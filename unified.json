@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-09-19T22:40:52Z",
+  "last_updated_utc": "2025-09-19T22:51:16Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios"
@@ -15,6 +15,34 @@
     }
   },
   "categorias": {
+    "Terneros hasta 140 kg": {
+      "plaza_rural": {
+        "prom": 3.93,
+        "max": 3.98,
+        "min": 3.87,
+        "prom_bulto": 508.23
+      },
+      "pantalla_uruguay": {
+        "prom": 3.65,
+        "max": 3.91,
+        "min": 3.47,
+        "prom_bulto": 491.0
+      }
+    },
+    "Terneros más de 180 kg": {
+      "plaza_rural": {
+        "prom": 3.2,
+        "max": 3.68,
+        "min": 2.9,
+        "prom_bulto": 727.73
+      },
+      "pantalla_uruguay": {
+        "prom": 3.17,
+        "max": 3.42,
+        "min": 2.87,
+        "prom_bulto": 671.0
+      }
+    },
     "Terneras": {
       "plaza_rural": {
         "prom": 3.07,
@@ -30,6 +58,12 @@
       }
     },
     "Terneros/as": {
+      "plaza_rural": {
+        "prom": 3.19,
+        "max": 4.0,
+        "min": 2.8,
+        "prom_bulto": 559.72
+      },
       "pantalla_uruguay": {
         "prom": 3.12,
         "max": 4.1,
@@ -123,6 +157,12 @@
         "max": 1270.0,
         "min": 860.0,
         "prom_bulto": 979.18
+      },
+      "pantalla_uruguay": {
+        "prom": 1003.0,
+        "max": 1210.0,
+        "min": 880.0,
+        "prom_bulto": 1003.0
       }
     },
     "Piezas de cría": {
@@ -201,30 +241,6 @@
         "prom_bulto": 623.0
       }
     },
-    "Terneros + 180 Kg": {
-      "plaza_rural": {
-        "prom": 3.2,
-        "max": 3.68,
-        "min": 2.9,
-        "prom_bulto": 727.73
-      }
-    },
-    "Terneros - 140 Kg": {
-      "plaza_rural": {
-        "prom": 3.93,
-        "max": 3.98,
-        "min": 3.87,
-        "prom_bulto": 508.23
-      }
-    },
-    "Terneros / Terneras": {
-      "plaza_rural": {
-        "prom": 3.19,
-        "max": 4.0,
-        "min": 2.8,
-        "prom_bulto": 559.72
-      }
-    },
     "Terneros Entre 140 Y 180 Kg": {
       "plaza_rural": {
         "prom": 3.4,
@@ -237,30 +253,6 @@
         "max": 3.58,
         "min": 3.26,
         "prom_bulto": 560.0
-      }
-    },
-    "Terneros Menos 140 Kg": {
-      "pantalla_uruguay": {
-        "prom": 3.65,
-        "max": 3.91,
-        "min": 3.47,
-        "prom_bulto": 491.0
-      }
-    },
-    "Terneros Más 180 Kg": {
-      "pantalla_uruguay": {
-        "prom": 3.17,
-        "max": 3.42,
-        "min": 2.87,
-        "prom_bulto": 671.0
-      }
-    },
-    "Vacas Preñadas": {
-      "pantalla_uruguay": {
-        "prom": 1003.0,
-        "max": 1210.0,
-        "min": 880.0,
-        "prom_bulto": 1003.0
       }
     },
     "Vaquillonas + 2 Años": {
