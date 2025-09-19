@@ -10,13 +10,14 @@
     .cell{line-height:1.2}
     .prom{font-weight:600;font-size:15px}
     .minor{font-size:12px;color:#9fb0c3;margin-top:2px}
+    th{ text-align:center; }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap">
       <h1>Promedios Ganaderos — Unificado por categoría</h1>
-      <div class="small">Fuentes comparadas con Prom · Máx · Mín. Los logos en el encabezado son clickeables.</div>
+      <div class="small">Prom · Máx · Mín por fuente. Clic en el logo abre la fuente.</div>
       <div id="last" class="small"></div>
     </div>
   </header>
@@ -25,15 +26,8 @@
       <h2>Cuadro comparativo</h2>
       <div id="table"></div>
     </div>
-    <div class="card">
-      <h2>Notas</h2>
-      <ul class="small">
-        <li>Para ACG se muestran referencias semanales (Prom=Ref).</li>
-        <li>Si alguna columna aparece vacía, esa categoría no existe en la fuente.</li>
-      </ul>
-    </div>
   </main>
-  <footer class="wrap">Hecho por JQ · Starter unificado estático</footer>
+  <footer class="wrap">Hecho por JQ · Starter unificado</footer>
   <script>
   async function main(){
     const res = await fetch('unified.json?_=' + Date.now());
@@ -49,7 +43,6 @@
 
     function thLogo(srcKey, img, alt){
       const th = document.createElement('th');
-      th.style.textAlign = 'center';
       const a = document.createElement('a');
       a.href = (data.fuentes[srcKey] && data.fuentes[srcKey].url) || '#';
       a.target = "_blank"; a.rel="noopener";
@@ -60,19 +53,13 @@
       return th;
     }
 
-    ["Categoría","plaza_rural","lote21","pantalla_uruguay","acg"].forEach(h=>{
-      if (h==="Categoría"){
-        const th = document.createElement('th'); th.textContent = "Categoría"; trh.appendChild(th);
-      } else {
-        const map = {
-          "plaza_rural":"assets/plazarural.svg",
-          "lote21":"assets/lote21.svg",
-          "pantalla_uruguay":"assets/pantallauruguay.svg",
-          "acg":"assets/acg.svg"
-        };
-        trh.appendChild(thLogo(h, map[h], h));
-      }
-    });
+    // Header row
+    trh.appendChild((()=>{ const th=document.createElement('th'); th.textContent='Categoría'; th.style.textAlign='left'; return th; })());
+    trh.appendChild(thLogo("plaza_rural","assets/plazarural.png","Plaza Rural"));
+    trh.appendChild(thLogo("lote21","assets/lote21.svg","Lote 21"));
+    trh.appendChild(thLogo("pantalla_uruguay","assets/pantallauruguay.png","Pantalla Uruguay"));
+    trh.appendChild(thLogo("acg","assets/acg.png","ACG"));
+
     thead.appendChild(trh);
     table.appendChild(thead);
 
