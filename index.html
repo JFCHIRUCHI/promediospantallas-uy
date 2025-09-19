@@ -5,11 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Promedios Ganaderos (Unificado)</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{--grid:#223044;--header:#0f141b;--muted:#9fb0c3}
+    .logoHead{height:32px;vertical-align:middle;display:block;margin:0 auto 4px auto}
+    .colHead{display:flex;flex-direction:column;align-items:center;gap:2px}
+    .colDate{font-size:11px;color:var(--muted); line-height:1}
+    table{width:100%;border-collapse:separate;border-spacing:0}
+    thead th{background:var(--header);position:sticky;top:0;z-index:1;border-bottom:1px solid var(--grid)}
+    th,td{border-bottom:1px solid var(--grid);padding:10px 8px;font-size:14px}
+    tbody td{border-right:1px solid var(--grid)}
+    tbody tr td:first-child{border-left:1px solid var(--grid)}
+    thead tr th:first-child{border-left:1px solid var(--grid);text-align:left}
+    thead tr th:not(:first-child){text-align:center;border-right:1px solid var(--grid)}
+    .cell{line-height:1.2}
+    .prom{font-weight:700;font-size:15px}
+    .minor{font-size:12px;color:var(--muted);margin-top:2px}
+  </style>
 </head>
 <body>
   <header>
     <div class="wrap">
       <h1>Promedios Ganaderos — Unificado por categoría</h1>
+      <div class="small">Debajo de cada logo: fecha del último evento. Columnas con bordes claros.</div>
       <div id="last" class="small"></div>
     </div>
   </header>
@@ -29,12 +46,10 @@
     }catch(e){}
     return d;
   }
-
   async function main(){
     const res = await fetch('unified.json?_=' + Date.now());
     const data = await res.json();
     document.getElementById('last').textContent = "Última actualización (UTC): " + (data.last_updated_utc || "—");
-
     const cats = Object.keys(data.categorias);
     const container = document.getElementById('table');
 
@@ -48,12 +63,10 @@
       const a = document.createElement('a');
       a.href = (data.fuentes[srcKey] && data.fuentes[srcKey].url) || '#';
       a.target = "_blank"; a.rel="noopener";
-      const im = document.createElement('img');
-      im.src = path; im.alt = alt; im.className='logoHead';
+      const im = document.createElement('img'); im.src = path; im.alt = alt; im.className='logoHead';
       a.appendChild(im);
-      const date = document.createElement('div');
-      date.className = 'colDate';
-      const d = (data.fuentes[srcKey] && data.fuentes[srcKey].fecha) || "";
+      const date = document.createElement('div'); date.className = 'colDate';
+      const d = (data.fuentes[srcKey] && (data.fuentes[srcKey].fecha || data.fuentes[srcKey].date || data.fuentes[srcKey].last_date)) || "";
       date.textContent = fmtDate(d);
       box.appendChild(a); box.appendChild(date);
       th.appendChild(box);
@@ -82,12 +95,9 @@
           if (v.max!==undefined && v.max!==null) minorLines.push("Máx: "+v.max);
           if (v.min!==undefined && v.min!==null) minorLines.push("Mín: "+v.min);
           if (v.prom_bulto!==undefined && v.prom_bulto!==null) minorLines.push("PB: "+v.prom_bulto);
-          const strong = document.createElement('div'); strong.className='prom';
-          strong.textContent = prom!==null ? prom : "";
-          const minor = document.createElement('div'); minor.className='minor';
-          minor.textContent = minorLines.join(" · ");
-          td.appendChild(strong);
-          if (minor.textContent) td.appendChild(minor);
+          const strong = document.createElement('div'); strong.className='prom'; strong.textContent = prom!==null ? prom : "";
+          const minor = document.createElement('div'); minor.className='minor'; minor.textContent = minorLines.join(" · ");
+          td.appendChild(strong); if (minor.textContent) td.appendChild(minor);
         }
         tr.appendChild(td);
       });
