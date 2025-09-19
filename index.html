@@ -5,27 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Promedios Ganaderos (Unificado)</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .logoHead{height:32px;vertical-align:middle}
+    .cell{line-height:1.2}
+    .prom{font-weight:600;font-size:15px}
+    .minor{font-size:12px;color:#9fb0c3;margin-top:2px}
+  </style>
 </head>
 <body>
   <header>
     <div class="wrap">
       <h1>Promedios Ganaderos — Unificado por categoría</h1>
-      <div class="small">Fuentes: Plaza Rural · Lote 21 · Pantalla Uruguay · ACG</div>
+      <div class="small">Fuentes comparadas con Prom · Máx · Mín. Los logos en el encabezado son clickeables.</div>
       <div id="last" class="small"></div>
     </div>
   </header>
   <main class="wrap">
     <div class="card">
       <h2>Cuadro comparativo</h2>
-      <div class="small">Columnas muestran Prom (y, en tooltip, Máx / Mín). Para ACG se muestra la referencia semanal.</div>
       <div id="table"></div>
     </div>
     <div class="card">
       <h2>Notas</h2>
       <ul class="small">
-        <li>Las categorías se normalizan con reglas simples (puede requerir ajustes según cada remate/semana).</li>
-        <li>ACG publica referencias semanales (no Máx/Mín); se mapea como “Prom”.</li>
-        <li>El flujo de actualización automática corre con GitHub Actions (ver <code>.github/workflows/update.yml</code>).</li>
+        <li>Para ACG se muestran referencias semanales (Prom=Ref).</li>
+        <li>Si alguna columna aparece vacía, esa categoría no existe en la fuente.</li>
       </ul>
     </div>
   </main>
@@ -42,10 +46,32 @@
     const table = document.createElement('table');
     const thead = document.createElement('thead');
     const trh = document.createElement('tr');
-    ["Categoría","Plaza Rural","Lote 21","Pantalla Uruguay","ACG"].forEach(h=>{
+
+    function thLogo(srcKey, img, alt){
       const th = document.createElement('th');
-      th.textContent = h;
-      trh.appendChild(th);
+      th.style.textAlign = 'center';
+      const a = document.createElement('a');
+      a.href = (data.fuentes[srcKey] && data.fuentes[srcKey].url) || '#';
+      a.target = "_blank"; a.rel="noopener";
+      const im = document.createElement('img');
+      im.src = img; im.alt = alt; im.className='logoHead';
+      a.appendChild(im);
+      th.appendChild(a);
+      return th;
+    }
+
+    ["Categoría","plaza_rural","lote21","pantalla_uruguay","acg"].forEach(h=>{
+      if (h==="Categoría"){
+        const th = document.createElement('th'); th.textContent = "Categoría"; trh.appendChild(th);
+      } else {
+        const map = {
+          "plaza_rural":"assets/plazarural.svg",
+          "lote21":"assets/lote21.svg",
+          "pantalla_uruguay":"assets/pantallauruguay.svg",
+          "acg":"assets/acg.svg"
+        };
+        trh.appendChild(thLogo(h, map[h], h));
+      }
     });
     thead.appendChild(trh);
     table.appendChild(thead);
@@ -54,19 +80,28 @@
     cats.forEach(cat=>{
       const tr = document.createElement('tr');
       const td0 = document.createElement('td'); td0.textContent = cat; tr.appendChild(td0);
+
       ["plaza_rural","lote21","pantalla_uruguay","acg"].forEach(src=>{
         const td = document.createElement('td');
+        td.className = 'cell';
         const v = (data.categorias[cat] && data.categorias[cat][src]) || null;
-        if (v && (v.prom!==null && v.prom!==undefined)){
-          td.textContent = v.prom;
-          let tip = [];
-          if (v.max!==undefined && v.max!==null) tip.push("Máx: "+v.max);
-          if (v.min!==undefined && v.min!==null) tip.push("Mín: "+v.min);
-          if (v.prom_bulto!==undefined && v.prom_bulto!==null) tip.push("Prom. bulto: "+v.prom_bulto);
-          if (v.ref!==undefined && v.ref!==null) tip.push("Ref: "+v.ref);
-          if (tip.length) td.title = tip.join(" · ");
-        } else {
-          td.textContent = "";
+        if (v){
+          const prom = (v.prom ?? v.ref ?? null);
+          const minorLines = [];
+          if (v.max!==undefined && v.max!==null) minorLines.push("Máx: "+v.max);
+          if (v.min!==undefined && v.min!==null) minorLines.push("Mín: "+v.min);
+          if (v.prom_bulto!==undefined && v.prom_bulto!==null) minorLines.push("PB: "+v.prom_bulto);
+
+          const strong = document.createElement('div');
+          strong.className='prom';
+          strong.textContent = prom!==null ? prom : "";
+
+          const minor = document.createElement('div');
+          minor.className='minor';
+          minor.textContent = minorLines.join(" · ");
+
+          td.appendChild(strong);
+          if (minor.textContent) td.appendChild(minor);
         }
         tr.appendChild(td);
       });
