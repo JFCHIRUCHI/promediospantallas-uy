@@ -20,13 +20,19 @@
     .cell{line-height:1.2}
     .prom{font-weight:700;font-size:15px}
     .minor{font-size:12px;color:var(--muted);margin-top:2px}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    header{padding:28px 16px;background:#11161c;border-bottom:1px solid var(--grid)}
+    body{margin:0;background:#0b0d10;color:#e8eef5;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,sans-serif}
+    h1{margin:0;font-size:24px}
+    .card{background:#0f141b;border:1px solid var(--grid);border-radius:12px;padding:16px;margin:12px 0}
+    .small{font-size:12px;color:var(--muted)}
   </style>
 </head>
 <body>
   <header>
     <div class="wrap">
       <h1>Promedios Ganaderos — Unificado por categoría</h1>
-      <div class="small">Debajo de cada logo: fecha del último evento. Columnas con bordes claros.</div>
+      <div class="small">Debajo de cada logo se muestra la fecha del último evento detectado por el scraper.</div>
       <div id="last" class="small"></div>
     </div>
   </header>
@@ -46,10 +52,12 @@
     }catch(e){}
     return d;
   }
+
   async function main(){
     const res = await fetch('unified.json?_=' + Date.now());
     const data = await res.json();
     document.getElementById('last').textContent = "Última actualización (UTC): " + (data.last_updated_utc || "—");
+
     const cats = Object.keys(data.categorias);
     const container = document.getElementById('table');
 
@@ -63,10 +71,12 @@
       const a = document.createElement('a');
       a.href = (data.fuentes[srcKey] && data.fuentes[srcKey].url) || '#';
       a.target = "_blank"; a.rel="noopener";
-      const im = document.createElement('img'); im.src = path; im.alt = alt; im.className='logoHead';
+      const im = document.createElement('img');
+      im.src = path; im.alt = alt; im.className='logoHead';
       a.appendChild(im);
-      const date = document.createElement('div'); date.className = 'colDate';
-      const d = (data.fuentes[srcKey] && (data.fuentes[srcKey].fecha || data.fuentes[srcKey].date || data.fuentes[srcKey].last_date)) || "";
+      const date = document.createElement('div');
+      date.className = 'colDate';
+      const d = (data.fuentes[srcKey] && data.fuentes[srcKey].fecha) || "";
       date.textContent = fmtDate(d);
       box.appendChild(a); box.appendChild(date);
       th.appendChild(box);
@@ -88,14 +98,29 @@
       const td0 = document.createElement('td'); td0.textContent = cat; tr.appendChild(td0);
       ["plaza_rural","lote21","pantalla_uruguay","acg"].forEach(src=>{
         const td = document.createElement('td'); td.className='cell';
-        const v = (data.categorias[cat] && data.categorias[cat][src]) || null;
+        const row = (data.categorias[cat]) || {};
+        // tolerancia: aceptamos claves con espacios/guiones por si el scraper difiere
+        const srcCandidates = {
+          "plaza_rural": ["plaza_rural","plaza rural","plazarural","pr"],
+          "lote21": ["lote21","lote 21","lote_21"],
+          "pantalla_uruguay": ["pantalla_uruguay","pantalla uruguay","pantallauruguay"],
+          "acg": ["acg","asociacion de consignatarios de ganado"]
+        }[src];
+        let v = null;
+        for (const k of srcCandidates){
+          if (row[k] !== undefined){ v = row[k]; break; }
+        }
         if (v){
-          const prom = (v.prom ?? v.ref ?? null);
+          // tolerancia a nombres de campos
+          const prom = (v.prom ?? v.promedio ?? v.ref ?? null);
+          const max  = (v.max ?? v.máx ?? v.maximo ?? v.máximo ?? null);
+          const min  = (v.min ?? v.mín ?? v.minimo ?? v.mínimo ?? null);
+          const pb   = (v.prom_bulto ?? v.pb ?? null);
           const minorLines = [];
-          if (v.max!==undefined && v.max!==null) minorLines.push("Máx: "+v.max);
-          if (v.min!==undefined && v.min!==null) minorLines.push("Mín: "+v.min);
-          if (v.prom_bulto!==undefined && v.prom_bulto!==null) minorLines.push("PB: "+v.prom_bulto);
-          const strong = document.createElement('div'); strong.className='prom'; strong.textContent = prom!==null ? prom : "";
+          if (max!==undefined && max!==null) minorLines.push("Máx: "+max);
+          if (min!==undefined && min!==null) minorLines.push("Mín: "+min);
+          if (pb!==undefined && pb!==null) minorLines.push("PB: "+pb);
+          const strong = document.createElement('div'); strong.className='prom'; strong.textContent = (prom!=null? prom:"");
           const minor = document.createElement('div'); minor.className='minor'; minor.textContent = minorLines.join(" · ");
           td.appendChild(strong); if (minor.textContent) td.appendChild(minor);
         }
