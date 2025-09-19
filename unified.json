@@ -1,0 +1,106 @@
+{
+  "last_updated_utc": "2025-09-19T20:09:56Z",
+  "fuentes": {
+    "plaza_rural": {
+      "url": "https://plazarural.com.uy/promedios"
+    },
+    "lote21": {
+      "url": "https://www.lote21.uy/promedios.asp"
+    },
+    "pantalla_uruguay": {
+      "url": "https://www.pantallauruguay.com.uy/promedios/"
+    },
+    "acg": {
+      "url": "https://acg.com.uy/?post_type=precio_semanal"
+    }
+  },
+  "categorias": {
+    "Terneros": {
+      "plaza_rural": {
+        "prom": 3.27,
+        "max": 3.98,
+        "min": 2.9,
+        "prom_bulto": 667.03
+      },
+      "lote21": {
+        "prom": 3.24,
+        "max": 3.65,
+        "min": 2.8
+      },
+      "pantalla_uruguay": {
+        "prom": 3.65,
+        "max": 3.91,
+        "min": 3.47,
+        "prom_bulto": 491
+      },
+      "acg": null
+    },
+    "Novillos 1-2 años": {
+      "plaza_rural": {
+        "prom": 3.0,
+        "max": 3.11,
+        "min": 2.85,
+        "prom_bulto": 1041.58
+      },
+      "lote21": {
+        "prom": 3.15,
+        "max": 3.4,
+        "min": 2.9
+      },
+      "pantalla_uruguay": {
+        "prom": 3.05,
+        "max": 3.2,
+        "min": 2.83,
+        "prom_bulto": 849
+      },
+      "acg": null
+    },
+    "Vacas de invernada": {
+      "plaza_rural": {
+        "prom": 2.39,
+        "max": 2.58,
+        "min": 2.2,
+        "prom_bulto": 910.93
+      },
+      "lote21": {
+        "prom": 2.28,
+        "max": 2.45,
+        "min": 2.1
+      },
+      "pantalla_uruguay": {
+        "prom": 2.28,
+        "max": 2.43,
+        "min": 2.1,
+        "prom_bulto": 887
+      },
+      "acg": null
+    },
+    "Novillo gordo (ACG)": {
+      "plaza_rural": null,
+      "lote21": null,
+      "pantalla_uruguay": null,
+      "acg": {
+        "prom": 5.27,
+        "ref": 5.27
+      }
+    },
+    "Vaca gorda (ACG)": {
+      "plaza_rural": null,
+      "lote21": null,
+      "pantalla_uruguay": null,
+      "acg": {
+        "prom": 4.94,
+        "ref": 4.94
+      }
+    },
+    "Vaquillona gorda (ACG)": {
+      "plaza_rural": null,
+      "lote21": null,
+      "pantalla_uruguay": null,
+      "acg": {
+        "prom": 5.08,
+        "ref": 5.08
+      }
+    }
+  }
+}
