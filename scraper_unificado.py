@@ -9,7 +9,6 @@ from unidecode import unidecode
 OUT = "unified.json"
 UA = {"User-Agent":"Mozilla/5.0"}
 
-# ---------------- Utilidades ----------------
 def fetch_html(url, timeout=60):
     r = requests.get(url, headers=UA, timeout=timeout)
     r.raise_for_status()
@@ -49,30 +48,28 @@ def pick_col(cols, *cands):
                 return original
     return None
 
-# ---------------- Normalización (canónica) ----------------
+# ---- Canonical order requested by user ----
 CANONICAL = [
-    "Terneros hasta 140 kg",
-    "Terneros 141 a 180 kg",
-    "Terneros más de 180 kg",
-    "Terneros generales",
-    "Enteros + de 1 año",
-    "Terneras",
-    "Terneros/as",
-    "Mixtos + de 1 año",
-    "Novillos 1 a 2 años",
-    "Novillos 2 a 3 años",
-    "Novillos más de 3 años",
-    "Holando y cruza Ho",
-    "Vacas de invernada",
-    "Vaquillonas de 1 a 2 años",
-    "Vaquillonas sin servicio",
-    "Vacas de cría",
-    "Vientres preñados",
-    "Vientres entorados",
-    "Piezas de cría",
-    "Novillo gordo (ACG)",
-    "Vaca gorda (ACG)",
-    "Vaquillona gorda (ACG)",
+  "Corderos y Corderas",
+  "Borregos",
+  "Oveja de cría 2 o + enc.",
+  "Terneros hasta 140 kg",
+  "Terneros más de 180 kg",
+  "Novillos 1 a 2 años",
+  "Novillos 2 a 3 años",
+  "Novillos más de 3 años",
+  "Holando y cruza Ho",
+  "Terneras",
+  "Terneras hasta 140 kg",
+  "Terneras entre 140 y 180 kg",
+  "Terneras más de 140 kg",
+  "Vaquillonas de 1 a 2 años",
+  "Vaquillonas más de 2 años",
+  "Vaquillonas sin servicio",
+  "Vaquillonas entoradas",
+  "Vaquillonas preñadas",
+  "Vientres preñados",
+  "Vacas de invernada"
 ]
 
 ALIASES_FILE = "categories_aliases.json"
@@ -85,63 +82,58 @@ if os.path.exists(ALIASES_FILE):
         ALIASES = {}
 
 def norm_cat(raw):
-    if raw is None:
-        return ""
+    if raw is None: return ""
     original = str(raw).strip()
-    if not original:
-        return ""
-    # 1) alias exacto insensible a acentos/case
-    k = unidecode(original).lower().strip()
-    for alias, target in ALIASES.items():
-        if unidecode(alias).lower().strip() == k:
+    if not original: return ""
+    key = unidecode(original).lower().strip()
+    # 1) exact alias
+    for a, target in ALIASES.items():
+        if unidecode(a).lower().strip() == key:
             return target
-    # 2) reglas amplias por patrones
+    # 2) generic patterns (fallback)
     s = unidecode(original).lower().strip()
     s = re.sub(r"\s+", " ", s)
     RULES = [
-        (r"^terneros?.*<\s*140|^terneros?.*hasta\s*140|^terneros?\s*-\s*140", "Terneros hasta 140 kg"),
-        (r"^terneros?.*(141|140\s*a\s*180|141\s*a\s*180|141\s*-\s*180|141\s*–\s*180)", "Terneros 141 a 180 kg"),
-        (r"^terneros?.*(\+\s*de\s*180|mas\s*de\s*180|\+?\s*180|>\s*180)", "Terneros más de 180 kg"),
-        (r"^terneros?.*(generales|grales|gnrales)$", "Terneros generales"),
-        (r"^enteros?.*(\+\s*de\s*1|mas\s*de\s*1).*a[nñ]o", "Enteros + de 1 año"),
-        (r"^mixtos?.*(\+\s*de\s*1|mas\s*de\s*1).*a[nñ]o", "Mixtos + de 1 año"),
-        (r"^terneras?$", "Terneras"),
-        (r"^terneros?\s*/\s*as$|^terneros?\s*y\s*terneras?$", "Terneros/as"),
-        (r"^novillos?.*(1\s*(–|-|a)\s*2)\s*a[nñ]os?", "Novillos 1 a 2 años"),
-        (r"^novillos?.*(2\s*(–|-|a)\s*3)\s*a[nñ]os?", "Novillos 2 a 3 años"),
-        (r"^novillos?.*(\+\s*de\s*3|mas\s*de\s*3|\+3)", "Novillos más de 3 años"),
-        (r"^holand.*|^holandos.*|holando.*cruza", "Holando y cruza Ho"),
-        (r"^vacas?\s*de\s*invernada", "Vacas de invernada"),
-        (r"^vaquillonas?.*(1\s*(–|-|a)\s*2)\s*a[nñ]os?", "Vaquillonas de 1 a 2 años"),
-        (r"^vaquillonas?.*sin\s*servicio", "Vaquillonas sin servicio"),
-        (r"^vacas?\s*de\s*cri[aá]", "Vacas de cría"),
-        (r"^vientres?\s*pre[ñn]ados?", "Vientres preñados"),
-        (r"^vientres?\s*entorados?", "Vientres entorados"),
-        (r"^piezas?\s*de\s*cri[aá]", "Piezas de cría"),
-        (r"^novillo\s*gordo", "Novillo gordo (ACG)"),
-        (r"^vaca\s*gorda", "Vaca gorda (ACG)"),
-        (r"^vaquillona\s*gorda", "Vaquillona gorda (ACG)"),
+      (r"^corderos?.*corderas?", "Corderos y Corderas"),
+      (r"^borreg", "Borregos"),
+      (r"^oveja.*cr[ií]a.*(\+|mas)", "Oveja de cría 2 o + enc."),
+      (r"^terneros?.*hasta\s*140|^terneros?.*-\s*140|^terneros?.*<\s*140", "Terneros hasta 140 kg"),
+      (r"^terneros?.*(\+\s*180|mas\s*de\s*180|>\s*180|\+?\s*180)", "Terneros más de 180 kg"),
+      (r"^novillos?.*1\s*(–|-|a)\s*2\s*a[nñ]os?", "Novillos 1 a 2 años"),
+      (r"^novillos?.*2\s*(–|-|a)\s*3\s*a[nñ]os?", "Novillos 2 a 3 años"),
+      (r"^novillos?.*(\+\s*3|mas\s*de\s*3)", "Novillos más de 3 años"),
+      (r"^holand.*|^holandos.*|holando.*cruza", "Holando y cruza Ho"),
+      (r"^terneras?$", "Terneras"),
+      (r"^terneras?.*hasta\s*140", "Terneras hasta 140 kg"),
+      (r"^terneras?.*(140\s*y\s*180|140\s*a\s*180)", "Terneras entre 140 y 180 kg"),
+      (r"^terneras?.*mas\s*de\s*140|^terneras?.*\+\s*140|^terneras?.*>\s*140", "Terneras más de 140 kg"),
+      (r"^vaquillonas?.*1\s*(–|-|a)\s*2\s*a[nñ]os?", "Vaquillonas de 1 a 2 años"),
+      (r"^vaquillonas?.*mas\s*de\s*2", "Vaquillonas más de 2 años"),
+      (r"^vaquillonas?.*sin\s*servicio", "Vaquillonas sin servicio"),
+      (r"^vaquillonas?.*entorad", "Vaquillonas entoradas"),
+      (r"^vaquillonas?.*pre[ñn]ad", "Vaquillonas preñadas"),
+      (r"^vientres?.*pre[ñn]ad", "Vientres preñados"),
+      (r"^vacas?.*invernada", "Vacas de invernada"),
     ]
     for pat, target in RULES:
         if re.search(pat, s, flags=re.I):
             return target
     return original.strip().title()
 
-# ---------------- Scrapers (cada uno devuelve url, rows, fecha) ----------------
+# ---- Sources ----
 def plaza_rural():
     url = "https://plazarural.com.uy/promedios"
-    df = read_table_any(url)
-    # fecha dd/mm/aaaa en el HTML si aparece
     fecha = None
     try:
         html = fetch_html(url)
-        m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html)
+        m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
         if m:
             d,mn,y = m.group(1).split("/")
             y = y if len(y)==4 else ("20"+y)
             fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
     except Exception:
         pass
+    df = read_table_any(url)
     df.columns = [str(c).strip() for c in df.columns]
     c_cat = pick_col(df.columns, "categoria", "categoría")
     c_max = pick_col(df.columns, "max", "máx", "maximo", "máximo")
@@ -158,8 +150,8 @@ def plaza_rural():
 def lote21():
     url = "https://www.lote21.uy/promedios.asp"
     html = fetch_html(url)
-    m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html)
     fecha = None
+    m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
     if m:
         d,mn,y = m.group(1).split("/")
         y = y if len(y)==4 else ("20"+y)
@@ -192,8 +184,8 @@ def lote21():
 def pantalla_uruguay():
     url = "https://www.pantallauruguay.com.uy/promedios/"
     html = fetch_html(url)
-    m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html)
     fecha = None
+    m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
     if m:
         d,mn,y = m.group(1).split("/")
         y = y if len(y)==4 else ("20"+y)
@@ -219,22 +211,21 @@ def acg():
     first = soup.select_one("article a")
     post_url = first.get("href") if first else list_url
     html_post = fetch_html(post_url)
-    m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html_post)
     fecha = None
+    m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html_post)
     if m:
         d,mn,y = m.group(1).split("/")
         y = y if len(y)==4 else ("20"+y)
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
-    def rex(label): return re.search(rf"{label}.*?([\\d\\.,]+)", html_post, flags=re.I|re.S)
+    def rex(label): return re.search(rf"{label}.*?([\d\.,]+)", html_post, flags=re.I|re.S)
     rows = {}
-    for etiqueta, cat in [("Novillo\\s*gordo","Novillo gordo (ACG)"),("Vaca\\s*gorda","Vaca gorda (ACG)"),("Vaquillona\\s*gorda","Vaquillona gorda (ACG)")]:
+    for etiqueta, cat in [("Novillo\s*gordo","Novillo gordo (ACG)"),("Vaca\s*gorda","Vaca gorda (ACG)"),("Vaquillona\s*gorda","Vaquillona gorda (ACG)")]:
         m2 = rex(etiqueta)
         if m2:
             val = to_float(m2.group(1))
             rows[cat] = {"prom": val, "ref": val}
     return post_url, rows, fecha
 
-# ---------------- Main ----------------
 def main():
     data = {"last_updated_utc": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"), "fuentes": {}, "categorias": {}}
     funcs = {"plaza_rural": plaza_rural, "lote21": lote21, "pantalla_uruguay": pantalla_uruguay, "acg": acg}
@@ -249,7 +240,7 @@ def main():
             time.sleep(1.5)
         except Exception as e:
             data["fuentes"][key] = {"url": None, "error": str(e)}
-    # Orden según CANONICAL primero
+    # order by CANONICAL first, then any extras
     ordered = {}
     for c in CANONICAL:
         if c in all_rows: ordered[c] = all_rows[c]
