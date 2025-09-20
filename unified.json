@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-09-20T00:08:05Z",
+  "last_updated_utc": "2025-09-20T00:19:05Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -11,7 +11,7 @@
     },
     "pantalla_uruguay": {
       "url": "https://www.pantallauruguay.com.uy/promedios/",
-      "fecha": "2022-04-13"
+      "fecha": null
     },
     "acg": {
       "url": "https://acg.com.uy/?post_type=precio_semanal",
@@ -57,6 +57,20 @@
         "prom_bulto": 491.0
       }
     },
+    "Terneros Entre 140 Y 180 Kg": {
+      "plaza_rural": {
+        "prom": 3.4,
+        "max": 3.56,
+        "min": 3.2,
+        "prom_bulto": 568.74
+      },
+      "pantalla_uruguay": {
+        "prom": 3.41,
+        "max": 3.58,
+        "min": 3.26,
+        "prom_bulto": 560.0
+      }
+    },
     "Terneros": {
       "plaza_rural": {
         "prom": 3.27,
@@ -71,34 +85,12 @@
         "prom_bulto": 623.0
       }
     },
-    "Novillos 1 a 2 años": {
-      "pantalla_uruguay": {
-        "prom": 3.05,
-        "max": 3.2,
-        "min": 2.83,
-        "prom_bulto": 849.0
-      }
-    },
-    "Novillos 2 a 3 alos": {
-      "pantalla_uruguay": {
-        "prom": 2.84,
-        "max": 2.93,
-        "min": 2.7,
-        "prom_bulto": 1049.0
-      }
-    },
     "Novillos mas de 3 años": {
       "plaza_rural": {
         "prom": 2.82,
         "max": 2.85,
         "min": 2.8,
         "prom_bulto": 1255.8
-      },
-      "pantalla_uruguay": {
-        "prom": 2.88,
-        "max": 2.92,
-        "min": 2.77,
-        "prom_bulto": 1064.0
       }
     },
     "Terneras": {
@@ -197,6 +189,14 @@
         "prom_bulto": 806.0
       }
     },
+    "Novillos 1 A 2 Años": {
+      "pantalla_uruguay": {
+        "prom": 3.05,
+        "max": 3.2,
+        "min": 2.83,
+        "prom_bulto": 849.0
+      }
+    },
     "Novillos 1-2 Años": {
       "plaza_rural": {
         "prom": 3.0,
@@ -205,12 +205,28 @@
         "prom_bulto": 1041.58
       }
     },
+    "Novillos 2 A 3 Años": {
+      "pantalla_uruguay": {
+        "prom": 2.84,
+        "max": 2.93,
+        "min": 2.7,
+        "prom_bulto": 1049.0
+      }
+    },
     "Novillos 2-3 Años": {
       "plaza_rural": {
         "prom": 3.0,
         "max": 3.11,
         "min": 2.9,
         "prom_bulto": 1169.04
+      }
+    },
+    "Novillos Más De 3 Años": {
+      "pantalla_uruguay": {
+        "prom": 2.88,
+        "max": 2.92,
+        "min": 2.77,
+        "prom_bulto": 1064.0
       }
     },
     "Novillos Y Vaquillonas 1 A 2 Años": {
@@ -241,20 +257,6 @@
         "max": 3.68,
         "min": 2.9,
         "prom_bulto": 727.73
-      }
-    },
-    "Terneros Entre 140 Y 180 Kg": {
-      "plaza_rural": {
-        "prom": 3.4,
-        "max": 3.56,
-        "min": 3.2,
-        "prom_bulto": 568.74
-      },
-      "pantalla_uruguay": {
-        "prom": 3.41,
-        "max": 3.58,
-        "min": 3.26,
-        "prom_bulto": 560.0
       }
     },
     "Terneros Más 180 Kg": {
