@@ -5,231 +5,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Promedios Ganaderos (Unificado)</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    :root{--grid:#223044;--header:#0f141b;--muted:#9fb0c3;--card:#0f141b;--bg:#0b0d10}
-    body{margin:0;background:var(--bg);color:#e8eef5;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,sans-serif}
-    header{padding:28px 16px;background:#11161c;border-bottom:1px solid var(--grid)}
-    h1{margin:0;font-size:24px}
-    .wrap{max-width:1100px;margin:0 auto;padding:16px}
-    .card{background:var(--card);border:1px solid var(--grid);border-radius:12px;padding:16px;margin:12px 0}
-    .small{font-size:12px;color:var(--muted)}
-    table{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px}
-    thead th{background:var(--header);position:sticky;top:0;z-index:1;border-bottom:1px solid var(--grid)}
-    th,td{border-bottom:1px solid var(--grid);padding:10px 8px;font-size:14px}
-    tbody td{border-right:1px solid var(--grid)}
-    tbody tr td:first-child{border-left:1px solid var(--grid)}
-    thead tr th:first-child{border-left:1px solid var(--grid);text-align:left}
-    thead tr th:not(:first-child){text-align:center;border-right:1px solid var(--grid)}
-    .cell{line-height:1.2}
-    .prom{font-weight:700;font-size:15px}
-    .minor{font-size:12px;color:var(--muted);margin-top:2px}
-    .logoHead{height:32px;vertical-align:middle;display:block;margin:0 auto 4px auto}
-    .colHead{display:flex;flex-direction:column;align-items:center;gap:2px}
-    .colDate{font-size:11px;color:var(--muted); line-height:1}
-    .acg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
-    .pill{background:#101826;border:1px solid var(--grid);border-radius:10px;padding:12px}
-    .pill h4{margin:0 0 6px 0;font-size:14px}
-    .pill .val{font-weight:700;font-size:18px}
-    .acg-head{display:flex;align-items:center;gap:12px}
-    .acg-head img{height:26px}
-    .muted{color:var(--muted);font-size:12px}
-  </style>
+  <meta name="theme-color" content="#0b0d10">
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <div class="wrap">
-      <h1>Promedios Ganaderos — Unificado por categoría</h1>
+      <h1>Promedios Ganaderos — Unificado</h1>
       <div id="last" class="small"></div>
     </div>
   </header>
   <main class="wrap">
-    <div class="card">
-      <h2>Cuadro comparativo</h2>
-      <div id="table"></div>
-    </div>
-
-    <div id="acgCard" class="card" style="display:none">
+    <section class="card">
+      <div class="card-head">
+        <h2>Cuadro comparativo</h2>
+        <div class="hint small">Desliza horizontalmente en celular</div>
+      </div>
+      <div class="table-scroll" role="region" aria-label="Tabla comparativa" tabindex="0">
+        <table id="cuadro"><thead></thead><tbody></tbody></table>
+      </div>
+    </section>
+    <section id="acgCard" class="card" style="display:none">
       <div class="acg-head">
-        <img src="assets/acg.png" alt="ACG">
+        <img src="assets/acg.png" alt="ACG" class="acg-logo">
         <div>
-          <div><strong>ACG — Precios de la semana</strong></div>
+          <div class="acg-title">ACG — Precios de la semana</div>
           <div class="muted">Fecha: <span id="acgDate">—</span></div>
         </div>
       </div>
       <div class="acg-grid">
-        <div class="pill">
-          <h4>Novillo gordo</h4>
-          <div class="val" id="acgNovillo">—</div>
-        </div>
-        <div class="pill">
-          <h4>Vaca gorda</h4>
-          <div class="val" id="acgVaca">—</div>
-        </div>
-        <div class="pill">
-          <h4>Vaquillona gorda</h4>
-          <div class="val" id="acgVaquillona">—</div>
-        </div>
+        <article class="pill"><h4>Novillo gordo</h4><div class="val" id="acgNovillo">—</div></article>
+        <article class="pill"><h4>Vaca gorda</h4><div class="val" id="acgVaca">—</div></article>
+        <article class="pill"><h4>Vaquillona gorda</h4><div class="val" id="acgVaquillona">—</div></article>
       </div>
-    </div>
+    </section>
   </main>
-  <footer class="wrap small">Hecho por JQ</footer>
+  <footer class="wrap small footnote">Hecho por JQ</footer>
   <script>
-  function normalize(s){
-    return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
-  }
-  function fmtDate(d){
-    if(!d) return "—";
-    try{
-      const dt = new Date(d);
-      if(!isNaN(dt)) return String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0') + '/' + dt.getFullYear();
-    }catch(e){}
-    return d;
-  }
-  // Scoring con bloque Ovinos primero
+  function normalize(s){return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();}
+  function fmtDate(d){if(!d) return "—"; try{const dt=new Date(d); if(!isNaN(dt)) return String(dt.getDate()).padStart(2,'0')+'/'+String(dt.getMonth()+1).padStart(2,'0')+'/'+dt.getFullYear();}catch(e){} return d;}
   function score(cat){
     const n = normalize(cat);
-    // ACG (fuera del cuadro principal)
     if (/novillo gordo \(acg\)|vaca gorda \(acg\)|vaquillona gorda \(acg\)/.test(n)) return [99,99];
-    // 0. Ovinos
     if (/^corderos? y corderas?/.test(n)) return [0,1];
     if (/^borregos?\b/.test(n)) return [0,2];
     if (/oveja.*cria.*(2|\+)/.test(n)) return [0,3];
-    // 1. Terneros (Machos)
-    if (/^terneros\b/.test(n) && !/terneras\b/.test(n) && !/\sterneros\s*[\/y]\s*terneras/.test(n)){
-      if (/(hasta|<|\-\s*140|140\s*kg|menos)/.test(n)) return [1,1];
-      if (/(140.*180|140-180|entre 140 y 180)/.test(n)) return [1,2];
-      if (/(\+\s*180|mas de 180|mas de\s*180|>\s*180)/.test(n)) return [1,3];
-      return [1,9];
-    }
-    // 2. Novillos
-    if (/^novillos?\b/.test(n)){
-      if (/(1\s*(a|–|-)\s*2)/.test(n)) return [2,1];
-      if (/(2\s*(a|–|-)\s*3)/.test(n)) return [2,2];
-      if (/(\+\s*3|mas de 3)/.test(n)) return [2,3];
-      if (/(mas de 2)/.test(n)) return [2,2]; // mapear "Más de 2 años" a 2-3
-      return [2,9];
-    }
-    // 3. Holando y Cruza
+    if (/^terneros\b/.test(n) && !/terneras\b/.test(n) && !/\sterneros\s*[\/y]\s*terneras/.test(n)){ if (/(hasta|<|\-\s*140|140\s*kg|menos)/.test(n)) return [1,1]; if (/(140.*180|140-180|entre 140 y 180)/.test(n)) return [1,2]; if (/(\+\s*180|mas de 180|>\s*180)/.test(n)) return [1,3]; return [1,9];}
+    if (/^novillos?\b/.test(n)){ if (/(1\s*(a|–|-)\s*2)/.test(n)) return [2,1]; if (/(2\s*(a|–|-)\s*3)/.test(n)) return [2,2]; if (/(\+\s*3|mas de 3)/.test(n)) return [2,3]; if (/(mas de 2)/.test(n)) return [2,2]; return [2,9];}
     if (/holando|cruza ho/.test(n)) return [3,1];
-    // 4. Mixtos
     if (/\sterneros\s*[\/y]\s*terneras|^mixtos/.test(n)) return [4,1];
-    // 5. Terneras
-    if (/^terneras\b/.test(n)){
-      if (/(hasta|<|\-\s*140|140\s*kg|menos)/.test(n)) return [5,1];
-      if (/(140.*180|140-180|entre 140 y 180)/.test(n)) return [5,2];
-      if (/(\+\s*140|mas de 140|>\s*140)/.test(n)) return [5,3];
-      return [5,9];
-    }
-    // 6. Vaquillonas
-    if (/^vaquillonas\b/.test(n)){
-      if (/(1\s*(a|–|-)\s*2)/.test(n)) return [6,1];
-      if (/(\+\s*2|mas de 2)/.test(n)) return [6,2];
-      if (/sin servicio/.test(n)) return [6,3];
-      if (/entorad/.test(n)) return [6,4];
-      if (/pren/.test(n)) return [6,5];
-      return [6,9];
-    }
-    // 7. Vientres/Vacas preñadas
+    if (/^terneras\b/.test(n)){ if (/(hasta|<|\-\s*140|140\s*kg|menos)/.test(n)) return [5,1]; if (/(140.*180|140-180|entre 140 y 180)/.test(n)) return [5,2]; if (/(\+\s*140|mas de 140|>\s*140)/.test(n)) return [5,3]; return [5,9];}
+    if (/^vaquillonas\b/.test(n)){ if (/(1\s*(a|–|-)\s*2)/.test(n)) return [6,1]; if (/(\+\s*2|mas de 2)/.test(n)) return [6,2]; if (/sin servicio/.test(n)) return [6,3]; if (/entorad/.test(n)) return [6,4]; if (/pren/.test(n)) return [6,5]; return [6,9];}
     if (/vientres?\s*pren|vacas?\s*pren/.test(n)) return [7,1];
-    // 8. Piezas de cría
     if (/pieza?s?\s*de\s*cria/.test(n)) return [8,1];
-    // 9. Vacas de Invernada
     if (/vacas?\s*de\s*invernada/.test(n)) return [9,1];
     return [50,50];
   }
-
+  function thLogo(data, srcKey, path, alt){
+    const th=document.createElement('th'); th.scope="col";
+    const box=document.createElement('div'); box.className='colHead';
+    const a=document.createElement('a'); a.href=(data.fuentes[srcKey]&&data.fuentes[srcKey].url)||'#'; a.target="_blank"; a.rel="noopener";
+    const im=document.createElement('img'); im.src=path; im.alt=alt; im.className='logoHead'; a.appendChild(im);
+    const date=document.createElement('div'); date.className='colDate'; const d=(data.fuentes[srcKey]&&data.fuentes[srcKey].fecha)||""; date.textContent=fmtDate(d);
+    box.appendChild(a); box.appendChild(date); th.appendChild(box); return th;
+  }
   async function main(){
-    const res = await fetch('unified.json?_=' + Date.now());
-    const data = await res.json();
+    const res = await fetch('unified.json?_=' + Date.now()); const data = await res.json();
     document.getElementById('last').textContent = "Última actualización (UTC): " + (data.last_updated_utc || "—");
-
-    const catsObj = data.categorias || {};
-    let cats = Object.keys(catsObj);
-    cats.sort((a,b)=>{
-      const sa=score(a), sb=score(b);
-      if (sa[0]!==sb[0]) return sa[0]-sb[0];
-      if (sa[1]!==sb[1]) return sa[1]-sb[1];
-      return a.localeCompare(b);
-    });
-
-    const container = document.getElementById('table');
-    if (cats.length === 0){
-      container.innerHTML = '<div class="small">No hay filas. Verificá que el workflow generó datos.</div>';
-      return;
-    }
-
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const trh = document.createElement('tr');
-
-    function thLogo(srcKey, path, alt){
-      const th = document.createElement('th');
-      const box = document.createElement('div'); box.className = 'colHead';
-      const a = document.createElement('a');
-      a.href = (data.fuentes[srcKey] && data.fuentes[srcKey].url) || '#';
-      a.target = "_blank"; a.rel="noopener";
-      const im = document.createElement('img');
-      im.src = path; im.alt = alt; im.className='logoHead';
-      a.appendChild(im);
-      const date = document.createElement('div'); date.className = 'colDate';
-      const d = (data.fuentes[srcKey] && data.fuentes[srcKey].fecha) || "";
-      date.textContent = fmtDate(d);
-      box.appendChild(a); box.appendChild(date);
-      th.appendChild(box);
-      return th;
-    }
-
-    const hCat = document.createElement('th'); hCat.textContent = "Categoría";
-    trh.appendChild(hCat);
-    trh.appendChild(thLogo("plaza_rural","assets/plazarural.png","Plaza Rural"));
-    trh.appendChild(thLogo("lote21","assets/lote21.png","Lote 21"));
-    trh.appendChild(thLogo("pantalla_uruguay","assets/pantallauruguay.png","Pantalla Uruguay"));
-    trh.appendChild(thLogo("acg","assets/acg.png","ACG"));
-    thead.appendChild(trh);
-    table.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
-    cats.forEach(cat=>{
-      if (/\(acg\)/i.test(cat)) return; // ACG va en el rectángulo
-      const tr = document.createElement('tr');
-      const td0 = document.createElement('td'); td0.textContent = cat; tr.appendChild(td0);
-      ["plaza_rural","lote21","pantalla_uruguay","acg"].forEach(src=>{
-        const td = document.createElement('td'); td.className='cell';
-        const v = (catsObj[cat] && catsObj[cat][src]) || null;
-        if (v){
-          const prom = (v.prom ?? v.ref ?? null);
-          const max  = (v.max ?? null);
-          const min  = (v.min ?? null);
-          const pb   = (v.prom_bulto ?? null);
-          const minorLines = [];
-          if (max!==null) minorLines.push("Máx: "+max);
-          if (min!==null) minorLines.push("Mín: "+min);
-          if (pb!==null) minorLines.push("PB: "+pb);
-          const strong = document.createElement('div'); strong.className='prom'; strong.textContent = (prom!=null? prom:"");
-          const minor = document.createElement('div'); minor.className='minor'; minor.textContent = minorLines.join(" · ");
+    const catsObj = data.categorias || {}; let cats = Object.keys(catsObj);
+    cats.sort((a,b)=>{const sa=score(a), sb=score(b); if (sa[0]!==sb[0]) return sa[0]-sb[0]; if (sa[1]!==sb[1]) return sa[1]-sb[1]; return a.localeCompare(b);});
+    const thead=document.querySelector('#cuadro thead'), tbody=document.querySelector('#cuadro tbody'); thead.innerHTML=""; tbody.innerHTML="";
+    const trh=document.createElement('tr'); const hCat=document.createElement('th'); hCat.textContent="Categoría"; hCat.scope="col"; trh.appendChild(hCat);
+    trh.appendChild(thLogo(data,"plaza_rural","assets/plazarural.png","Plaza Rural"));
+    trh.appendChild(thLogo(data,"lote21","assets/lote21.png","Lote 21"));
+    trh.appendChild(thLogo(data,"pantalla_uruguay","assets/pantallauruguay.png","Pantalla Uruguay"));
+    trh.appendChild(thLogo(data,"acg","assets/acg.png","ACG")); thead.appendChild(trh);
+    if (cats.length===0){const tr=document.createElement('tr'); const td=document.createElement('td'); td.colSpan=5; td.className="small"; td.textContent="No hay datos. Verificá el último run de Actions y el unified.json."; tr.appendChild(td); tbody.appendChild(tr); return;}
+    cats.forEach(cat=>{ if (/\(acg\)/i.test(cat)) return; const tr=document.createElement('tr');
+      const td0=document.createElement('th'); td0.scope="row"; td0.textContent=cat; tr.appendChild(td0);
+      ["plaza_rural","lote21","pantalla_uruguay","acg"].forEach(src=>{ const td=document.createElement('td'); td.className='cell'; const v=(catsObj[cat]&&catsObj[cat][src])||null;
+        if (v){ const prom=(v.prom ?? v.ref ?? null); const max=(v.max ?? null); const min=(v.min ?? null); const pb=(v.prom_bulto ?? null);
+          const minorLines=[]; if (max!==null) minorLines.push("Máx: "+max); if (min!==null) minorLines.push("Mín: "+min); if (pb!==null) minorLines.push("PB: "+pb);
+          const strong=document.createElement('div'); strong.className='prom'; strong.textContent=(prom!=null? prom:""); const minor=document.createElement('div'); minor.className='minor'; minor.textContent=minorLines.join(" · ");
           td.appendChild(strong); if (minor.textContent) td.appendChild(minor);
-        }
-        tr.appendChild(td);
-      });
-      tbody.appendChild(tr);
-    });
-    table.appendChild(tbody);
-    container.appendChild(table);
-
-    // ACG rectangle
-    const acg = (data.fuentes && data.fuentes.acg) || {};
-    const nov = (catsObj["Novillo gordo (ACG)"] && catsObj["Novillo gordo (ACG)"].acg && (catsObj["Novillo gordo (ACG)"].acg.prom ?? catsObj["Novillo gordo (ACG)"].acg.ref)) || null;
-    const vac = (catsObj["Vaca gorda (ACG)"] && catsObj["Vaca gorda (ACG)"].acg && (catsObj["Vaca gorda (ACG)"].acg.prom ?? catsObj["Vaca gorda (ACG)"].acg.ref)) || null;
-    const vaq = (catsObj["Vaquillona gorda (ACG)"] && catsObj["Vaquillona gorda (ACG)"].acg && (catsObj["Vaquillona gorda (ACG)"].acg.prom ?? catsObj["Vaquillona gorda (ACG)"].acg.ref)) || null;
-    if (nov!==null || vac!==null || vaq!==null){
-      document.getElementById('acgCard').style.display = '';
-      document.getElementById('acgDate').textContent = fmtDate(acg.fecha || "");
+        } tr.appendChild(td); }); tbody.appendChild(tr); });
+    const acg=(data.fuentes&&data.fuentes.acg)||{}; const catsd=data.categorias||{};
+    const nov=(catsd["Novillo gordo (ACG)"]&&catsd["Novillo gordo (ACG)"].acg&&(catsd["Novillo gordo (ACG)"].acg.prom ?? catsd["Novillo gordo (ACG)"].acg.ref))||null;
+    const vac=(catsd["Vaca gorda (ACG)"]&&catsd["Vaca gorda (ACG)"].acg&&(catsd["Vaca gorda (ACG)"].acg.prom ?? catsd["Vaca gorda (ACG)"].acg.ref))||null;
+    const vaq=(catsd["Vaquillona gorda (ACG)"]&&catsd["Vaquillona gorda (ACG)"].acg&&(catsd["Vaquillona gorda (ACG)"].acg.prom ?? catsd["Vaquillona gorda (ACG)"].acg.ref))||null;
+    if (nov!==null || vac!==null || vaq!==null){ document.getElementById('acgCard').style.display=''; document.getElementById('acgDate').textContent=fmtDate(acg.fecha || "");
       if (nov!==null) document.getElementById('acgNovillo').textContent = nov;
       if (vac!==null) document.getElementById('acgVaca').textContent = vac;
-      if (vaq!==null) document.getElementById('acgVaquillona').textContent = vaq;
-    }
-  }
-  main();
+      if (vaq!==null) document.getElementById('acgVaquillona').textContent = vaq; }
+  } main();
   </script>
 </body>
 </html>
