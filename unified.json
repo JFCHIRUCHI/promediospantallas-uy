@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-09-20T00:19:05Z",
+  "last_updated_utc": "2025-09-20T00:34:20Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -14,35 +14,11 @@
       "fecha": null
     },
     "acg": {
-      "url": "https://acg.com.uy/?post_type=precio_semanal",
-      "fecha": null
+      "url": null,
+      "error": "name 'reS' is not defined"
     }
   },
   "categorias": {
-    "Corderos y Corderas": {
-      "plaza_rural": {
-        "prom": 53.0,
-        "max": 53.0,
-        "min": 53.0,
-        "prom_bulto": 53.0
-      }
-    },
-    "Borregos": {
-      "pantalla_uruguay": {
-        "prom": 50.0,
-        "max": 50.0,
-        "min": 50.0,
-        "prom_bulto": 50.0
-      }
-    },
-    "Oveja De Cría 2 O + Enc.": {
-      "plaza_rural": {
-        "prom": 80.75,
-        "max": 81.5,
-        "min": 80.0,
-        "prom_bulto": 80.75
-      }
-    },
     "Terneros hasta 140kg": {
       "plaza_rural": {
         "prom": 3.93,
@@ -57,7 +33,7 @@
         "prom_bulto": 491.0
       }
     },
-    "Terneros Entre 140 Y 180 Kg": {
+    "Terneros entre 140 y 180kg": {
       "plaza_rural": {
         "prom": 3.4,
         "max": 3.56,
@@ -93,6 +69,20 @@
         "prom_bulto": 1255.8
       }
     },
+    "Terneros / Terneras": {
+      "plaza_rural": {
+        "prom": 3.19,
+        "max": 4.0,
+        "min": 2.8,
+        "prom_bulto": 559.72
+      },
+      "pantalla_uruguay": {
+        "prom": 3.12,
+        "max": 4.1,
+        "min": 2.45,
+        "prom_bulto": 511.0
+      }
+    },
     "Terneras": {
       "plaza_rural": {
         "prom": 3.07,
@@ -123,34 +113,12 @@
         "prom_bulto": 553.0
       }
     },
-    "Terneros / Terneras": {
-      "plaza_rural": {
-        "prom": 3.19,
-        "max": 4.0,
-        "min": 2.8,
-        "prom_bulto": 559.72
-      },
-      "pantalla_uruguay": {
-        "prom": 3.12,
-        "max": 4.1,
-        "min": 2.45,
-        "prom_bulto": 511.0
-      }
-    },
     "Vaquillonas mas de 2 años": {
       "plaza_rural": {
         "prom": 2.63,
         "max": 2.63,
         "min": 2.63,
         "prom_bulto": 888.1
-      }
-    },
-    "Vaquillonas entoradas": {
-      "pantalla_uruguay": {
-        "prom": 920.0,
-        "max": 920.0,
-        "min": 920.0,
-        "prom_bulto": 920.0
       }
     },
     "Vientres Preñados": {
@@ -167,6 +135,20 @@
         "prom_bulto": 1003.0
       }
     },
+    "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 614.7,
+        "max": 624.0,
+        "min": 605.0,
+        "prom_bulto": 614.7
+      },
+      "pantalla_uruguay": {
+        "prom": 556.0,
+        "max": 582.0,
+        "min": 535.0,
+        "prom_bulto": 556.0
+      }
+    },
     "Vacas de Invernada": {
       "plaza_rural": {
         "prom": 2.39,
@@ -179,6 +161,22 @@
         "max": 2.43,
         "min": 2.1,
         "prom_bulto": 887.0
+      }
+    },
+    "Borregos": {
+      "pantalla_uruguay": {
+        "prom": 50.0,
+        "max": 50.0,
+        "min": 50.0,
+        "prom_bulto": 50.0
+      }
+    },
+    "Corderos Y Corderas": {
+      "plaza_rural": {
+        "prom": 53.0,
+        "max": 53.0,
+        "min": 53.0,
+        "prom_bulto": 53.0
       }
     },
     "Holandos": {
@@ -237,18 +235,12 @@
         "prom_bulto": 663.0
       }
     },
-    "Piezas De Cría": {
+    "Oveja De Cría 2 O + Enc.": {
       "plaza_rural": {
-        "prom": 614.7,
-        "max": 624.0,
-        "min": 605.0,
-        "prom_bulto": 614.7
-      },
-      "pantalla_uruguay": {
-        "prom": 556.0,
-        "max": 582.0,
-        "min": 535.0,
-        "prom_bulto": 556.0
+        "prom": 80.75,
+        "max": 81.5,
+        "min": 80.0,
+        "prom_bulto": 80.75
       }
     },
     "Terneros + 180 Kg": {
@@ -273,6 +265,14 @@
         "max": 3.11,
         "min": 2.53,
         "prom_bulto": 794.71
+      }
+    },
+    "Vaquillonas Entoradas": {
+      "pantalla_uruguay": {
+        "prom": 920.0,
+        "max": 920.0,
+        "min": 920.0,
+        "prom_bulto": 920.0
       }
     },
     "Vaquillonas Preñadas": {
