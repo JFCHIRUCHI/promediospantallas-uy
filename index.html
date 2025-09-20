@@ -74,6 +74,9 @@
   </main>
   <footer class="wrap small">Hecho por JQ</footer>
   <script>
+  function normalize(s){
+    return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
+  }
   function fmtDate(d){
     if(!d) return "—";
     try{
@@ -82,40 +85,58 @@
     }catch(e){}
     return d;
   }
-
-  // Bloques y orden pedido
-  const ORDER = [
-    // Terneros (Machos)
-    "Terneros hasta 140kg",
-    "Terneros entre 140 y 180kg","Terneros Entre 140 Y 180 Kg","Terneros 141 a 180 kg",
-    "Terneros mas de 180kg","Terneros más de 180 kg","Terneros + 180 Kg",
-    "Terneros","Terneros Generales",
-    // Novillos
-    "Novillos 1 a 2 años","novillos de 1-2 años",
-    "Novillos 2 a 3 años","novillos de 2-3 años",
-    "Novillos mas de 3 años","Novillos más de 3 años","Novillos + 3 Años",
-    // Holando
-    "Holando y Cruza Ho","Holando y Cruza",
-    // Mixtos
-    "Terneros / Terneras","Terneros y Terneras",
-    // Terneras
-    "Terneras",
-    "Terneras hasta 140kg","Terneras hasta 140 kg",
-    "Terneras entre 140 y 180kg","Terneras entre 140 y 180 kg",
-    "Terneras mas de 140kg","Terneras más de 140 kg",
-    // Vaquillonas
-    "Vaquillonas de 1 a 2 años",
-    "Vaquillonas mas de 2 años","Vaquillonas + 2 años",
-    "Vaquillonas sin servicio",
-    "Vaquillonas entoradas",
-    "Vaquillonas preñadas",
-    // Vientres/Vacas preñadas
-    "Vientres Preñados","Vientres preñados","Vacas Preñadas",
-    // Pieza de cría
-    "Piezas de cría","Pieza de Cria",
-    // Vacas de Invernada
-    "Vacas de Invernada","Vacas de invernada"
-  ];
+  // Scoring con bloque Ovinos primero
+  function score(cat){
+    const n = normalize(cat);
+    // ACG (fuera del cuadro principal)
+    if (/novillo gordo \(acg\)|vaca gorda \(acg\)|vaquillona gorda \(acg\)/.test(n)) return [99,99];
+    // 0. Ovinos
+    if (/^corderos? y corderas?/.test(n)) return [0,1];
+    if (/^borregos?\b/.test(n)) return [0,2];
+    if (/oveja.*cria.*(2|\+)/.test(n)) return [0,3];
+    // 1. Terneros (Machos)
+    if (/^terneros\b/.test(n) && !/terneras\b/.test(n) && !/\sterneros\s*[\/y]\s*terneras/.test(n)){
+      if (/(hasta|<|\-\s*140|140\s*kg|menos)/.test(n)) return [1,1];
+      if (/(140.*180|140-180|entre 140 y 180)/.test(n)) return [1,2];
+      if (/(\+\s*180|mas de 180|mas de\s*180|>\s*180)/.test(n)) return [1,3];
+      return [1,9];
+    }
+    // 2. Novillos
+    if (/^novillos?\b/.test(n)){
+      if (/(1\s*(a|–|-)\s*2)/.test(n)) return [2,1];
+      if (/(2\s*(a|–|-)\s*3)/.test(n)) return [2,2];
+      if (/(\+\s*3|mas de 3)/.test(n)) return [2,3];
+      if (/(mas de 2)/.test(n)) return [2,2]; // mapear "Más de 2 años" a 2-3
+      return [2,9];
+    }
+    // 3. Holando y Cruza
+    if (/holando|cruza ho/.test(n)) return [3,1];
+    // 4. Mixtos
+    if (/\sterneros\s*[\/y]\s*terneras|^mixtos/.test(n)) return [4,1];
+    // 5. Terneras
+    if (/^terneras\b/.test(n)){
+      if (/(hasta|<|\-\s*140|140\s*kg|menos)/.test(n)) return [5,1];
+      if (/(140.*180|140-180|entre 140 y 180)/.test(n)) return [5,2];
+      if (/(\+\s*140|mas de 140|>\s*140)/.test(n)) return [5,3];
+      return [5,9];
+    }
+    // 6. Vaquillonas
+    if (/^vaquillonas\b/.test(n)){
+      if (/(1\s*(a|–|-)\s*2)/.test(n)) return [6,1];
+      if (/(\+\s*2|mas de 2)/.test(n)) return [6,2];
+      if (/sin servicio/.test(n)) return [6,3];
+      if (/entorad/.test(n)) return [6,4];
+      if (/pren/.test(n)) return [6,5];
+      return [6,9];
+    }
+    // 7. Vientres/Vacas preñadas
+    if (/vientres?\s*pren|vacas?\s*pren/.test(n)) return [7,1];
+    // 8. Piezas de cría
+    if (/pieza?s?\s*de\s*cria/.test(n)) return [8,1];
+    // 9. Vacas de Invernada
+    if (/vacas?\s*de\s*invernada/.test(n)) return [9,1];
+    return [50,50];
+  }
 
   async function main(){
     const res = await fetch('unified.json?_=' + Date.now());
@@ -123,18 +144,16 @@
     document.getElementById('last').textContent = "Última actualización (UTC): " + (data.last_updated_utc || "—");
 
     const catsObj = data.categorias || {};
-    // Construir lista ordenada según bloques
-    const seen = new Set();
-    const ordered = [];
-    ORDER.forEach(name => {
-      const k = Object.keys(catsObj).find(c => c.toLowerCase() === name.toLowerCase());
-      if (k && !seen.has(k)){ ordered.push(k); seen.add(k); }
+    let cats = Object.keys(catsObj);
+    cats.sort((a,b)=>{
+      const sa=score(a), sb=score(b);
+      if (sa[0]!==sb[0]) return sa[0]-sb[0];
+      if (sa[1]!==sb[1]) return sa[1]-sb[1];
+      return a.localeCompare(b);
     });
-    // Añadir cualquier categoría no contemplada al final
-    Object.keys(catsObj).forEach(c => { if(!seen.has(c)) ordered.push(c); });
 
     const container = document.getElementById('table');
-    if (ordered.length === 0){
+    if (cats.length === 0){
       container.innerHTML = '<div class="small">No hay filas. Verificá que el workflow generó datos.</div>';
       return;
     }
@@ -170,9 +189,8 @@
     table.appendChild(thead);
 
     const tbody = document.createElement('tbody');
-    ordered.forEach(cat=>{
-      // saltar los ACG gordo: irán en el rectángulo de abajo
-      if (["Novillo gordo (ACG)","Vaca gorda (ACG)","Vaquillona gorda (ACG)"].includes(cat)) return;
+    cats.forEach(cat=>{
+      if (/\(acg\)/i.test(cat)) return; // ACG va en el rectángulo
       const tr = document.createElement('tr');
       const td0 = document.createElement('td'); td0.textContent = cat; tr.appendChild(td0);
       ["plaza_rural","lote21","pantalla_uruguay","acg"].forEach(src=>{
