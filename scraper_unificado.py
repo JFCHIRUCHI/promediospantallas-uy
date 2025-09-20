@@ -9,21 +9,18 @@ from unidecode import unidecode
 OUT = "unified.json"
 UA = {"User-Agent":"Mozilla/5.0"}
 
-# ---------- utils ----------
 def fetch_html(url, timeout=60):
     r = requests.get(url, headers=UA, timeout=timeout)
     r.raise_for_status()
     return r.text
 
 def read_table_any(url, table_selector=None):
-    # try pandas directly
     try:
         tables = pd.read_html(url, flavor="lxml")
         if tables:
             return tables[0]
     except Exception:
         pass
-    # fallback: select specific table then read
     html = fetch_html(url)
     soup = BeautifulSoup(html, "lxml")
     t = soup.select_one(table_selector or "table")
@@ -51,37 +48,15 @@ def pick_col(cols, *cands):
                 return original
     return None
 
-# ---------- canonical order (as requested) ----------
 CANONICAL = [
-    "Corderos y Corderas",
-    "Borregos",
-    "Oveja De Cría 2 O + Enc.",
-    "Terneros hasta 140kg",
-    "Terneros mas de 180kg",
-    "Terneros",
-    "Novillos 1 a 2 años",
-    "Novillos 2 a 3 alos",
-    "Novillos mas de 3 años",
-    "Holando y Cruza Ho",
-    "Terneras",
-    "Terneras hasta 140kg",
-    "Terneras mas de 140kg",
-    "Terneras entre 140 y 180kg",
-    "Terneros / Terneras",
-    "Vaquillonas de 1 a 2 años",
-    "Vaquillonas mas de 2 años",
-    "Vaquillonas sin servicio",
-    "Vaquillonas entoradas",
-    "Vaquillonas preñadas",
-    "Vientres Preñados",
-    "Vacas de Invernada",
-    # ACG gordo (se agregan al final si aparecen)
-    "Novillo gordo (ACG)",
-    "Vaca gorda (ACG)",
-    "Vaquillona gorda (ACG)",
+    "Corderos y Corderas","Borregos","Oveja De Cría 2 O + Enc.","Terneros hasta 140kg",
+    "Terneros mas de 180kg","Terneros","Novillos 1 a 2 años","Novillos 2 a 3 alos","Novillos mas de 3 años",
+    "Holando y Cruza Ho","Terneras","Terneras hasta 140kg","Terneras mas de 140kg","Terneras entre 140 y 180kg",
+    "Terneros / Terneras","Vaquillonas de 1 a 2 años","Vaquillonas mas de 2 años","Vaquillonas sin servicio",
+    "Vaquillonas entoradas","Vaquillonas preñadas","Vientres Preñados","Vacas de Invernada",
+    "Novillo gordo (ACG)","Vaca gorda (ACG)","Vaquillona gorda (ACG)"
 ]
 
-# ---------- aliases ----------
 ALIASES_FILE = "categories_aliases.json"
 ALIASES = {}
 if os.path.exists(ALIASES_FILE):
@@ -97,54 +72,20 @@ def norm_cat(raw):
     original = str(raw).strip()
     if not original:
         return ""
-    # alias exacto (case/acentos insensible)
     k = unidecode(original).lower().strip()
     for alias, target in ALIASES.items():
         if unidecode(alias).lower().strip() == k:
             return target
-    # reglas ampliadas por patrones (básicas; el alias cubre el resto)
-    s = unidecode(original).lower().strip()
-    s = re.sub(r"\s+", " ", s)
-    RULES = [
-        (r"^corderos?.*corderas?", "Corderos y Corderas"),
-        (r"^borregos?", "Borregos"),
-        (r"^oveja.*cria.*(2|\+)", "Oveja De Cría 2 O + Enc."),
-        (r"^terneros?.*(hasta|<|-\s*140|140\s*kg)", "Terneros hasta 140kg"),
-        (r"^terneros?.*(\+|mas|>\s*180|180\s*kg)", "Terneros mas de 180kg"),
-        (r"^terneros?$", "Terneros"),
-        (r"^novillos?.*(1.*2).*anos?", "Novillos 1 a 2 años"),
-        (r"^novillos?.*(2.*3).*anos?", "Novillos 2 a 3 alos"),
-        (r"^novillos?.*(\+.*3|mas.*3)", "Novillos mas de 3 años"),
-        (r"^holando.*", "Holando y Cruza Ho"),
-        (r"^terneras?$", "Terneras"),
-        (r"^terneras?.*(hasta|<).*140", "Terneras hasta 140kg"),
-        (r"^terneras?.*(\+|mas).*140", "Terneras mas de 140kg"),
-        (r"^terneras?.*(140.*180|140-180|140 – 180)", "Terneras entre 140 y 180kg"),
-        (r"^terneros?\s*/\s*terneras?$|^terneros?\s*y\s*terneras?$", "Terneros / Terneras"),
-        (r"^vaquillonas?.*(1.*2).*anos?", "Vaquillonas de 1 a 2 años"),
-        (r"^vaquillonas?.*(\+|mas).*2.*anos?", "Vaquillonas mas de 2 años"),
-        (r"^vaquillonas?.*sin.*servicio", "Vaquillonas sin servicio"),
-        (r"^vaquillonas?.*entorad", "Vaquillonas entoradas"),
-        (r"^vaquillonas?.*pren", "Vaquillonas preñadas"),
-        (r"^vientres?.*pren", "Vientres Preñados"),
-        (r"^vacas?.*invernada", "Vacas de Invernada"),
-        (r"^novillo.*gordo", "Novillo gordo (ACG)"),
-        (r"^vaca.*gorda", "Vaca gorda (ACG)"),
-        (r"^vaquillona.*gorda", "Vaquillona gorda (ACG)"),
-    ]
-    for pat, target in RULES:
-        if re.search(pat, s, flags=re.I):
-            return target
+    # fallback simple
     return original.strip().title()
 
-# ---------- scrapers ----------
 def plaza_rural():
     url = "https://plazarural.com.uy/promedios"
     df = read_table_any(url)
     fecha = None
     try:
         html = fetch_html(url)
-        m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html)
+        m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
         if m:
             d,mn,y = m.group(1).split("/")
             y = y if len(y)==4 else ("20"+y)
@@ -152,25 +93,22 @@ def plaza_rural():
     except Exception:
         pass
     df.columns = [str(c).strip() for c in df.columns]
-    c_cat = pick_col(df.columns, "categoria","categoría")
-    c_max = pick_col(df.columns, "max","máx","maximo","máximo")
-    c_min = pick_col(df.columns, "min","mín","minimo","mínimo")
-    c_prom= pick_col(df.columns, "prom","promedio")
-    c_pb  = pick_col(df.columns, "prom bulto","prom. bulto","pb")
+    c_cat = pick_col(df.columns, "categoria", "categoría")
+    c_max = pick_col(df.columns, "max", "máx", "maximo", "máximo")
+    c_min = pick_col(df.columns, "min", "mín", "minimo", "mínimo")
+    c_prom = pick_col(df.columns, "prom", "promedio")
+    c_pb = pick_col(df.columns, "prom bulto", "prom. bulto", "pb")
     rows = {}
     for _, r in df.iterrows():
-        cat = norm_cat(r.get(c_cat,""))
+        cat = norm_cat(r.get(c_cat, ""))
         if not cat: continue
-        rows[cat] = {"prom": to_float(r.get(c_prom)),
-                     "max": to_float(r.get(c_max)),
-                     "min": to_float(r.get(c_min)),
-                     "prom_bulto": to_float(r.get(c_pb))}
+        rows[cat] = {"prom": to_float(r.get(c_prom)), "max": to_float(r.get(c_max)), "min": to_float(r.get(c_min)), "prom_bulto": to_float(r.get(c_pb))}
     return url, rows, fecha
 
 def lote21():
     url = "https://www.lote21.uy/promedios.asp"
     html = fetch_html(url)
-    m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html)
+    m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
     fecha = None
     if m:
         d,mn,y = m.group(1).split("/")
@@ -181,32 +119,29 @@ def lote21():
     for t in tables:
         t.columns = [str(c).strip() for c in t.columns]
         cols = t.columns
-        c_cat  = pick_col(cols,"categoria","categoría")
-        c_max  = pick_col(cols,"maximo","máximo","max")
-        c_min  = pick_col(cols,"minimo","mínimo","min")
-        c_prom = pick_col(cols,"promedio","prom")
-        if c_cat and c_prom:
-            df = t; break
+        c_cat  = pick_col(cols, "categoria", "categoría")
+        c_max  = pick_col(cols, "maximo", "máximo", "max")
+        c_min  = pick_col(cols, "minimo", "mínimo", "min")
+        c_prom = pick_col(cols, "promedio", "prom")
+        if c_cat and c_prom: df = t; break
     if df is None:
         df = read_table_any(url)
         df.columns = [str(c).strip() for c in df.columns]
-        c_cat  = pick_col(df.columns,"categoria","categoría")
-        c_max  = pick_col(df.columns,"maximo","máximo","max")
-        c_min  = pick_col(df.columns,"minimo","mínimo","min")
-        c_prom = pick_col(df.columns,"promedio","prom")
+        c_cat  = pick_col(df.columns, "categoria", "categoría")
+        c_max  = pick_col(df.columns, "maximo", "máximo", "max")
+        c_min  = pick_col(df.columns, "minimo", "mínimo", "min")
+        c_prom = pick_col(df.columns, "promedio", "prom")
     rows = {}
     for _, r in df.iterrows():
-        cat = norm_cat(r.get(c_cat,""))
+        cat = norm_cat(r.get(c_cat, ""))
         if not cat: continue
-        rows[cat] = {"prom": to_float(r.get(c_prom)),
-                     "max": to_float(r.get(c_max)),
-                     "min": to_float(r.get(c_min))}
+        rows[cat] = {"prom": to_float(r.get(c_prom)), "max": to_float(r.get(c_max)), "min": to_float(r.get(c_min))}
     return url, rows, fecha
 
 def pantalla_uruguay():
     url = "https://www.pantallauruguay.com.uy/promedios/"
     html = fetch_html(url)
-    m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html)
+    m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
     fecha = None
     if m:
         d,mn,y = m.group(1).split("/")
@@ -214,19 +149,16 @@ def pantalla_uruguay():
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
     df = read_table_any(url)
     df.columns = [str(c).strip() for c in df.columns]
-    c_cat  = pick_col(df.columns,"categoria","categoría")
-    c_max  = pick_col(df.columns,"maximo","máximo","max")
-    c_min  = pick_col(df.columns,"minimo","mínimo","min")
-    c_prom = pick_col(df.columns,"prom","promedio")
-    c_pb   = pick_col(df.columns,"prom bulto","prom. bulto","pb")
+    c_cat  = pick_col(df.columns, "categoria", "categoría")
+    c_max  = pick_col(df.columns, "maximo", "máximo", "max")
+    c_min  = pick_col(df.columns, "minimo", "mínimo", "min")
+    c_prom = pick_col(df.columns, "prom", "promedio")
+    c_pb   = pick_col(df.columns, "prom bulto", "prom. bulto", "pb")
     rows = {}
     for _, r in df.iterrows():
-        cat = norm_cat(r.get(c_cat,""))
+        cat = norm_cat(r.get(c_cat, ""))
         if not cat: continue
-        rows[cat] = {"prom": to_float(r.get(c_prom)),
-                     "max": to_float(r.get(c_max)),
-                     "min": to_float(r.get(c_min)),
-                     "prom_bulto": to_float(r.get(c_pb))}
+        rows[cat] = {"prom": to_float(r.get(c_prom)), "max": to_float(r.get(c_max)), "min": to_float(r.get(c_min)), "prom_bulto": to_float(r.get(c_pb))}
     return url, rows, fecha
 
 def acg():
@@ -236,27 +168,21 @@ def acg():
     first = soup.select_one("article a")
     post_url = first.get("href") if first else list_url
     html_post = fetch_html(post_url)
-    m = re.search(r"(\\d{1,2}/\\d{1,2}/\\d{2,4})", html_post)
+    m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html_post)
     fecha = None
     if m:
         d,mn,y = m.group(1).split("/")
         y = y if len(y)==4 else ("20"+y)
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
-    def rex(label): 
-        return re.search(rf"{label}.*?([\\d\\.,]+)", html_post, flags=re.I|re.S)
+    def rex(label): return re.search(rf"{label}.*?([\d\.,]+)", html_post, flags=re.I|re.S)
     rows = {}
-    for etiqueta, cat in [
-        ("Novillo\\s*gordo", "Novillo gordo (ACG)"),
-        ("Vaca\\s*gorda", "Vaca gorda (ACG)"),
-        ("Vaquillona\\s*gorda", "Vaquillona gorda (ACG)"),
-    ]:
+    for etiqueta, cat in [("Novillo\s*gordo","Novillo gordo (ACG)"),("Vaca\s*gorda","Vaca gorda (ACG)"),("Vaquillona\s*gorda","Vaquillona gorda (ACG)")]:
         m2 = rex(etiqueta)
         if m2:
             val = to_float(m2.group(1))
             rows[cat] = {"prom": val, "ref": val}
     return post_url, rows, fecha
 
-# ---------- main ----------
 def main():
     data = {"last_updated_utc": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
             "fuentes": {}, "categorias": {}}
@@ -272,7 +198,7 @@ def main():
             time.sleep(1.2)
         except Exception as e:
             data["fuentes"][key] = {"url": None, "error": str(e)}
-    # order by CANONICAL first
+    # order: show only categories that appeared; keep discovery order, but not empty
     ordered = {}
     for c in CANONICAL:
         if c in all_rows: ordered[c] = all_rows[c]
