@@ -32,7 +32,6 @@ def fetch_html(url, timeout=60):
     return r.text
 
 def read_table_any(url, table_selector=None, debug_prefix=None):
-    # 1) try pandas direct
     try:
         tables = pd.read_html(url, flavor="lxml")
         if tables:
@@ -40,7 +39,6 @@ def read_table_any(url, table_selector=None, debug_prefix=None):
             return tables[0]
     except Exception as e:
         if debug_prefix: save_debug(f"{debug_prefix}_pandas_error.txt", repr(e))
-    # 2) manual soup + first table
     html = fetch_html(url)
     if debug_prefix: save_debug(f"{debug_prefix}_page.html", html[:200000])
     soup = BeautifulSoup(html, "lxml")
@@ -61,11 +59,18 @@ def to_float(x):
         return None
 
 def pick_col(cols, *cands):
-    norm = {unidecode(str(c)).lower().strip(): c for c in cols}
+    # tolerante a variantes mal codificadas de tildes (CategorÃ­a, MÃ¡ximo, etc.)
+    norm_map = {unidecode(str(c)).lower().strip(): c for c in cols}
+    raw_map = {str(c).strip(): c for c in cols}
     for cand in cands:
         key = unidecode(cand).lower().strip()
-        for k, original in norm.items():
+        # 1) por unidecode lowercase contiene
+        for k, original in norm_map.items():
             if key in k:
+                return original
+        # 2) por coincidencia cruda (para casos como "CategorÃ­a", "MÃ¡ximo", "MÃ­nimo", "Promedios")
+        for k, original in raw_map.items():
+            if cand.lower() in k.lower():
                 return original
     return None
 
@@ -88,11 +93,9 @@ def norm_cat(raw):
     if not raw: return ""
     original = str(raw).strip()
     nb = _norm_basic(original)
-    # exact alias first
     for alias, target in ALIASES.items():
         if _norm_basic(alias) == nb:
             return target
-
     # Ovinos
     if nb.startswith("corderos y corderas"): return "Corderos y Corderas"
     if nb.startswith("borregos"): return "Borregos"
@@ -173,10 +176,10 @@ def plaza_rural():
     except Exception as e:
         save_debug("plazarural_date_error.txt", repr(e))
     df.columns = [str(c).strip() for c in df.columns]
-    c_cat = pick_col(df.columns, "categoria","categoría")
-    c_max = pick_col(df.columns, "max","máx","maximo","máximo")
-    c_min = pick_col(df.columns, "min","mín","minimo","mínimo")
-    c_prom= pick_col(df.columns, "prom","promedio")
+    c_cat = pick_col(df.columns, "categoria","categoría","CategorÃ­a")
+    c_max = pick_col(df.columns, "max","máx","maximo","máximo","MÃ¡ximo")
+    c_min = pick_col(df.columns, "min","mín","minimo","mínimo","MÃ­nimo")
+    c_prom= pick_col(df.columns, "prom","promedio","Promedios")
     c_pb  = pick_col(df.columns, "prom bulto","prom. bulto","pb")
     rows = {}
     for _, r in df.iterrows():
@@ -196,7 +199,6 @@ def lote21():
         "http://www.lote21.uy/promedios.asp",
         "http://lote21.uy/promedios.asp",
     ]
-    # fetch variants
     s = requests.Session(); s.headers.update(UA)
     html, ok_url = None, None
     for u in urls:
@@ -215,14 +217,12 @@ def lote21():
         raise RuntimeError("Lote21: no pude descargar la página")
     save_debug("lote21_response_url.txt", ok_url or "")
     save_debug("lote21_page.html", html[:250000])
-    # Fecha
     m = re.search(r"(?:Actualizado|Subasta|Remate)?[^\\d]{0,20}(\\d{1,2}/\\d{1,2}/\\d{2,4})", html, flags=re.I)
     fecha = None
     if m:
         d,mn,y = m.group(1).split("/")
         y = y if len(y)==4 else ("20"+y)
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
-    # Tablas candidatas
     cands = []
     try:
         for t in pd.read_html(html, flavor="lxml"):
@@ -238,7 +238,6 @@ def lote21():
     save_debug("lote21_tables_found.txt", str(len(cands)))
     if not cands:
         raise RuntimeError("Lote21: no hay tablas")
-    # pick best
     def score_df(df):
         d = df.dropna(how="all")
         d = d.loc[:, ~d.columns.duplicated()]
@@ -246,14 +245,13 @@ def lote21():
         cols = [unidecode(str(c)).lower() for c in d.columns]
         score = 0
         if any(("cat" in c or "ategor" in c) for c in cols): score += 2
-        if any(("prom" in c) for c in cols): score += 2
-        if any(("max" in c or "máx" in c) for c in cols): score += 1
-        if any(("min" in c or "mín" in c) for c in cols): score += 1
+        if any(("prom" in c) or ("promedios" in c) for c in cols): score += 2
+        if any(("max" in c or "máx" in c or "mÃ¡ximo" in c) for c in cols): score += 1
+        if any(("min" in c or "mín" in c or "mÃ­nimo" in c) for c in cols): score += 1
         return score, d
     scored = [score_df(t) for t in cands]
     scored.sort(key=lambda x: (-x[0], -len(x[1])))
     df = scored[0][1]
-    # Si la primera fila parece encabezado
     if df.shape[0] > 1 and not any(isinstance(x, str) for x in df.columns):
         first = df.iloc[0].astype(str).str.lower().tolist()
         if any("cat" in s or "prom" in s for s in first):
@@ -261,12 +259,12 @@ def lote21():
             df = df.iloc[1:]
     df = df.dropna(how="all")
     df.columns = [str(c).strip() for c in df.columns]
-    save_debug("lote21_table_preview.csv", df.head(40).to_csv(index=False))
-    c_cat  = pick_col(df.columns, "categoria","categoría","rubro","lote","clase")
-    c_prom = pick_col(df.columns, "promedio","prom")
-    c_max  = pick_col(df.columns, "maximo","máximo","max")
-    c_min  = pick_col(df.columns, "minimo","mínimo","min")
-    # Fallback si no encuentra headers claros y hay 4+ cols
+    save_debug("lote21_table_preview.csv", df.head(60).to_csv(index=False))
+    # Column picks con variantes mal codificadas
+    c_cat  = pick_col(df.columns, "categoria","categoría","CategorÃ­a","rubro","lote","clase")
+    c_prom = pick_col(df.columns, "promedio","prom","Promedios")
+    c_max  = pick_col(df.columns, "maximo","máximo","max","MÃ¡ximo")
+    c_min  = pick_col(df.columns, "minimo","mínimo","min","MÃ­nimo")
     if not c_cat and not c_prom and df.shape[1] >= 4:
         cols = list(df.columns)
         c_cat, c_prom, c_max, c_min = cols[0], cols[1], cols[2], cols[3]
@@ -296,10 +294,10 @@ def pantalla_uruguay():
         y = y if len(y)==4 else ("20"+y)
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
     df.columns = [str(c).strip() for c in df.columns]
-    c_cat  = pick_col(df.columns, "categoria","categoría")
-    c_max  = pick_col(df.columns, "maximo","máximo","max")
-    c_min  = pick_col(df.columns, "minimo","mínimo","min")
-    c_prom = pick_col(df.columns, "prom","promedio")
+    c_cat  = pick_col(df.columns, "categoria","categoría","CategorÃ­a")
+    c_max  = pick_col(df.columns, "maximo","máximo","max","MÃ¡ximo")
+    c_min  = pick_col(df.columns, "minimo","mínimo","min","MÃ­nimo")
+    c_prom = pick_col(df.columns, "prom","promedio","Promedios")
     c_pb   = pick_col(df.columns, "prom bulto","prom. bulto","pb")
     rows = {}
     for _, r in df.iterrows():
@@ -352,10 +350,10 @@ def main():
             for cat, vals in rows.items():
                 all_rows.setdefault(cat, {})
                 all_rows[cat][key] = vals
-            time.sleep(1.0)
+            time.sleep(0.8)
         except Exception as e:
             data["fuentes"][key] = {"url": None, "error": str(e)}
-    # Orden canónico (igual al front)
+    # Orden canónico: mismo que en el front
     CANONICAL = [
         "Corderos y Corderas","Borregos","Oveja De Cría 2 O + Enc.",
         "Terneros hasta 140kg","Terneros entre 140 y 180kg","Terneros mas de 180kg","Terneros",
