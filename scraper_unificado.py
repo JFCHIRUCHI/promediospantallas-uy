@@ -7,26 +7,57 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 
 OUT = "unified.json"
-UA = {"User-Agent":"Mozilla/5.0"}
+UA = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"}
 
 def fetch_html(url, timeout=60):
     r = requests.get(url, headers=UA, timeout=timeout)
+    # A veces Lote21 sirve ISO-8859-1 sin declarar, forzamos detección
+    enc = r.encoding or "utf-8"
+    if enc and enc.lower() in ("iso-8859-1","latin-1","windows-1252"):
+        r.encoding = enc
+    else:
+        # fallback a lo que detecte chardet de requests
+        if r.apparent_encoding:
+            r.encoding = r.apparent_encoding
     r.raise_for_status()
     return r.text
 
 def read_table_any(url, table_selector=None):
+    # Primero intentamos con pandas
     try:
         tables = pd.read_html(url, flavor="lxml")
         if tables:
             return tables[0]
     except Exception:
         pass
+    # Luego hacemos manual con BeautifulSoup
     html = fetch_html(url)
     soup = BeautifulSoup(html, "lxml")
-    t = soup.select_one(table_selector or "table")
-    if t is None:
-        raise RuntimeError(f"No se encontró tabla en {url}")
-    return pd.read_html(str(t))[0]
+    # Si hay selector específico, probarlo
+    if table_selector:
+        t = soup.select_one(table_selector)
+        if t is not None:
+            return pd.read_html(str(t))[0]
+    # Buscar la tabla con cabeceras que contengan Categoria/Promedio/Max/Min
+    candidates = []
+    for t in soup.find_all("table"):
+        try:
+            df = pd.read_html(str(t))[0]
+        except Exception:
+            continue
+        cols = [str(c).strip().lower() for c in df.columns]
+        score = sum([
+            any("cat" in c or "ategor" in c for c in cols),
+            any("prom" in c for c in cols),
+            any("max" in c or "máx" in c for c in cols),
+            any("min" in c or "mín" in c for c in cols),
+        ])
+        if score >= 2:
+            candidates.append((score, df))
+    if candidates:
+        candidates.sort(key=lambda x: (-x[0], -len(x[1])))
+        return candidates[0][1]
+    raise RuntimeError(f"No se encontró tabla utilizable en {url}")
 
 def to_float(x):
     if x is None: return None
@@ -43,36 +74,11 @@ def pick_col(cols, *cands):
     norm = {unidecode(str(c)).lower().strip(): c for c in cols}
     for cand in cands:
         key = unidecode(cand).lower().strip()
+        # match contiene
         for k, original in norm.items():
             if key in k:
                 return original
     return None
-
-# CANONICAL stays in block order (front already enforces too)
-CANONICAL = [
-    # Ovinos
-    "Corderos y Corderas","Borregos","Oveja De Cría 2 O + Enc.",
-    # Terneros (Machos)
-    "Terneros hasta 140kg","Terneros entre 140 y 180kg","Terneros mas de 180kg","Terneros",
-    # Novillos
-    "Novillos 1 a 2 años","Novillos 2 a 3 años","Novillos mas de 3 años",
-    # Holando
-    "Holando y Cruza Ho",
-    # Mixtos
-    "Terneros / Terneras",
-    # Terneras
-    "Terneras","Terneras hasta 140kg","Terneras entre 140 y 180kg","Terneras mas de 140kg",
-    # Vaquillonas
-    "Vaquillonas de 1 a 2 años","Vaquillonas mas de 2 años","Vaquillonas sin servicio","Vaquillonas entoradas","Vaquillonas preñadas",
-    # Vientres/Vacas preñadas
-    "Vientres Preñados",
-    # Pieza de cría
-    "Piezas de cría",
-    # Vacas de Invernada
-    "Vacas de Invernada",
-    # ACG (fuera del cuadro principal)
-    "Novillo gordo (ACG)","Vaca gorda (ACG)","Vaquillona gorda (ACG)",
-]
 
 ALIASES_FILE = "categories_aliases.json"
 ALIASES = {}
@@ -84,107 +90,18 @@ if os.path.exists(ALIASES_FILE):
         ALIASES = {}
 
 def _norm_basic(s: str) -> str:
-    """Lower, unidecode, collapse spaces."""
     s = unidecode(str(s or "")).lower()
     s = re.sub(r"\s+", " ", s).strip()
     return s
 
-def norm_cat(raw):
-    """Map raw category text to canonical label using:
-    1) explicit aliases,
-    2) rule-based normalization for ages/pesos/estados (regex).
-    """
-    if not raw: return ""
-    original = str(raw).strip()
+def norm_cat_basic(original: str) -> str:
     nb = _norm_basic(original)
-    # 1) direct alias match
     for alias, target in ALIASES.items():
         if _norm_basic(alias) == nb:
             return target
-
-    # ----- RULES BY FAMILY -----
-    # Ovinos
-    if nb.startswith("corderos y corderas"): return "Corderos y Corderas"
-    if nb.startswith("borregos"): return "Borregos"
-    if nb.startswith("oveja de cria") or nb.startswith("oveja de cria 2 o") or "enc" in nb and "oveja" in nb:
-        return "Oveja De Cría 2 O + Enc."
-
-    # Holando
-    if "holando" in nb or "cruza ho" in nb:
-        return "Holando y Cruza Ho"
-
-    # Mixtos
-    if re.search(r"\bterneros?\s*[/y]\s*terneras?\b", nb) or nb.startswith("mixtos"):
-        return "Terneros / Terneras"
-
-    # Vientres/Vacas preñadas
-    if "vientres pren" in nb or "vacas pren" in nb or "vaca pren" in nb:
-        return "Vientres Preñados"
-
-    # Piezas de cría
-    if re.search(r"\bpiezas?\s+de\s+cria\b", nb):
-        return "Piezas de cría"
-
-    # Vacas de Invernada
-    if "vacas de invernada" in nb or "vaca de invernada" in nb:
-        return "Vacas de Invernada"
-
-    # --- TERNEROS (MACHOS) by peso ---
-    if nb.startswith("terneros") and "terneras" not in nb and not re.search(r"\bterneros\s*[/y]\s*terneras\b", nb):
-        # hasta / menos 140
-        if re.search(r"(hasta|menos|<|\-\s*140|140\s*kg|^terneros\s*-?\s*140)", nb) and not re.search(r"(180)", nb):
-            return "Terneros hasta 140kg"
-        # entre 140 y 180 (141 a 180 etc.)
-        if re.search(r"(140.*180|entre 140 y 180|141 a 180|140-180)", nb):
-            return "Terneros entre 140 y 180kg"
-        # mas de 180 / +180
-        if re.search(r"(\+\s*180|mas de 180|> *180|\- 180)", nb):
-            return "Terneros mas de 180kg"
-        # generales
-        return "Terneros"
-
-    # --- TERNERAS by peso ---
-    if nb.startswith("terneras"):
-        if re.search(r"(hasta|menos|<|\-\s*140|140\s*kg)", nb) and not re.search(r"(180)", nb):
-            return "Terneras hasta 140kg"
-        if re.search(r"(140.*180|entre 140 y 180|141 a 180|140-180)", nb):
-            return "Terneras entre 140 y 180kg"
-        if re.search(r"(\+\s*140|mas de 140|> *140)", nb):
-            return "Terneras mas de 140kg"
-        return "Terneras"
-
-    # --- NOVILLOS by edad ---
-    if nb.startswith("novillos") or nb.startswith("novillo "):
-        if re.search(r"(1\s*(a|–|-)\s*2|1 a 2)", nb):
-            return "Novillos 1 a 2 años"
-        if re.search(r"(2\s*(a|–|-)\s*3|de 2 a 3|2 a 3)", nb) or "mas de 2" in nb:
-            return "Novillos 2 a 3 años"
-        if re.search(r"(\+\s*3|mas de 3|> *3)", nb):
-            return "Novillos mas de 3 años"
-        # si dice "mas de 2 años" y no menciona 3, lo mapeamos a 2-3 por defecto
-        if "mas de 2" in nb:
-            return "Novillos 2 a 3 años"
-        return "Novillos 1 a 2 años"
-
-    # --- VAQUILLONAS by edad/estado ---
-    if nb.startswith("vaquillonas"):
-        if "sin servicio" in nb: return "Vaquillonas sin servicio"
-        if "entorad" in nb: return "Vaquillonas entoradas"
-        if "pren" in nb: return "Vaquillonas preñadas"
-        if re.search(r"(1\s*(a|–|-)\s*2|1 a 2)", nb):
-            return "Vaquillonas de 1 a 2 años"
-        if re.search(r"(\+\s*2|mas de 2|> *2)", nb):
-            return "Vaquillonas mas de 2 años"
-        # default
-        return "Vaquillonas de 1 a 2 años"
-
-    # --- ACG gordo ---
-    if "novillo gordo" in nb and "(acg)" in nb: return "Novillo gordo (ACG)"
-    if "vaca gorda" in nb and "(acg)" in nb: return "Vaca gorda (ACG)"
-    if "vaquillona gorda" in nb and "(acg)" in nb: return "Vaquillona gorda (ACG)"
-
-    # fallback: title-case original
     return original.strip().title()
+
+# ===== Scrapers =====
 
 def plaza_rural():
     url = "https://plazarural.com.uy/promedios"
@@ -207,7 +124,7 @@ def plaza_rural():
     c_pb  = pick_col(df.columns, "prom bulto","prom. bulto","pb")
     rows = {}
     for _, r in df.iterrows():
-        cat = norm_cat(r.get(c_cat,""))
+        cat = norm_cat_basic(r.get(c_cat,""))
         if not cat: continue
         rows[cat] = {"prom": to_float(r.get(c_prom)),
                      "max": to_float(r.get(c_max)),
@@ -218,41 +135,59 @@ def plaza_rural():
 def lote21():
     url = "https://www.lote21.uy/promedios.asp"
     html = fetch_html(url)
+    # fecha: primer dd/mm/aaaa de la página
     m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
     fecha = None
     if m:
         d,mn,y = m.group(1).split("/")
         y = y if len(y)==4 else ("20"+y)
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
-    tables = pd.read_html(url, flavor="lxml")
+    # Buscar tabla utilizable manualmente (mejor que pd.read_html directo por bloqueos)
+    soup = BeautifulSoup(html, "lxml")
     df = None
-    for t in tables:
-        t.columns = [str(c).strip() for c in t.columns]
-        cols = t.columns
-        c_cat  = pick_col(cols,"categoria","categoría")
-        c_max  = pick_col(cols,"maximo","máximo","max")
-        c_min  = pick_col(cols,"minimo","mínimo","min")
-        c_prom = pick_col(cols,"promedio","prom")
-        if c_cat and c_prom:
-            df = t; break
+    for t in soup.find_all("table"):
+        try:
+            cand = pd.read_html(str(t))[0]
+        except Exception:
+            continue
+        cand.columns = [str(c).strip() for c in cand.columns]
+        cols = [unidecode(str(c)).lower() for c in cand.columns]
+        if any("cat" in c for c in cols) and any(("prom" in c) or ("promedio" in c) for c in cols):
+            df = cand
+            break
     if df is None:
-        df = read_table_any(url)
-        df.columns = [str(c).strip() for c in df.columns]
-        c_cat  = pick_col(df.columns,"categoria","categoría")
-        c_max  = pick_col(df.columns,"maximo","máximo","max")
-        c_min  = pick_col(df.columns,"minimo","mínimo","min")
-        c_prom = pick_col(df.columns,"promedio","prom")
+        # último intento: toda la página con pandas
+        try:
+            tables = pd.read_html(html)
+            if tables: df = tables[0]
+        except Exception:
+            pass
+    if df is None:
+        raise RuntimeError("No pude leer tabla de Lote21")
+    df.columns = [str(c).strip() for c in df.columns]
+    c_cat  = pick_col(df.columns, "categoria","categoría")
+    c_max  = pick_col(df.columns, "maximo","máximo","max")
+    c_min  = pick_col(df.columns, "minimo","mínimo","min")
+    c_prom = pick_col(df.columns, "promedio","prom")
+    # Limpiar filas vacías o separadores
+    df = df.dropna(how="all")
     rows = {}
     for _, r in df.iterrows():
-        cat = norm_cat(r.get(c_cat,""))
-        if not cat: continue
-        rows[cat] = {"prom": to_float(r.get(c_prom)),
-                     "max": to_float(r.get(c_max)),
-                     "min": to_float(r.get(c_min))}
+        rawcat = r.get(c_cat, "")
+        cat = norm_cat_basic(rawcat)
+        if not cat or str(cat).strip("-— ") == "": 
+            continue
+        prom = to_float(r.get(c_prom))
+        maxv = to_float(r.get(c_max))
+        minv = to_float(r.get(c_min))
+        if prom is None and maxv is None and minv is None:
+            continue
+        rows[cat] = {"prom": prom, "max": maxv, "min": minv}
     return url, rows, fecha
 
 def pantalla_uruguay():
     url = "https://www.pantallauruguay.com.uy/promedios/"
+    df = read_table_any(url)
     html = fetch_html(url)
     m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4})", html)
     fecha = None
@@ -260,16 +195,15 @@ def pantalla_uruguay():
         d,mn,y = m.group(1).split("/")
         y = y if len(y)==4 else ("20"+y)
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
-    df = read_table_any(url)
     df.columns = [str(c).strip() for c in df.columns]
-    c_cat  = pick_col(df.columns,"categoria","categoría")
-    c_max  = pick_col(df.columns,"maximo","máximo","max")
-    c_min  = pick_col(df.columns,"minimo","mínimo","min")
-    c_prom = pick_col(df.columns,"prom","promedio")
-    c_pb   = pick_col(df.columns,"prom bulto","prom. bulto","pb")
+    c_cat  = pick_col(df.columns, "categoria","categoría")
+    c_max  = pick_col(df.columns, "maximo","máximo","max")
+    c_min  = pick_col(df.columns, "minimo","mínimo","min")
+    c_prom = pick_col(df.columns, "prom","promedio")
+    c_pb   = pick_col(df.columns, "prom bulto","prom. bulto","pb")
     rows = {}
     for _, r in df.iterrows():
-        cat = norm_cat(r.get(c_cat,""))
+        cat = norm_cat_basic(r.get(c_cat,""))
         if not cat: continue
         rows[cat] = {"prom": to_float(r.get(c_prom)),
                      "max": to_float(r.get(c_max)),
@@ -298,7 +232,7 @@ def acg():
                           ("Vaquillona\s*gorda","Vaquillona gorda (ACG)")]:
         m2 = rex(etiqueta)
         if m2:
-            val = to_float(m2.group(1))
+            val = float(str(m2.group(1)).replace(".","").replace(",",".").strip())
             rows[cat] = {"prom": val, "ref": val}
     return post_url, rows, fecha
 
@@ -317,16 +251,11 @@ def main():
             time.sleep(1.2)
         except Exception as e:
             data["fuentes"][key] = {"url": None, "error": str(e)}
-    # order according to CANONICAL first, then rest
-    ordered = {}
-    for c in CANONICAL:
-        if c in all_rows: ordered[c] = all_rows[c]
-    for c in sorted(all_rows.keys()):
-        if c not in ordered: ordered[c] = all_rows[c]
-    data["categorias"] = ordered
+    # ordenar (si existiera CANONICAL en el repo, lo respetará al render; aquí solo empaquetamos)
+    data["categorias"] = dict(sorted(all_rows.items(), key=lambda kv: kv[0]))
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"Generado {OUT} con {len(all_rows)} categorías")
+    print(f"Generado {OUT} con {len(all_rows)} categorías; fuentes: {list(data['fuentes'].keys())}")
 
 if __name__ == "__main__":
     main()
