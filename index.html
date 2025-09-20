@@ -6,11 +6,14 @@
   <title>Promedios Ganaderos (Unificado)</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    :root{--grid:#223044;--header:#0f141b;--muted:#9fb0c3}
-    .logoHead{height:32px;vertical-align:middle;display:block;margin:0 auto 4px auto}
-    .colHead{display:flex;flex-direction:column;align-items:center;gap:2px}
-    .colDate{font-size:11px;color:var(--muted); line-height:1}
-    table{width:100%;border-collapse:separate;border-spacing:0}
+    :root{--grid:#223044;--header:#0f141b;--muted:#9fb0c3;--card:#0f141b;--bg:#0b0d10}
+    body{margin:0;background:var(--bg);color:#e8eef5;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,sans-serif}
+    header{padding:28px 16px;background:#11161c;border-bottom:1px solid var(--grid)}
+    h1{margin:0;font-size:24px}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px}
+    .card{background:var(--card);border:1px solid var(--grid);border-radius:12px;padding:16px;margin:12px 0}
+    .small{font-size:12px;color:var(--muted)}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin-top:8px}
     thead th{background:var(--header);position:sticky;top:0;z-index:1;border-bottom:1px solid var(--grid)}
     th,td{border-bottom:1px solid var(--grid);padding:10px 8px;font-size:14px}
     tbody td{border-right:1px solid var(--grid)}
@@ -20,19 +23,22 @@
     .cell{line-height:1.2}
     .prom{font-weight:700;font-size:15px}
     .minor{font-size:12px;color:var(--muted);margin-top:2px}
-    .wrap{max-width:1100px;margin:0 auto;padding:16px}
-    header{padding:28px 16px;background:#11161c;border-bottom:1px solid var(--grid)}
-    body{margin:0;background:#0b0d10;color:#e8eef5;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Inter,sans-serif}
-    h1{margin:0;font-size:24px}
-    .card{background:#0f141b;border:1px solid var(--grid);border-radius:12px;padding:16px;margin:12px 0}
-    .small{font-size:12px;color:var(--muted)}
+    .logoHead{height:32px;vertical-align:middle;display:block;margin:0 auto 4px auto}
+    .colHead{display:flex;flex-direction:column;align-items:center;gap:2px}
+    .colDate{font-size:11px;color:var(--muted); line-height:1}
+    .acg-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+    .pill{background:#101826;border:1px solid var(--grid);border-radius:10px;padding:12px}
+    .pill h4{margin:0 0 6px 0;font-size:14px}
+    .pill .val{font-weight:700;font-size:18px}
+    .acg-head{display:flex;align-items:center;gap:12px}
+    .acg-head img{height:26px}
+    .muted{color:var(--muted);font-size:12px}
   </style>
 </head>
 <body>
   <header>
     <div class="wrap">
       <h1>Promedios Ganaderos — Unificado por categoría</h1>
-      <div class="small">Debajo de cada logo se muestra la fecha del último evento detectado por el scraper.</div>
       <div id="last" class="small"></div>
     </div>
   </header>
@@ -41,8 +47,32 @@
       <h2>Cuadro comparativo</h2>
       <div id="table"></div>
     </div>
+
+    <div id="acgCard" class="card" style="display:none">
+      <div class="acg-head">
+        <img src="assets/acg.png" alt="ACG">
+        <div>
+          <div><strong>ACG — Precios de la semana</strong></div>
+          <div class="muted">Fecha: <span id="acgDate">—</span></div>
+        </div>
+      </div>
+      <div class="acg-grid">
+        <div class="pill">
+          <h4>Novillo gordo</h4>
+          <div class="val" id="acgNovillo">—</div>
+        </div>
+        <div class="pill">
+          <h4>Vaca gorda</h4>
+          <div class="val" id="acgVaca">—</div>
+        </div>
+        <div class="pill">
+          <h4>Vaquillona gorda</h4>
+          <div class="val" id="acgVaquillona">—</div>
+        </div>
+      </div>
+    </div>
   </main>
-  <footer class="wrap">Hecho por JQ · Starter unificado</footer>
+  <footer class="wrap small">Hecho por JQ</footer>
   <script>
   function fmtDate(d){
     if(!d) return "—";
@@ -53,17 +83,59 @@
     return d;
   }
 
+  // Bloques y orden pedido
+  const ORDER = [
+    // Terneros (Machos)
+    "Terneros hasta 140kg",
+    "Terneros entre 140 y 180kg","Terneros Entre 140 Y 180 Kg","Terneros 141 a 180 kg",
+    "Terneros mas de 180kg","Terneros más de 180 kg","Terneros + 180 Kg",
+    "Terneros","Terneros Generales",
+    // Novillos
+    "Novillos 1 a 2 años","novillos de 1-2 años",
+    "Novillos 2 a 3 años","novillos de 2-3 años",
+    "Novillos mas de 3 años","Novillos más de 3 años","Novillos + 3 Años",
+    // Holando
+    "Holando y Cruza Ho","Holando y Cruza",
+    // Mixtos
+    "Terneros / Terneras","Terneros y Terneras",
+    // Terneras
+    "Terneras",
+    "Terneras hasta 140kg","Terneras hasta 140 kg",
+    "Terneras entre 140 y 180kg","Terneras entre 140 y 180 kg",
+    "Terneras mas de 140kg","Terneras más de 140 kg",
+    // Vaquillonas
+    "Vaquillonas de 1 a 2 años",
+    "Vaquillonas mas de 2 años","Vaquillonas + 2 años",
+    "Vaquillonas sin servicio",
+    "Vaquillonas entoradas",
+    "Vaquillonas preñadas",
+    // Vientres/Vacas preñadas
+    "Vientres Preñados","Vientres preñados","Vacas Preñadas",
+    // Pieza de cría
+    "Piezas de cría","Pieza de Cria",
+    // Vacas de Invernada
+    "Vacas de Invernada","Vacas de invernada"
+  ];
+
   async function main(){
     const res = await fetch('unified.json?_=' + Date.now());
     const data = await res.json();
     document.getElementById('last').textContent = "Última actualización (UTC): " + (data.last_updated_utc || "—");
 
     const catsObj = data.categorias || {};
-    const cats = Object.keys(catsObj);
-    const container = document.getElementById('table');
+    // Construir lista ordenada según bloques
+    const seen = new Set();
+    const ordered = [];
+    ORDER.forEach(name => {
+      const k = Object.keys(catsObj).find(c => c.toLowerCase() === name.toLowerCase());
+      if (k && !seen.has(k)){ ordered.push(k); seen.add(k); }
+    });
+    // Añadir cualquier categoría no contemplada al final
+    Object.keys(catsObj).forEach(c => { if(!seen.has(c)) ordered.push(c); });
 
-    if (cats.length === 0){
-      container.innerHTML = '<div class="small">No hay filas. Revisá que <code>unified.json</code> tenga categorías y que el workflow haya generado datos.</div>';
+    const container = document.getElementById('table');
+    if (ordered.length === 0){
+      container.innerHTML = '<div class="small">No hay filas. Verificá que el workflow generó datos.</div>';
       return;
     }
 
@@ -98,7 +170,9 @@
     table.appendChild(thead);
 
     const tbody = document.createElement('tbody');
-    cats.forEach(cat=>{
+    ordered.forEach(cat=>{
+      // saltar los ACG gordo: irán en el rectángulo de abajo
+      if (["Novillo gordo (ACG)","Vaca gorda (ACG)","Vaquillona gorda (ACG)"].includes(cat)) return;
       const tr = document.createElement('tr');
       const td0 = document.createElement('td'); td0.textContent = cat; tr.appendChild(td0);
       ["plaza_rural","lote21","pantalla_uruguay","acg"].forEach(src=>{
@@ -123,6 +197,19 @@
     });
     table.appendChild(tbody);
     container.appendChild(table);
+
+    // ACG rectangle
+    const acg = (data.fuentes && data.fuentes.acg) || {};
+    const nov = (catsObj["Novillo gordo (ACG)"] && catsObj["Novillo gordo (ACG)"].acg && (catsObj["Novillo gordo (ACG)"].acg.prom ?? catsObj["Novillo gordo (ACG)"].acg.ref)) || null;
+    const vac = (catsObj["Vaca gorda (ACG)"] && catsObj["Vaca gorda (ACG)"].acg && (catsObj["Vaca gorda (ACG)"].acg.prom ?? catsObj["Vaca gorda (ACG)"].acg.ref)) || null;
+    const vaq = (catsObj["Vaquillona gorda (ACG)"] && catsObj["Vaquillona gorda (ACG)"].acg && (catsObj["Vaquillona gorda (ACG)"].acg.prom ?? catsObj["Vaquillona gorda (ACG)"].acg.ref)) || null;
+    if (nov!==null || vac!==null || vaq!==null){
+      document.getElementById('acgCard').style.display = '';
+      document.getElementById('acgDate').textContent = fmtDate(acg.fecha || "");
+      if (nov!==null) document.getElementById('acgNovillo').textContent = nov;
+      if (vac!==null) document.getElementById('acgVaca').textContent = vac;
+      if (vaq!==null) document.getElementById('acgVaquillona').textContent = vaq;
+    }
   }
   main();
   </script>

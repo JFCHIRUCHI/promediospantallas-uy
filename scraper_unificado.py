@@ -48,34 +48,40 @@ def pick_col(cols, *cands):
                 return original
     return None
 
-# === Nuevo orden canónico ===
+# Orden canónico por bloques (ACG al final, fuera de la tabla principal)
 CANONICAL = [
-    "Corderos y Corderas",
-    "Borregos",
-    "Oveja De Cría 2 O + Enc.",
+    # Terneros (Machos)
     "Terneros hasta 140kg",
-    "Terneros Entre 140 Y 180 Kg",
+    "Terneros entre 140 y 180kg",
     "Terneros mas de 180kg",
     "Terneros",
+    # Novillos
     "Novillos 1 a 2 años",
     "Novillos 2 a 3 años",
     "Novillos mas de 3 años",
+    # Holando
     "Holando y Cruza Ho",
+    # Mixtos
+    "Terneros / Terneras",
+    # Terneras
     "Terneras",
     "Terneras hasta 140kg",
-    "Terneras mas de 140kg",
     "Terneras entre 140 y 180kg",
-    "Terneros / Terneras",
+    "Terneras mas de 140kg",
+    # Vaquillonas
     "Vaquillonas de 1 a 2 años",
     "Vaquillonas mas de 2 años",
     "Vaquillonas sin servicio",
     "Vaquillonas entoradas",
     "Vaquillonas preñadas",
+    # Vientres/Vacas preñadas
     "Vientres Preñados",
+    # Pieza de cría
+    "Piezas de cría",
+    # Vacas de Invernada
     "Vacas de Invernada",
-    "Novillo gordo (ACG)",
-    "Vaca gorda (ACG)",
-    "Vaquillona gorda (ACG)",
+    # ACG (aparte)
+    "Novillo gordo (ACG)","Vaca gorda (ACG)","Vaquillona gorda (ACG)",
 ]
 
 ALIASES_FILE = "categories_aliases.json"
@@ -93,14 +99,12 @@ def norm_cat(raw):
     original = str(raw).strip()
     if not original:
         return ""
-    # alias exacto (case/acentos-insensible)
     k = unidecode(original).lower().strip()
     for alias, target in ALIASES.items():
         if unidecode(alias).lower().strip() == k:
             return target
     return original.strip().title()
 
-# --- Scrapers reales (idénticos a los del paquete anterior) ---
 def plaza_rural():
     url = "https://plazarural.com.uy/promedios"
     df = read_table_any(url)
@@ -206,13 +210,11 @@ def acg():
         y = y if len(y)==4 else ("20"+y)
         fecha = f"{int(y):04d}-{int(mn):02d}-{int(d):02d}"
     def rex(label): 
-        return re.search(rf"{label}.*?([\\d\\.,]+)", html_post, flags=re.I|re.S)
+        return re.search(rf"{label}.*?([\\d\\.,]+)", html_post, flags=re.I|reS)
     rows = {}
-    for etiqueta, cat in [
-        ("Novillo\\s*gordo","Novillo gordo (ACG)"),
-        ("Vaca\\s*gorda","Vaca gorda (ACG)"),
-        ("Vaquillona\\s*gorda","Vaquillona gorda (ACG)"),
-    ]:
+    for etiqueta, cat in [("Novillo\\s*gordo","Novillo gordo (ACG)"),
+                          ("Vaca\\s*gorda","Vaca gorda (ACG)"),
+                          ("Vaquillona\\s*gorda","Vaquillona gorda (ACG)")]:
         m2 = rex(etiqueta)
         if m2:
             val = to_float(m2.group(1))
