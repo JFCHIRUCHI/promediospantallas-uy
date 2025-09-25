@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-09-24T10:27:10Z",
+  "last_updated_utc": "2025-09-25T10:27:32Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -163,6 +163,12 @@
       }
     },
     "Terneros / Terneras": {
+      "plaza_rural": {
+        "prom": 2.8,
+        "max": 2.93,
+        "min": 2.67,
+        "prom_bulto": 681.97
+      },
       "lote21": {
         "prom": 300.0,
         "max": 300.0,
@@ -176,6 +182,12 @@
       }
     },
     "Terneras": {
+      "plaza_rural": {
+        "prom": 3.26,
+        "max": 4.0,
+        "min": 2.88,
+        "prom_bulto": 654.91
+      },
       "lote21": {
         "prom": 307.0,
         "max": 360.0,
@@ -197,10 +209,24 @@
       }
     },
     "Vaquillonas de 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.02,
+        "max": 3.52,
+        "min": 2.86,
+        "prom_bulto": 846.67
+      },
       "lote21": {
         "prom": 1040.0,
         "max": 1040.0,
         "min": 1040.0
+      }
+    },
+    "Vaquillonas mas de 2 años": {
+      "plaza_rural": {
+        "prom": 2.83,
+        "max": 2.9,
+        "min": 2.7,
+        "prom_bulto": 899.62
       }
     },
     "Vaquillonas sin servicio": {
@@ -316,6 +342,12 @@
       }
     },
     "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 860.47,
+        "max": 945.0,
+        "min": 745.0,
+        "prom_bulto": 860.47
+      },
       "lote21": {
         "prom": 77400.0,
         "max": 85000.0,
