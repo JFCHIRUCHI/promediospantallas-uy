@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-10-10T10:28:01Z",
+  "last_updated_utc": "2025-10-11T10:24:14Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -209,6 +209,11 @@
         "max": 3.52,
         "min": 2.86,
         "prom_bulto": 846.67
+      },
+      "lote21": {
+        "prom": 290.0,
+        "max": 312.0,
+        "min": 265.0
       }
     },
     "Vaquillonas mas de 2 años": {
@@ -220,6 +225,11 @@
       }
     },
     "Vaquillonas sin servicio": {
+      "lote21": {
+        "prom": 293.0,
+        "max": 303.0,
+        "min": 280.0
+      },
       "pantalla_uruguay": {
         "prom": 2.8,
         "max": 2.97,
@@ -306,12 +316,33 @@
         "prom_bulto": 54.0
       }
     },
+    "Ovejas De Invernada": {
+      "lote21": {
+        "prom": 6800.0,
+        "max": 6800.0,
+        "min": 6800.0
+      }
+    },
+    "Piezas De Crã­A": {
+      "lote21": {
+        "prom": 60271.0,
+        "max": 67000.0,
+        "min": 56500.0
+      }
+    },
     "Vientres Entorados": {
       "plaza_rural": {
         "prom": 860.47,
         "max": 945.0,
         "min": 745.0,
         "prom_bulto": 860.47
+      }
+    },
+    "Vientres Preã±Ados": {
+      "lote21": {
+        "prom": 99796.0,
+        "max": 1250.0,
+        "min": 90000.0
       }
     }
   }
