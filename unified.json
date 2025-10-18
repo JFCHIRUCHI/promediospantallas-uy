@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-10-17T10:28:04Z",
+  "last_updated_utc": "2025-10-18T10:24:58Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -19,6 +19,14 @@
     }
   },
   "categorias": {
+    "Corderos y Corderas": {
+      "plaza_rural": {
+        "prom": 43.5,
+        "max": 43.5,
+        "min": 43.5,
+        "prom_bulto": 43.5
+      }
+    },
     "Borregos": {
       "pantalla_uruguay": {
         "prom": 55.0,
@@ -177,6 +185,12 @@
       }
     },
     "Terneras": {
+      "plaza_rural": {
+        "prom": 3.17,
+        "max": 3.9,
+        "min": 2.9,
+        "prom_bulto": 655.38
+      },
       "lote21": {
         "prom": 313.0,
         "max": 355.0,
@@ -198,10 +212,24 @@
       }
     },
     "Vaquillonas de 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.0,
+        "max": 3.15,
+        "min": 2.8,
+        "prom_bulto": 789.36
+      },
       "lote21": {
         "prom": 290.0,
         "max": 312.0,
         "min": 265.0
+      }
+    },
+    "Vaquillonas mas de 2 años": {
+      "plaza_rural": {
+        "prom": 2.9,
+        "max": 3.2,
+        "min": 2.75,
+        "prom_bulto": 888.04
       }
     },
     "Vaquillonas sin servicio": {
@@ -234,6 +262,12 @@
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 943.47,
+        "max": 1200.0,
+        "min": 840.0,
+        "prom_bulto": 943.47
+      },
       "pantalla_uruguay": {
         "prom": 1008.0,
         "max": 1360.0,
@@ -242,6 +276,12 @@
       }
     },
     "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 611.16,
+        "max": 650.0,
+        "min": 550.0,
+        "prom_bulto": 611.16
+      },
       "pantalla_uruguay": {
         "prom": 581.0,
         "max": 635.0,
@@ -276,6 +316,22 @@
         "prom_bulto": 75.0
       }
     },
+    "Corderas Dl": {
+      "plaza_rural": {
+        "prom": 69.5,
+        "max": 69.5,
+        "min": 69.5,
+        "prom_bulto": 69.5
+      }
+    },
+    "Corderos Dl": {
+      "plaza_rural": {
+        "prom": 72.5,
+        "max": 72.5,
+        "min": 72.5,
+        "prom_bulto": 72.5
+      }
+    },
     "Ovejas": {
       "pantalla_uruguay": {
         "prom": 54.23,
@@ -296,6 +352,14 @@
         "prom": 60271.0,
         "max": 67000.0,
         "min": 56500.0
+      }
+    },
+    "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 787.68,
+        "max": 865.0,
+        "min": 720.0,
+        "prom_bulto": 787.68
       }
     },
     "Vientres Preã±Ados": {
