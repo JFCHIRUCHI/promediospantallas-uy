@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-10-21T10:28:52Z",
+  "last_updated_utc": "2025-10-22T10:30:14Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -42,11 +42,6 @@
         "min": 3.85,
         "prom_bulto": 530.23
       },
-      "lote21": {
-        "prom": 391.0,
-        "max": 410.0,
-        "min": 377.0
-      },
       "pantalla_uruguay": {
         "prom": 3.91,
         "max": 4.01,
@@ -60,11 +55,6 @@
         "max": 4.15,
         "min": 3.4,
         "prom_bulto": 590.11
-      },
-      "lote21": {
-        "prom": 354.0,
-        "max": 403.0,
-        "min": 320.0
       },
       "pantalla_uruguay": {
         "prom": 3.6,
@@ -88,11 +78,6 @@
         "min": 3.02,
         "prom_bulto": 676.65
       },
-      "lote21": {
-        "prom": 331.0,
-        "max": 370.0,
-        "min": 310.0
-      },
       "pantalla_uruguay": {
         "prom": 3.46,
         "max": 4.1,
@@ -107,11 +92,6 @@
         "min": 2.95,
         "prom_bulto": 989.43
       },
-      "lote21": {
-        "prom": 305.0,
-        "max": 310.0,
-        "min": 300.0
-      },
       "pantalla_uruguay": {
         "prom": 3.1,
         "max": 3.1,
@@ -125,11 +105,6 @@
         "max": 3.17,
         "min": 2.97,
         "prom_bulto": 1147.13
-      },
-      "lote21": {
-        "prom": 302.0,
-        "max": 310.0,
-        "min": 280.0
       },
       "pantalla_uruguay": {
         "prom": 3.02,
@@ -153,11 +128,6 @@
         "min": 2.38,
         "prom_bulto": 704.48
       },
-      "lote21": {
-        "prom": 268.0,
-        "max": 290.0,
-        "min": 250.0
-      },
       "pantalla_uruguay": {
         "prom": 2.71,
         "max": 2.71,
@@ -172,11 +142,6 @@
         "min": 2.96,
         "prom_bulto": 558.34
       },
-      "lote21": {
-        "prom": 270.0,
-        "max": 270.0,
-        "min": 270.0
-      },
       "pantalla_uruguay": {
         "prom": 3.5,
         "max": 4.01,
@@ -190,11 +155,6 @@
         "max": 3.9,
         "min": 2.9,
         "prom_bulto": 655.38
-      },
-      "lote21": {
-        "prom": 313.0,
-        "max": 355.0,
-        "min": 275.0
       },
       "pantalla_uruguay": {
         "prom": 3.28,
@@ -217,11 +177,6 @@
         "max": 3.15,
         "min": 2.8,
         "prom_bulto": 789.36
-      },
-      "lote21": {
-        "prom": 290.0,
-        "max": 312.0,
-        "min": 265.0
       }
     },
     "Vaquillonas mas de 2 años": {
@@ -233,11 +188,6 @@
       }
     },
     "Vaquillonas sin servicio": {
-      "lote21": {
-        "prom": 293.0,
-        "max": 303.0,
-        "min": 280.0
-      },
       "pantalla_uruguay": {
         "prom": 2.8,
         "max": 2.97,
@@ -296,11 +246,6 @@
         "min": 2.0,
         "prom_bulto": 908.93
       },
-      "lote21": {
-        "prom": 237.0,
-        "max": 247.0,
-        "min": 228.0
-      },
       "pantalla_uruguay": {
         "prom": 2.32,
         "max": 2.5,
@@ -340,33 +285,12 @@
         "prom_bulto": 54.0
       }
     },
-    "Ovejas De Invernada": {
-      "lote21": {
-        "prom": 6800.0,
-        "max": 6800.0,
-        "min": 6800.0
-      }
-    },
-    "Piezas De Crã­A": {
-      "lote21": {
-        "prom": 60271.0,
-        "max": 67000.0,
-        "min": 56500.0
-      }
-    },
     "Vientres Entorados": {
       "plaza_rural": {
         "prom": 787.68,
         "max": 865.0,
         "min": 720.0,
         "prom_bulto": 787.68
-      }
-    },
-    "Vientres Preã±Ados": {
-      "lote21": {
-        "prom": 99796.0,
-        "max": 1250.0,
-        "min": 90000.0
       }
     }
   }
