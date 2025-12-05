@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2025-12-04T10:33:19Z",
+  "last_updated_utc": "2025-12-05T10:30:56Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -20,6 +20,11 @@
   },
   "categorias": {
     "Borregos": {
+      "lote21": {
+        "prom": 7000.0,
+        "max": 7000.0,
+        "min": 7000.0
+      },
       "pantalla_uruguay": {
         "prom": 64.0,
         "max": 64.0,
@@ -33,11 +38,6 @@
         "max": 3.7,
         "min": 3.14,
         "prom_bulto": 560.04
-      },
-      "lote21": {
-        "prom": 318.0,
-        "max": 320.0,
-        "min": 315.0
       },
       "pantalla_uruguay": {
         "prom": 3.2,
@@ -62,9 +62,9 @@
         "prom_bulto": 699.46
       },
       "lote21": {
-        "prom": 294.0,
-        "max": 325.0,
-        "min": 268.0
+        "prom": 301.0,
+        "max": 311.0,
+        "min": 287.0
       },
       "pantalla_uruguay": {
         "prom": 3.21,
@@ -81,9 +81,9 @@
         "prom_bulto": 980.75
       },
       "lote21": {
-        "prom": 280.0,
-        "max": 280.0,
-        "min": 280.0
+        "prom": 293.0,
+        "max": 293.0,
+        "min": 293.0
       },
       "pantalla_uruguay": {
         "prom": 2.83,
@@ -100,9 +100,9 @@
         "prom_bulto": 1219.34
       },
       "lote21": {
-        "prom": 285.0,
-        "max": 291.0,
-        "min": 280.0
+        "prom": 295.0,
+        "max": 307.0,
+        "min": 284.0
       },
       "pantalla_uruguay": {
         "prom": 2.76,
@@ -131,6 +131,11 @@
         "max": 2.15,
         "min": 2.15,
         "prom_bulto": 750.35
+      },
+      "lote21": {
+        "prom": 258.0,
+        "max": 258.0,
+        "min": 258.0
       }
     },
     "Terneros / Terneras": {
@@ -139,11 +144,6 @@
         "max": 2.94,
         "min": 2.94,
         "prom_bulto": 508.62
-      },
-      "lote21": {
-        "prom": 270.0,
-        "max": 270.0,
-        "min": 270.0
       },
       "pantalla_uruguay": {
         "prom": 2.97,
@@ -161,8 +161,8 @@
       },
       "lote21": {
         "prom": 291.0,
-        "max": 316.0,
-        "min": 270.0
+        "max": 332.0,
+        "min": 260.0
       },
       "pantalla_uruguay": {
         "prom": 2.96,
@@ -187,9 +187,9 @@
         "prom_bulto": 789.45
       },
       "lote21": {
-        "prom": 274.0,
-        "max": 285.0,
-        "min": 248.0
+        "prom": 272.0,
+        "max": 280.0,
+        "min": 265.0
       }
     },
     "Vaquillonas mas de 2 años": {
@@ -252,9 +252,9 @@
         "prom_bulto": 905.71
       },
       "lote21": {
-        "prom": 209.0,
-        "max": 237.0,
-        "min": 194.0
+        "prom": 210.0,
+        "max": 221.0,
+        "min": 198.0
       },
       "pantalla_uruguay": {
         "prom": 2.2,
@@ -296,6 +296,11 @@
       }
     },
     "Corderos/As": {
+      "lote21": {
+        "prom": 6800.0,
+        "max": 6800.0,
+        "min": 6800.0
+      },
       "pantalla_uruguay": {
         "prom": 63.0,
         "max": 63.0,
@@ -313,23 +318,23 @@
     },
     "Ovejas De Crã­A": {
       "lote21": {
-        "prom": 6800.0,
-        "max": 6800.0,
-        "min": 6800.0
+        "prom": 6000.0,
+        "max": 6000.0,
+        "min": 6000.0
       }
     },
-    "Ovejas Piezas De Crã­A": {
+    "Ovejas De Invernada": {
       "lote21": {
-        "prom": 4500.0,
-        "max": 4500.0,
-        "min": 4500.0
+        "prom": 7000.0,
+        "max": 7000.0,
+        "min": 7000.0
       }
     },
     "Piezas De Crã­A": {
       "lote21": {
-        "prom": 57847.0,
-        "max": 75000.0,
-        "min": 45700.0
+        "prom": 55950.0,
+        "max": 64500.0,
+        "min": 51500.0
       }
     },
     "Toros": {
@@ -356,16 +361,16 @@
         "prom_bulto": 864.93
       },
       "lote21": {
-        "prom": 84000.0,
-        "max": 84000.0,
-        "min": 84000.0
+        "prom": 85500.0,
+        "max": 90500.0,
+        "min": 80500.0
       }
     },
     "Vientres Preã±Ados": {
       "lote21": {
-        "prom": 87333.0,
-        "max": 92000.0,
-        "min": 85000.0
+        "prom": 97750.0,
+        "max": 1050.0,
+        "min": 90000.0
       }
     }
   }
