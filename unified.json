@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-02-04T10:51:19Z",
+  "last_updated_utc": "2026-02-05T10:52:36Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -19,28 +19,12 @@
     }
   },
   "categorias": {
-    "Oveja De Cría 2 O + Enc.": {
-      "plaza_rural": {
-        "prom": 70.0,
-        "max": 70.0,
-        "min": 70.0,
-        "prom_bulto": 70.0
-      }
-    },
-    "Terneros hasta 140kg": {
-      "plaza_rural": {
-        "prom": 3.62,
-        "max": 3.62,
-        "min": 3.62,
-        "prom_bulto": 459.74
-      }
-    },
     "Terneros entre 140 y 180kg": {
       "plaza_rural": {
-        "prom": 3.54,
-        "max": 3.69,
-        "min": 3.1,
-        "prom_bulto": 560.53
+        "prom": 3.77,
+        "max": 3.84,
+        "min": 3.62,
+        "prom_bulto": 597.08
       },
       "lote21": {
         "prom": 338.0,
@@ -56,18 +40,18 @@
     },
     "Terneros mas de 180kg": {
       "plaza_rural": {
-        "prom": 3.26,
-        "max": 3.57,
-        "min": 2.95,
-        "prom_bulto": 753.51
+        "prom": 3.56,
+        "max": 3.82,
+        "min": 3.25,
+        "prom_bulto": 710.82
       }
     },
     "Terneros": {
       "plaza_rural": {
-        "prom": 3.31,
-        "max": 3.69,
-        "min": 2.95,
-        "prom_bulto": 706.07
+        "prom": 3.61,
+        "max": 3.84,
+        "min": 3.25,
+        "prom_bulto": 682.69
       },
       "lote21": {
         "prom": 344.0,
@@ -83,10 +67,10 @@
     },
     "Novillos 1 a 2 años": {
       "plaza_rural": {
-        "prom": 3.13,
-        "max": 3.35,
-        "min": 2.96,
-        "prom_bulto": 981.86
+        "prom": 3.36,
+        "max": 3.43,
+        "min": 3.2,
+        "prom_bulto": 1027.52
       },
       "lote21": {
         "prom": 325.0,
@@ -102,10 +86,10 @@
     },
     "Novillos 2 a 3 años": {
       "plaza_rural": {
-        "prom": 2.93,
-        "max": 3.02,
-        "min": 2.76,
-        "prom_bulto": 1193.46
+        "prom": 3.2,
+        "max": 3.2,
+        "min": 3.2,
+        "prom_bulto": 1232.0
       },
       "lote21": {
         "prom": 310.0,
@@ -121,10 +105,10 @@
     },
     "Novillos mas de 3 años": {
       "plaza_rural": {
-        "prom": 2.84,
-        "max": 2.88,
-        "min": 2.8,
-        "prom_bulto": 1409.41
+        "prom": 2.92,
+        "max": 2.92,
+        "min": 2.92,
+        "prom_bulto": 1235.16
       },
       "pantalla_uruguay": {
         "prom": 2.91,
@@ -134,12 +118,6 @@
       }
     },
     "Holando y Cruza Ho": {
-      "plaza_rural": {
-        "prom": 2.39,
-        "max": 2.39,
-        "min": 2.39,
-        "prom_bulto": 929.71
-      },
       "pantalla_uruguay": {
         "prom": 2.55,
         "max": 2.55,
@@ -149,10 +127,10 @@
     },
     "Terneros / Terneras": {
       "plaza_rural": {
-        "prom": 2.85,
-        "max": 2.85,
-        "min": 2.85,
-        "prom_bulto": 800.85
+        "prom": 3.67,
+        "max": 3.67,
+        "min": 3.67,
+        "prom_bulto": 521.14
       },
       "pantalla_uruguay": {
         "prom": 3.38,
@@ -163,10 +141,10 @@
     },
     "Terneras": {
       "plaza_rural": {
-        "prom": 3.1,
-        "max": 3.61,
-        "min": 2.86,
-        "prom_bulto": 632.72
+        "prom": 3.18,
+        "max": 3.23,
+        "min": 3.13,
+        "prom_bulto": 747.06
       },
       "lote21": {
         "prom": 312.0,
@@ -190,10 +168,10 @@
     },
     "Vaquillonas de 1 a 2 años": {
       "plaza_rural": {
-        "prom": 2.9,
-        "max": 3.17,
-        "min": 2.72,
-        "prom_bulto": 830.68
+        "prom": 3.12,
+        "max": 3.3,
+        "min": 3.0,
+        "prom_bulto": 918.12
       },
       "lote21": {
         "prom": 301.0,
@@ -203,10 +181,10 @@
     },
     "Vaquillonas mas de 2 años": {
       "plaza_rural": {
-        "prom": 2.79,
-        "max": 3.03,
-        "min": 2.71,
-        "prom_bulto": 899.53
+        "prom": 3.1,
+        "max": 3.18,
+        "min": 3.01,
+        "prom_bulto": 1049.6
       }
     },
     "Vaquillonas sin servicio": {
@@ -232,10 +210,10 @@
     },
     "Vientres Preñados": {
       "plaza_rural": {
-        "prom": 1022.72,
-        "max": 1215.0,
-        "min": 905.0,
-        "prom_bulto": 1022.72
+        "prom": 1107.79,
+        "max": 1208.0,
+        "min": 935.0,
+        "prom_bulto": 1107.79
       },
       "pantalla_uruguay": {
         "prom": 1002.0,
@@ -246,10 +224,10 @@
     },
     "Piezas de cría": {
       "plaza_rural": {
-        "prom": 45.37,
-        "max": 46.0,
-        "min": 45.0,
-        "prom_bulto": 45.37
+        "prom": 658.19,
+        "max": 710.0,
+        "min": 620.0,
+        "prom_bulto": 658.19
       },
       "pantalla_uruguay": {
         "prom": 640.0,
@@ -260,10 +238,10 @@
     },
     "Vacas de Invernada": {
       "plaza_rural": {
-        "prom": 2.29,
-        "max": 2.5,
-        "min": 2.1,
-        "prom_bulto": 984.23
+        "prom": 2.37,
+        "max": 2.39,
+        "min": 2.33,
+        "prom_bulto": 997.22
       },
       "lote21": {
         "prom": 223.0,
@@ -278,24 +256,10 @@
       }
     },
     "Corderos Dl": {
-      "plaza_rural": {
-        "prom": 45.0,
-        "max": 45.0,
-        "min": 45.0,
-        "prom_bulto": 45.0
-      },
       "lote21": {
         "prom": 6800.0,
         "max": 6800.0,
         "min": 6800.0
-      }
-    },
-    "Oveja De Invernada": {
-      "plaza_rural": {
-        "prom": 55.56,
-        "max": 60.0,
-        "min": 50.0,
-        "prom_bulto": 55.56
       }
     },
     "Piezas De Crã­A": {
@@ -315,10 +279,10 @@
     },
     "Vientres Entorados": {
       "plaza_rural": {
-        "prom": 890.17,
-        "max": 900.0,
-        "min": 880.0,
-        "prom_bulto": 890.17
+        "prom": 998.8,
+        "max": 1150.0,
+        "min": 915.0,
+        "prom_bulto": 998.8
       },
       "lote21": {
         "prom": 86500.0,
