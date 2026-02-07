@@ -1,9 +1,9 @@
 {
-  "last_updated_utc": "2026-02-06T10:52:00Z",
+  "last_updated_utc": "2026-02-07T10:36:31Z",
   "fuentes": {
     "plaza_rural": {
-      "url": null,
-      "error": "415 Client Error: Unsupported Media Type for url: https://plazarural.com.uy/promedios"
+      "url": "https://plazarural.com.uy/promedios",
+      "fecha": null
     },
     "lote21": {
       "url": "https://www.lote21.uy/promedios.asp",
@@ -14,113 +14,179 @@
       "fecha": null
     },
     "acg": {
-      "url": null,
-      "error": "HTTPSConnectionPool(host='acg.com.uy', port=443): Max retries exceeded with url: /?post_type=precio_semanal (Caused by NewConnectionError(\"HTTPSConnection(host='acg.com.uy', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))"
+      "url": "https://acg.com.uy/?post_type=precio_semanal",
+      "fecha": null
     }
   },
   "categorias": {
+    "Terneros hasta 140kg": {
+      "pantalla_uruguay": {
+        "prom": 4.35,
+        "max": 4.35,
+        "min": 4.35,
+        "prom_bulto": 478.0
+      }
+    },
     "Terneros entre 140 y 180kg": {
+      "plaza_rural": {
+        "prom": 3.83,
+        "max": 4.2,
+        "min": 3.59,
+        "prom_bulto": 659.31
+      },
       "lote21": {
         "prom": 338.0,
         "max": 371.0,
         "min": 315.0
       },
       "pantalla_uruguay": {
-        "prom": 3.64,
-        "max": 3.76,
-        "min": 3.6,
-        "prom_bulto": 604.0
+        "prom": 3.78,
+        "max": 4.2,
+        "min": 3.36,
+        "prom_bulto": 621.0
+      }
+    },
+    "Terneros mas de 180kg": {
+      "plaza_rural": {
+        "prom": 3.69,
+        "max": 4.05,
+        "min": 3.3,
+        "prom_bulto": 823.95
       }
     },
     "Terneros": {
+      "plaza_rural": {
+        "prom": 3.71,
+        "max": 4.2,
+        "min": 3.3,
+        "prom_bulto": 788.94
+      },
       "lote21": {
         "prom": 344.0,
         "max": 367.0,
         "min": 332.0
       },
       "pantalla_uruguay": {
-        "prom": 3.46,
-        "max": 3.76,
-        "min": 3.05,
-        "prom_bulto": 628.0
+        "prom": 3.71,
+        "max": 4.35,
+        "min": 3.36,
+        "prom_bulto": 673.0
       }
     },
     "Novillos 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.42,
+        "max": 3.8,
+        "min": 3.17,
+        "prom_bulto": 1066.98
+      },
       "lote21": {
         "prom": 325.0,
         "max": 339.0,
         "min": 315.0
       },
       "pantalla_uruguay": {
-        "prom": 3.2,
-        "max": 3.44,
-        "min": 2.99,
-        "prom_bulto": 989.0
+        "prom": 3.44,
+        "max": 3.7,
+        "min": 3.04,
+        "prom_bulto": 980.0
       }
     },
     "Novillos 2 a 3 años": {
+      "plaza_rural": {
+        "prom": 3.21,
+        "max": 3.36,
+        "min": 3.05,
+        "prom_bulto": 1354.33
+      },
       "lote21": {
         "prom": 310.0,
         "max": 327.0,
         "min": 293.0
       },
       "pantalla_uruguay": {
-        "prom": 3.13,
-        "max": 3.2,
-        "min": 3.08,
-        "prom_bulto": 1064.0
+        "prom": 3.19,
+        "max": 3.42,
+        "min": 3.0,
+        "prom_bulto": 1234.0
       }
     },
     "Novillos mas de 3 años": {
-      "pantalla_uruguay": {
-        "prom": 2.91,
-        "max": 3.03,
-        "min": 2.86,
-        "prom_bulto": 1325.0
+      "plaza_rural": {
+        "prom": 3.0,
+        "max": 3.0,
+        "min": 3.0,
+        "prom_bulto": 1545.0
       }
     },
     "Holando y Cruza Ho": {
       "pantalla_uruguay": {
-        "prom": 2.55,
-        "max": 2.55,
-        "min": 2.55,
-        "prom_bulto": 650.0
+        "prom": 2.65,
+        "max": 2.65,
+        "min": 2.65,
+        "prom_bulto": 1087.0
       }
     },
     "Terneros / Terneras": {
+      "plaza_rural": {
+        "prom": 3.43,
+        "max": 4.32,
+        "min": 3.08,
+        "prom_bulto": 603.98
+      },
       "pantalla_uruguay": {
-        "prom": 3.38,
-        "max": 3.63,
-        "min": 3.1,
-        "prom_bulto": 535.0
+        "prom": 3.73,
+        "max": 4.02,
+        "min": 3.48,
+        "prom_bulto": 589.0
       }
     },
     "Terneras": {
+      "plaza_rural": {
+        "prom": 3.64,
+        "max": 4.02,
+        "min": 3.32,
+        "prom_bulto": 741.22
+      },
       "lote21": {
         "prom": 312.0,
         "max": 321.0,
         "min": 300.0
       },
       "pantalla_uruguay": {
-        "prom": 3.32,
-        "max": 3.35,
-        "min": 3.29,
-        "prom_bulto": 639.0
+        "prom": 3.55,
+        "max": 4.35,
+        "min": 3.22,
+        "prom_bulto": 663.0
       }
     },
     "Terneras hasta 140kg": {
       "pantalla_uruguay": {
-        "prom": 3.32,
-        "max": 3.35,
-        "min": 3.29,
-        "prom_bulto": 639.0
+        "prom": 3.53,
+        "max": 4.32,
+        "min": 3.22,
+        "prom_bulto": 671.0
       }
     },
     "Vaquillonas de 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.35,
+        "max": 3.72,
+        "min": 3.12,
+        "prom_bulto": 934.15
+      },
       "lote21": {
         "prom": 301.0,
         "max": 325.0,
         "min": 286.0
+      }
+    },
+    "Vaquillonas mas de 2 años": {
+      "plaza_rural": {
+        "prom": 3.24,
+        "max": 3.25,
+        "min": 3.23,
+        "prom_bulto": 1195.39
       }
     },
     "Vaquillonas sin servicio": {
@@ -130,47 +196,65 @@
         "min": 272.0
       },
       "pantalla_uruguay": {
-        "prom": 2.91,
-        "max": 3.05,
-        "min": 2.66,
-        "prom_bulto": 810.0
+        "prom": 3.18,
+        "max": 3.31,
+        "min": 2.85,
+        "prom_bulto": 1085.0
       }
     },
     "Vaquillonas preñadas": {
       "pantalla_uruguay": {
-        "prom": 1005.0,
-        "max": 1115.0,
-        "min": 935.0,
-        "prom_bulto": 1005.0
+        "prom": 1132.0,
+        "max": 1250.0,
+        "min": 940.0,
+        "prom_bulto": 1132.0
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 1254.05,
+        "max": 1500.0,
+        "min": 1100.0,
+        "prom_bulto": 1254.05
+      },
       "pantalla_uruguay": {
-        "prom": 1002.0,
-        "max": 1040.0,
-        "min": 915.0,
-        "prom_bulto": 1002.0
+        "prom": 1209.0,
+        "max": 1300.0,
+        "min": 1125.0,
+        "prom_bulto": 1209.0
       }
     },
     "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 701.21,
+        "max": 805.0,
+        "min": 636.0,
+        "prom_bulto": 701.21
+      },
       "pantalla_uruguay": {
-        "prom": 640.0,
-        "max": 730.0,
-        "min": 570.0,
-        "prom_bulto": 640.0
+        "prom": 657.0,
+        "max": 700.0,
+        "min": 605.0,
+        "prom_bulto": 657.0
       }
     },
     "Vacas de Invernada": {
+      "plaza_rural": {
+        "prom": 2.44,
+        "max": 2.56,
+        "min": 2.24,
+        "prom_bulto": 1051.8
+      },
       "lote21": {
         "prom": 223.0,
         "max": 230.0,
         "min": 216.0
       },
       "pantalla_uruguay": {
-        "prom": 2.33,
-        "max": 2.67,
-        "min": 2.23,
-        "prom_bulto": 1021.0
+        "prom": 2.42,
+        "max": 2.55,
+        "min": 2.28,
+        "prom_bulto": 1013.0
       }
     },
     "Corderos Dl": {
@@ -180,6 +264,14 @@
         "min": 6800.0
       }
     },
+    "Ovejas": {
+      "pantalla_uruguay": {
+        "prom": 65.0,
+        "max": 65.0,
+        "min": 65.0,
+        "prom_bulto": 65.0
+      }
+    },
     "Piezas De Crã­A": {
       "lote21": {
         "prom": 63935.0,
@@ -187,12 +279,20 @@
         "min": 57500.0
       }
     },
-    "Sobreaño Enteros": {
+    "Vacas De Pedrigree": {
+      "plaza_rural": {
+        "prom": 1667.22,
+        "max": 2360.0,
+        "min": 870.0,
+        "prom_bulto": 1667.22
+      }
+    },
+    "Vacas Entoradas": {
       "pantalla_uruguay": {
-        "prom": 3.11,
-        "max": 3.15,
-        "min": 2.97,
-        "prom_bulto": 673.0
+        "prom": 1050.0,
+        "max": 1050.0,
+        "min": 1050.0,
+        "prom_bulto": 1050.0
       }
     },
     "Vientres Entorados": {
