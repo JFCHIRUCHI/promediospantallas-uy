@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-02-11T10:59:04Z",
+  "last_updated_utc": "2026-02-12T10:56:16Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -14,12 +14,17 @@
       "fecha": null
     },
     "acg": {
-      "url": null,
-      "error": "HTTPSConnectionPool(host='acg.com.uy', port=443): Max retries exceeded with url: /?post_type=precio_semanal (Caused by NewConnectionError(\"HTTPSConnection(host='acg.com.uy', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))"
+      "url": "https://acg.com.uy/?post_type=precio_semanal",
+      "fecha": null
     }
   },
   "categorias": {
     "Terneros hasta 140kg": {
+      "lote21": {
+        "prom": 405.0,
+        "max": 405.0,
+        "min": 405.0
+      },
       "pantalla_uruguay": {
         "prom": 4.35,
         "max": 4.35,
@@ -35,9 +40,9 @@
         "prom_bulto": 659.31
       },
       "lote21": {
-        "prom": 338.0,
-        "max": 371.0,
-        "min": 315.0
+        "prom": 381.0,
+        "max": 415.0,
+        "min": 350.0
       },
       "pantalla_uruguay": {
         "prom": 3.78,
@@ -62,9 +67,9 @@
         "prom_bulto": 788.94
       },
       "lote21": {
-        "prom": 344.0,
-        "max": 367.0,
-        "min": 332.0
+        "prom": 349.0,
+        "max": 384.0,
+        "min": 318.0
       },
       "pantalla_uruguay": {
         "prom": 3.71,
@@ -81,9 +86,9 @@
         "prom_bulto": 1066.98
       },
       "lote21": {
-        "prom": 325.0,
-        "max": 339.0,
-        "min": 315.0
+        "prom": 292.0,
+        "max": 306.0,
+        "min": 280.0
       },
       "pantalla_uruguay": {
         "prom": 3.44,
@@ -100,9 +105,9 @@
         "prom_bulto": 1354.33
       },
       "lote21": {
-        "prom": 310.0,
-        "max": 327.0,
-        "min": 293.0
+        "prom": 317.0,
+        "max": 332.0,
+        "min": 302.0
       },
       "pantalla_uruguay": {
         "prom": 3.19,
@@ -120,6 +125,11 @@
       }
     },
     "Holando y Cruza Ho": {
+      "lote21": {
+        "prom": 235.0,
+        "max": 235.0,
+        "min": 235.0
+      },
       "pantalla_uruguay": {
         "prom": 2.65,
         "max": 2.65,
@@ -133,6 +143,11 @@
         "max": 4.32,
         "min": 3.08,
         "prom_bulto": 603.98
+      },
+      "lote21": {
+        "prom": 325.0,
+        "max": 340.0,
+        "min": 309.0
       },
       "pantalla_uruguay": {
         "prom": 3.73,
@@ -149,9 +164,9 @@
         "prom_bulto": 741.22
       },
       "lote21": {
-        "prom": 312.0,
-        "max": 321.0,
-        "min": 300.0
+        "prom": 327.0,
+        "max": 346.0,
+        "min": 302.0
       },
       "pantalla_uruguay": {
         "prom": 3.55,
@@ -176,9 +191,9 @@
         "prom_bulto": 934.15
       },
       "lote21": {
-        "prom": 301.0,
-        "max": 325.0,
-        "min": 286.0
+        "prom": 335.0,
+        "max": 388.0,
+        "min": 310.0
       }
     },
     "Vaquillonas mas de 2 años": {
@@ -190,11 +205,6 @@
       }
     },
     "Vaquillonas sin servicio": {
-      "lote21": {
-        "prom": 284.0,
-        "max": 296.0,
-        "min": 272.0
-      },
       "pantalla_uruguay": {
         "prom": 3.18,
         "max": 3.31,
@@ -246,9 +256,9 @@
         "prom_bulto": 1051.8
       },
       "lote21": {
-        "prom": 223.0,
-        "max": 230.0,
-        "min": 216.0
+        "prom": 238.0,
+        "max": 250.0,
+        "min": 220.0
       },
       "pantalla_uruguay": {
         "prom": 2.42,
@@ -257,11 +267,11 @@
         "prom_bulto": 1013.0
       }
     },
-    "Corderos Dl": {
+    "Capones": {
       "lote21": {
-        "prom": 6800.0,
-        "max": 6800.0,
-        "min": 6800.0
+        "prom": 11200.0,
+        "max": 11200.0,
+        "min": 11200.0
       }
     },
     "Ovejas": {
@@ -272,11 +282,18 @@
         "prom_bulto": 65.0
       }
     },
+    "Ovejas De Invernada": {
+      "lote21": {
+        "prom": 9400.0,
+        "max": 9400.0,
+        "min": 9400.0
+      }
+    },
     "Piezas De Crã­A": {
       "lote21": {
-        "prom": 63935.0,
-        "max": 67800.0,
-        "min": 57500.0
+        "prom": 67421.0,
+        "max": 75000.0,
+        "min": 60700.0
       }
     },
     "Vacas De Pedrigree": {
@@ -297,16 +314,16 @@
     },
     "Vientres Entorados": {
       "lote21": {
-        "prom": 86500.0,
-        "max": 91000.0,
-        "min": 80500.0
+        "prom": 93000.0,
+        "max": 96000.0,
+        "min": 90000.0
       }
     },
     "Vientres Preã±Ados": {
       "lote21": {
-        "prom": 1047.5,
-        "max": 1100.0,
-        "min": 1000.0
+        "prom": 1174.38,
+        "max": 1260.0,
+        "min": 1070.0
       }
     }
   }
