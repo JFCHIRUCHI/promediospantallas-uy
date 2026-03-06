@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-03-05T10:52:33Z",
+  "last_updated_utc": "2026-03-06T10:48:28Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -19,6 +19,22 @@
     }
   },
   "categorias": {
+    "Corderos y Corderas": {
+      "plaza_rural": {
+        "prom": 79.0,
+        "max": 83.0,
+        "min": 75.0,
+        "prom_bulto": 79.0
+      }
+    },
+    "Oveja De Cría 2 O + Enc.": {
+      "plaza_rural": {
+        "prom": 86.17,
+        "max": 93.0,
+        "min": 82.0,
+        "prom_bulto": 86.17
+      }
+    },
     "Terneros hasta 140kg": {
       "plaza_rural": {
         "prom": 4.98,
@@ -156,6 +172,12 @@
       }
     },
     "Terneros / Terneras": {
+      "plaza_rural": {
+        "prom": 3.26,
+        "max": 3.3,
+        "min": 3.2,
+        "prom_bulto": 920.26
+      },
       "lote21": {
         "prom": 300.0,
         "max": 300.0,
@@ -169,6 +191,12 @@
       }
     },
     "Terneras": {
+      "plaza_rural": {
+        "prom": 3.69,
+        "max": 4.31,
+        "min": 3.25,
+        "prom_bulto": 728.16
+      },
       "lote21": {
         "prom": 397.0,
         "max": 431.0,
@@ -190,10 +218,24 @@
       }
     },
     "Vaquillonas de 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.26,
+        "max": 3.8,
+        "min": 3.05,
+        "prom_bulto": 873.59
+      },
       "lote21": {
         "prom": 347.0,
         "max": 385.0,
         "min": 326.0
+      }
+    },
+    "Vaquillonas mas de 2 años": {
+      "plaza_rural": {
+        "prom": 3.09,
+        "max": 3.2,
+        "min": 3.0,
+        "prom_bulto": 897.52
       }
     },
     "Vaquillonas sin servicio": {
@@ -226,6 +268,12 @@
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 1139.32,
+        "max": 1350.0,
+        "min": 930.0,
+        "prom_bulto": 1139.32
+      },
       "pantalla_uruguay": {
         "prom": 1209.0,
         "max": 1300.0,
@@ -234,6 +282,12 @@
       }
     },
     "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 679.03,
+        "max": 750.0,
+        "min": 640.0,
+        "prom_bulto": 679.03
+      },
       "pantalla_uruguay": {
         "prom": 729.0,
         "max": 835.0,
@@ -276,6 +330,14 @@
         "prom_bulto": 789.95
       }
     },
+    "Oveja De Invernada": {
+      "plaza_rural": {
+        "prom": 78.0,
+        "max": 78.0,
+        "min": 78.0,
+        "prom_bulto": 78.0
+      }
+    },
     "Ovejas": {
       "pantalla_uruguay": {
         "prom": 98.0,
@@ -315,6 +377,12 @@
       }
     },
     "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 972.18,
+        "max": 1070.0,
+        "min": 930.0,
+        "prom_bulto": 972.18
+      },
       "lote21": {
         "prom": 95500.0,
         "max": 96000.0,
