@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-03-12T10:51:49Z",
+  "last_updated_utc": "2026-03-13T10:49:20Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -14,8 +14,8 @@
       "fecha": null
     },
     "acg": {
-      "url": null,
-      "error": "HTTPSConnectionPool(host='acg.com.uy', port=443): Max retries exceeded with url: /?post_type=precio_semanal (Caused by NewConnectionError(\"HTTPSConnection(host='acg.com.uy', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))"
+      "url": "https://acg.com.uy/?post_type=precio_semanal",
+      "fecha": null
     }
   },
   "categorias": {
@@ -48,10 +48,10 @@
         "min": 420.0
       },
       "pantalla_uruguay": {
-        "prom": 4.34,
-        "max": 4.41,
-        "min": 4.22,
-        "prom_bulto": 595.0
+        "prom": 4.68,
+        "max": 4.74,
+        "min": 4.6,
+        "prom_bulto": 600.0
       }
     },
     "Terneros entre 140 y 180kg": {
@@ -67,10 +67,10 @@
         "min": 370.0
       },
       "pantalla_uruguay": {
-        "prom": 4.24,
-        "max": 5.01,
-        "min": 3.8,
-        "prom_bulto": 683.0
+        "prom": 4.16,
+        "max": 4.6,
+        "min": 3.74,
+        "prom_bulto": 665.0
       }
     },
     "Terneros mas de 180kg": {
@@ -94,10 +94,10 @@
         "min": 340.0
       },
       "pantalla_uruguay": {
-        "prom": 4.07,
-        "max": 5.01,
-        "min": 3.2,
-        "prom_bulto": 725.0
+        "prom": 4.06,
+        "max": 4.74,
+        "min": 3.52,
+        "prom_bulto": 702.0
       }
     },
     "Novillos 1 a 2 años": {
@@ -113,10 +113,10 @@
         "min": 316.0
       },
       "pantalla_uruguay": {
-        "prom": 3.33,
-        "max": 3.4,
-        "min": 3.26,
-        "prom_bulto": 919.0
+        "prom": 3.32,
+        "max": 3.76,
+        "min": 3.0,
+        "prom_bulto": 992.0
       }
     },
     "Novillos 2 a 3 años": {
@@ -132,10 +132,10 @@
         "min": 310.0
       },
       "pantalla_uruguay": {
-        "prom": 3.26,
-        "max": 3.37,
-        "min": 3.12,
-        "prom_bulto": 1354.0
+        "prom": 3.1,
+        "max": 3.25,
+        "min": 2.97,
+        "prom_bulto": 1090.0
       }
     },
     "Novillos mas de 3 años": {
@@ -146,10 +146,10 @@
         "prom_bulto": 1431.3
       },
       "pantalla_uruguay": {
-        "prom": 3.26,
-        "max": 3.31,
-        "min": 3.18,
-        "prom_bulto": 1345.0
+        "prom": 3.02,
+        "max": 3.02,
+        "min": 3.02,
+        "prom_bulto": 1430.0
       }
     },
     "Holando y Cruza Ho": {
@@ -165,10 +165,10 @@
         "min": 260.0
       },
       "pantalla_uruguay": {
-        "prom": 2.64,
-        "max": 2.64,
-        "min": 2.64,
-        "prom_bulto": 713.0
+        "prom": 2.58,
+        "max": 2.58,
+        "min": 2.58,
+        "prom_bulto": 1037.0
       }
     },
     "Terneros / Terneras": {
@@ -182,12 +182,6 @@
         "prom": 300.0,
         "max": 300.0,
         "min": 300.0
-      },
-      "pantalla_uruguay": {
-        "prom": 3.74,
-        "max": 5.1,
-        "min": 3.39,
-        "prom_bulto": 672.0
       }
     },
     "Terneras": {
@@ -201,20 +195,6 @@
         "prom": 353.0,
         "max": 380.0,
         "min": 322.0
-      },
-      "pantalla_uruguay": {
-        "prom": 3.8,
-        "max": 4.46,
-        "min": 3.12,
-        "prom_bulto": 632.0
-      }
-    },
-    "Terneras hasta 140kg": {
-      "pantalla_uruguay": {
-        "prom": 3.67,
-        "max": 4.33,
-        "min": 3.12,
-        "prom_bulto": 647.0
       }
     },
     "Vaquillonas de 1 a 2 años": {
@@ -243,28 +223,6 @@
         "prom": 331.0,
         "max": 341.0,
         "min": 320.0
-      },
-      "pantalla_uruguay": {
-        "prom": 3.22,
-        "max": 3.22,
-        "min": 3.22,
-        "prom_bulto": 1137.0
-      }
-    },
-    "Vaquillonas entoradas": {
-      "pantalla_uruguay": {
-        "prom": 1084.0,
-        "max": 1135.0,
-        "min": 980.0,
-        "prom_bulto": 1084.0
-      }
-    },
-    "Vaquillonas preñadas": {
-      "pantalla_uruguay": {
-        "prom": 1049.0,
-        "max": 1120.0,
-        "min": 1000.0,
-        "prom_bulto": 1049.0
       }
     },
     "Vientres Preñados": {
@@ -273,12 +231,6 @@
         "max": 1350.0,
         "min": 930.0,
         "prom_bulto": 1139.32
-      },
-      "pantalla_uruguay": {
-        "prom": 1209.0,
-        "max": 1300.0,
-        "min": 975.0,
-        "prom_bulto": 1209.0
       }
     },
     "Piezas de cría": {
@@ -287,12 +239,6 @@
         "max": 750.0,
         "min": 640.0,
         "prom_bulto": 679.03
-      },
-      "pantalla_uruguay": {
-        "prom": 729.0,
-        "max": 835.0,
-        "min": 640.0,
-        "prom_bulto": 729.0
       }
     },
     "Vacas de Invernada": {
@@ -308,18 +254,18 @@
         "min": 231.0
       },
       "pantalla_uruguay": {
-        "prom": 2.48,
-        "max": 2.6,
-        "min": 2.25,
-        "prom_bulto": 1021.0
+        "prom": 2.31,
+        "max": 2.46,
+        "min": 2.1,
+        "prom_bulto": 968.0
       }
     },
     "Corderos/As": {
       "pantalla_uruguay": {
-        "prom": 70.0,
-        "max": 70.0,
-        "min": 70.0,
-        "prom_bulto": 70.0
+        "prom": 71.36,
+        "max": 83.0,
+        "min": 65.0,
+        "prom_bulto": 71.0
       }
     },
     "Mas De Un Año Enteros": {
@@ -340,10 +286,10 @@
     },
     "Ovejas": {
       "pantalla_uruguay": {
-        "prom": 98.0,
-        "max": 98.0,
-        "min": 98.0,
-        "prom_bulto": 98.0
+        "prom": 72.47,
+        "max": 99.0,
+        "min": 60.0,
+        "prom_bulto": 72.0
       }
     },
     "Piezas De Crã­A": {
@@ -351,22 +297,6 @@
         "prom": 68100.0,
         "max": 69200.0,
         "min": 67000.0
-      }
-    },
-    "Sobreaño Enteros": {
-      "pantalla_uruguay": {
-        "prom": 3.34,
-        "max": 3.5,
-        "min": 3.18,
-        "prom_bulto": 787.0
-      }
-    },
-    "Vacas Entoradas": {
-      "pantalla_uruguay": {
-        "prom": 1000.0,
-        "max": 1000.0,
-        "min": 1000.0,
-        "prom_bulto": 1000.0
       }
     },
     "Vientres Entorados": {
