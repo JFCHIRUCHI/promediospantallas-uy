@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-03-27T10:57:21Z",
+  "last_updated_utc": "2026-03-28T10:41:11Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -19,6 +19,14 @@
     }
   },
   "categorias": {
+    "Oveja De Cría 2 O + Enc.": {
+      "plaza_rural": {
+        "prom": 110.0,
+        "max": 110.0,
+        "min": 110.0,
+        "prom_bulto": 110.0
+      }
+    },
     "Terneros hasta 140kg": {
       "plaza_rural": {
         "prom": 4.35,
@@ -127,10 +135,10 @@
     },
     "Terneros / Terneras": {
       "plaza_rural": {
-        "prom": 3.25,
-        "max": 3.46,
-        "min": 3.1,
-        "prom_bulto": 689.39
+        "prom": 3.81,
+        "max": 5.26,
+        "min": 3.32,
+        "prom_bulto": 622.61
       },
       "pantalla_uruguay": {
         "prom": 3.77,
@@ -194,6 +202,12 @@
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 1206.43,
+        "max": 1760.0,
+        "min": 930.0,
+        "prom_bulto": 1206.43
+      },
       "pantalla_uruguay": {
         "prom": 1099.0,
         "max": 1350.0,
@@ -243,6 +257,14 @@
         "max": 970.0,
         "min": 818.0,
         "prom_bulto": 891.0
+      }
+    },
+    "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 943.27,
+        "max": 1150.0,
+        "min": 770.0,
+        "prom_bulto": 943.27
       }
     }
   }
