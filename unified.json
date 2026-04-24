@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-04-23T11:15:55Z",
+  "last_updated_utc": "2026-04-24T11:14:34Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -120,6 +120,12 @@
       }
     },
     "Terneros / Terneras": {
+      "plaza_rural": {
+        "prom": 3.53,
+        "max": 3.53,
+        "min": 3.53,
+        "prom_bulto": 684.82
+      },
       "pantalla_uruguay": {
         "prom": 3.58,
         "max": 4.05,
@@ -128,6 +134,12 @@
       }
     },
     "Terneras": {
+      "plaza_rural": {
+        "prom": 3.91,
+        "max": 4.36,
+        "min": 3.6,
+        "prom_bulto": 681.02
+      },
       "pantalla_uruguay": {
         "prom": 3.75,
         "max": 5.07,
@@ -141,6 +153,22 @@
         "max": 3.86,
         "min": 2.9,
         "prom_bulto": 615.0
+      }
+    },
+    "Vaquillonas de 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.3,
+        "max": 3.74,
+        "min": 3.03,
+        "prom_bulto": 887.21
+      }
+    },
+    "Vaquillonas mas de 2 años": {
+      "plaza_rural": {
+        "prom": 2.99,
+        "max": 3.17,
+        "min": 2.85,
+        "prom_bulto": 1050.44
       }
     },
     "Vaquillonas sin servicio": {
