@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-04-24T11:14:34Z",
+  "last_updated_utc": "2026-04-25T10:53:31Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -196,6 +196,12 @@
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 1286.35,
+        "max": 1500.0,
+        "min": 1125.0,
+        "prom_bulto": 1286.35
+      },
       "pantalla_uruguay": {
         "prom": 1154.0,
         "max": 1258.0,
@@ -204,6 +210,12 @@
       }
     },
     "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 725.21,
+        "max": 785.0,
+        "min": 675.0,
+        "prom_bulto": 725.21
+      },
       "pantalla_uruguay": {
         "prom": 717.0,
         "max": 880.0,
@@ -212,11 +224,33 @@
       }
     },
     "Vacas de Invernada": {
+      "plaza_rural": {
+        "prom": 2.43,
+        "max": 2.61,
+        "min": 2.23,
+        "prom_bulto": 976.65
+      },
       "pantalla_uruguay": {
         "prom": 2.39,
         "max": 2.6,
         "min": 2.2,
         "prom_bulto": 1000.0
+      }
+    },
+    "Toros": {
+      "plaza_rural": {
+        "prom": 1306.11,
+        "max": 1650.0,
+        "min": 1110.0,
+        "prom_bulto": 1306.11
+      }
+    },
+    "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 1079.14,
+        "max": 1145.0,
+        "min": 1015.0,
+        "prom_bulto": 1079.14
       }
     }
   }
