@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-04-30T11:45:31Z",
+  "last_updated_utc": "2026-05-01T11:15:30Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -63,10 +63,10 @@
         "prom_bulto": 755.24
       },
       "pantalla_uruguay": {
-        "prom": 4.14,
+        "prom": 4.13,
         "max": 5.0,
         "min": 3.32,
-        "prom_bulto": 728.0
+        "prom_bulto": 729.0
       }
     },
     "Novillos 1 a 2 años": {
@@ -117,6 +117,12 @@
         "max": 3.53,
         "min": 3.53,
         "prom_bulto": 684.82
+      },
+      "pantalla_uruguay": {
+        "prom": 3.76,
+        "max": 4.5,
+        "min": 3.45,
+        "prom_bulto": 671.0
       }
     },
     "Terneras": {
@@ -125,6 +131,20 @@
         "max": 4.36,
         "min": 3.6,
         "prom_bulto": 681.02
+      },
+      "pantalla_uruguay": {
+        "prom": 3.87,
+        "max": 4.2,
+        "min": 3.4,
+        "prom_bulto": 668.0
+      }
+    },
+    "Terneras hasta 140kg": {
+      "pantalla_uruguay": {
+        "prom": 3.87,
+        "max": 4.15,
+        "min": 3.4,
+        "prom_bulto": 674.0
       }
     },
     "Vaquillonas de 1 a 2 años": {
@@ -143,12 +163,26 @@
         "prom_bulto": 1050.44
       }
     },
+    "Vaquillonas sin servicio": {
+      "pantalla_uruguay": {
+        "prom": 2.89,
+        "max": 2.95,
+        "min": 2.82,
+        "prom_bulto": 1007.0
+      }
+    },
     "Vientres Preñados": {
       "plaza_rural": {
         "prom": 1286.35,
         "max": 1500.0,
         "min": 1125.0,
         "prom_bulto": 1286.35
+      },
+      "pantalla_uruguay": {
+        "prom": 1262.0,
+        "max": 1410.0,
+        "min": 1055.0,
+        "prom_bulto": 1262.0
       }
     },
     "Piezas de cría": {
@@ -157,6 +191,12 @@
         "max": 785.0,
         "min": 675.0,
         "prom_bulto": 725.21
+      },
+      "pantalla_uruguay": {
+        "prom": 675.0,
+        "max": 740.0,
+        "min": 632.0,
+        "prom_bulto": 675.0
       }
     },
     "Vacas de Invernada": {
