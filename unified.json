@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-05-14T11:58:30Z",
+  "last_updated_utc": "2026-05-15T12:00:26Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -64,6 +64,12 @@
       }
     },
     "Novillos 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.35,
+        "max": 3.75,
+        "min": 3.12,
+        "prom_bulto": 1039.1
+      },
       "pantalla_uruguay": {
         "prom": 3.32,
         "max": 3.81,
@@ -72,6 +78,12 @@
       }
     },
     "Novillos 2 a 3 años": {
+      "plaza_rural": {
+        "prom": 3.15,
+        "max": 3.35,
+        "min": 2.87,
+        "prom_bulto": 1181.17
+      },
       "pantalla_uruguay": {
         "prom": 3.07,
         "max": 3.12,
@@ -80,6 +92,12 @@
       }
     },
     "Novillos mas de 3 años": {
+      "plaza_rural": {
+        "prom": 2.93,
+        "max": 2.99,
+        "min": 2.9,
+        "prom_bulto": 1288.44
+      },
       "pantalla_uruguay": {
         "prom": 2.99,
         "max": 3.04,
@@ -88,6 +106,12 @@
       }
     },
     "Holando y Cruza Ho": {
+      "plaza_rural": {
+        "prom": 2.6,
+        "max": 2.66,
+        "min": 2.58,
+        "prom_bulto": 801.76
+      },
       "pantalla_uruguay": {
         "prom": 2.56,
         "max": 2.56,
@@ -96,6 +120,12 @@
       }
     },
     "Terneros / Terneras": {
+      "plaza_rural": {
+        "prom": 3.25,
+        "max": 3.25,
+        "min": 3.25,
+        "prom_bulto": 884.0
+      },
       "pantalla_uruguay": {
         "prom": 3.87,
         "max": 4.3,
@@ -104,6 +134,12 @@
       }
     },
     "Terneras": {
+      "plaza_rural": {
+        "prom": 3.95,
+        "max": 4.51,
+        "min": 3.54,
+        "prom_bulto": 680.16
+      },
       "pantalla_uruguay": {
         "prom": 3.86,
         "max": 4.4,
@@ -152,6 +188,12 @@
       }
     },
     "Vacas de Invernada": {
+      "plaza_rural": {
+        "prom": 2.41,
+        "max": 2.61,
+        "min": 2.23,
+        "prom_bulto": 974.73
+      },
       "pantalla_uruguay": {
         "prom": 2.42,
         "max": 2.6,
