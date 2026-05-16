@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-05-15T12:00:26Z",
+  "last_updated_utc": "2026-05-16T11:08:01Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -14,11 +14,19 @@
       "fecha": null
     },
     "acg": {
-      "url": "https://acg.com.uy/?post_type=precio_semanal",
-      "fecha": null
+      "url": null,
+      "error": "HTTPSConnectionPool(host='acg.com.uy', port=443): Max retries exceeded with url: /?post_type=precio_semanal (Caused by NewConnectionError(\"HTTPSConnection(host='acg.com.uy', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))"
     }
   },
   "categorias": {
+    "Corderos y Corderas": {
+      "plaza_rural": {
+        "prom": 90.0,
+        "max": 90.0,
+        "min": 90.0,
+        "prom_bulto": 90.0
+      }
+    },
     "Terneros hasta 140kg": {
       "plaza_rural": {
         "prom": 4.38,
@@ -155,6 +163,22 @@
         "prom_bulto": 677.0
       }
     },
+    "Vaquillonas de 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.3,
+        "max": 3.92,
+        "min": 3.0,
+        "prom_bulto": 871.02
+      }
+    },
+    "Vaquillonas mas de 2 años": {
+      "plaza_rural": {
+        "prom": 3.03,
+        "max": 3.4,
+        "min": 2.95,
+        "prom_bulto": 1081.82
+      }
+    },
     "Vaquillonas sin servicio": {
       "pantalla_uruguay": {
         "prom": 3.17,
@@ -172,6 +196,12 @@
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 1336.95,
+        "max": 1650.0,
+        "min": 980.0,
+        "prom_bulto": 1336.95
+      },
       "pantalla_uruguay": {
         "prom": 1210.0,
         "max": 1350.0,
@@ -180,6 +210,12 @@
       }
     },
     "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 760.74,
+        "max": 818.0,
+        "min": 645.0,
+        "prom_bulto": 760.74
+      },
       "pantalla_uruguay": {
         "prom": 664.0,
         "max": 678.0,
@@ -207,6 +243,14 @@
         "max": 908.0,
         "min": 788.0,
         "prom_bulto": 848.0
+      }
+    },
+    "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 992.9,
+        "max": 1050.0,
+        "min": 865.0,
+        "prom_bulto": 992.9
       }
     }
   }
