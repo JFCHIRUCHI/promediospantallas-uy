@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-05-29T12:50:15Z",
+  "last_updated_utc": "2026-05-30T11:37:10Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -14,8 +14,8 @@
       "fecha": null
     },
     "acg": {
-      "url": null,
-      "error": "HTTPSConnectionPool(host='acg.com.uy', port=443): Max retries exceeded with url: /?post_type=precio_semanal (Caused by NewConnectionError(\"HTTPSConnection(host='acg.com.uy', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))"
+      "url": "https://acg.com.uy/?post_type=precio_semanal",
+      "fecha": null
     }
   },
   "categorias": {
@@ -173,12 +173,34 @@
         "prom_bulto": 1074.44
       }
     },
+    "Vaquillonas sin servicio": {
+      "pantalla_uruguay": {
+        "prom": 3.1,
+        "max": 3.14,
+        "min": 2.87,
+        "prom_bulto": 1043.0
+      }
+    },
+    "Vaquillonas preñadas": {
+      "pantalla_uruguay": {
+        "prom": 1238.0,
+        "max": 1760.0,
+        "min": 1010.0,
+        "prom_bulto": 1238.0
+      }
+    },
     "Vientres Preñados": {
       "plaza_rural": {
         "prom": 1199.64,
         "max": 1360.0,
         "min": 980.0,
         "prom_bulto": 1199.64
+      },
+      "pantalla_uruguay": {
+        "prom": 1196.0,
+        "max": 1335.0,
+        "min": 1125.0,
+        "prom_bulto": 1196.0
       }
     },
     "Piezas de cría": {
@@ -215,6 +237,14 @@
         "max": 3.93,
         "min": 3.93,
         "prom_bulto": 1336.2
+      }
+    },
+    "Vacas Entoradas": {
+      "pantalla_uruguay": {
+        "prom": 1070.0,
+        "max": 1070.0,
+        "min": 1070.0,
+        "prom_bulto": 1070.0
       }
     },
     "Vientres Entorados": {
