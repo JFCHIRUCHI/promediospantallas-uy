@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-06-12T13:33:51Z",
+  "last_updated_utc": "2026-06-13T11:58:12Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -14,8 +14,8 @@
       "fecha": null
     },
     "acg": {
-      "url": "https://acg.com.uy/?post_type=precio_semanal",
-      "fecha": null
+      "url": null,
+      "error": "HTTPSConnectionPool(host='acg.com.uy', port=443): Max retries exceeded with url: /?post_type=precio_semanal (Caused by NewConnectionError(\"HTTPSConnection(host='acg.com.uy', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))"
     }
   },
   "categorias": {
@@ -33,6 +33,12 @@
         "max": 4.62,
         "min": 4.36,
         "prom_bulto": 591.21
+      },
+      "pantalla_uruguay": {
+        "prom": 4.76,
+        "max": 4.76,
+        "min": 4.76,
+        "prom_bulto": 652.0
       }
     },
     "Terneros entre 140 y 180kg": {
@@ -41,6 +47,12 @@
         "max": 4.41,
         "min": 3.97,
         "prom_bulto": 683.28
+      },
+      "pantalla_uruguay": {
+        "prom": 4.32,
+        "max": 4.61,
+        "min": 3.95,
+        "prom_bulto": 702.0
       }
     },
     "Terneros mas de 180kg": {
@@ -57,6 +69,12 @@
         "max": 4.62,
         "min": 3.7,
         "prom_bulto": 731.84
+      },
+      "pantalla_uruguay": {
+        "prom": 4.13,
+        "max": 4.76,
+        "min": 3.64,
+        "prom_bulto": 746.0
       }
     },
     "Novillos 1 a 2 años": {
@@ -65,6 +83,12 @@
         "max": 4.03,
         "min": 3.1,
         "prom_bulto": 960.98
+      },
+      "pantalla_uruguay": {
+        "prom": 3.28,
+        "max": 3.72,
+        "min": 3.13,
+        "prom_bulto": 993.0
       }
     },
     "Novillos 2 a 3 años": {
@@ -73,6 +97,12 @@
         "max": 3.2,
         "min": 2.84,
         "prom_bulto": 1230.94
+      },
+      "pantalla_uruguay": {
+        "prom": 3.28,
+        "max": 3.28,
+        "min": 3.28,
+        "prom_bulto": 1207.0
       }
     },
     "Novillos mas de 3 años": {
@@ -89,6 +119,12 @@
         "max": 4.32,
         "min": 3.5,
         "prom_bulto": 671.83
+      },
+      "pantalla_uruguay": {
+        "prom": 3.82,
+        "max": 4.05,
+        "min": 3.33,
+        "prom_bulto": 704.0
       }
     },
     "Terneras": {
@@ -97,6 +133,20 @@
         "max": 4.5,
         "min": 3.18,
         "prom_bulto": 656.97
+      },
+      "pantalla_uruguay": {
+        "prom": 3.96,
+        "max": 4.22,
+        "min": 3.45,
+        "prom_bulto": 688.0
+      }
+    },
+    "Terneras hasta 140kg": {
+      "pantalla_uruguay": {
+        "prom": 3.95,
+        "max": 4.22,
+        "min": 3.45,
+        "prom_bulto": 694.0
       }
     },
     "Vaquillonas de 1 a 2 años": {
@@ -115,12 +165,34 @@
         "prom_bulto": 1074.44
       }
     },
+    "Vaquillonas sin servicio": {
+      "pantalla_uruguay": {
+        "prom": 3.33,
+        "max": 3.5,
+        "min": 2.85,
+        "prom_bulto": 883.0
+      }
+    },
+    "Vaquillonas preñadas": {
+      "pantalla_uruguay": {
+        "prom": 1257.0,
+        "max": 1275.0,
+        "min": 1200.0,
+        "prom_bulto": 1257.0
+      }
+    },
     "Vientres Preñados": {
       "plaza_rural": {
         "prom": 1199.64,
         "max": 1360.0,
         "min": 980.0,
         "prom_bulto": 1199.64
+      },
+      "pantalla_uruguay": {
+        "prom": 1200.0,
+        "max": 1370.0,
+        "min": 1100.0,
+        "prom_bulto": 1200.0
       }
     },
     "Piezas de cría": {
@@ -129,6 +201,12 @@
         "max": 740.0,
         "min": 700.0,
         "prom_bulto": 724.41
+      },
+      "pantalla_uruguay": {
+        "prom": 667.0,
+        "max": 685.0,
+        "min": 650.0,
+        "prom_bulto": 667.0
       }
     },
     "Vacas de Invernada": {
@@ -137,6 +215,12 @@
         "max": 2.89,
         "min": 2.26,
         "prom_bulto": 995.0
+      },
+      "pantalla_uruguay": {
+        "prom": 2.35,
+        "max": 2.5,
+        "min": 2.07,
+        "prom_bulto": 964.0
       }
     },
     "Mas De Un Año Enteros": {
