@@ -1,9 +1,9 @@
 {
-  "last_updated_utc": "2026-06-19T13:40:12Z",
+  "last_updated_utc": "2026-06-20T12:03:18Z",
   "fuentes": {
     "plaza_rural": {
-      "url": "https://plazarural.com.uy/promedios",
-      "fecha": null
+      "url": null,
+      "error": "415 Client Error: Unsupported Media Type for url: https://plazarural.com.uy/promedios"
     },
     "lote21": {
       "url": "https://www.lote21.uy/promedios.asp",
@@ -20,12 +20,6 @@
   },
   "categorias": {
     "Terneros hasta 140kg": {
-      "plaza_rural": {
-        "prom": 4.59,
-        "max": 4.74,
-        "min": 4.41,
-        "prom_bulto": 619.22
-      },
       "lote21": {
         "prom": 491.0,
         "max": 560.0,
@@ -39,12 +33,6 @@
       }
     },
     "Terneros entre 140 y 180kg": {
-      "plaza_rural": {
-        "prom": 4.15,
-        "max": 4.87,
-        "min": 3.86,
-        "prom_bulto": 677.26
-      },
       "lote21": {
         "prom": 408.0,
         "max": 431.0,
@@ -57,21 +45,7 @@
         "prom_bulto": 702.0
       }
     },
-    "Terneros mas de 180kg": {
-      "plaza_rural": {
-        "prom": 3.95,
-        "max": 4.11,
-        "min": 3.6,
-        "prom_bulto": 792.84
-      }
-    },
     "Terneros": {
-      "plaza_rural": {
-        "prom": 4.05,
-        "max": 4.87,
-        "min": 3.6,
-        "prom_bulto": 734.63
-      },
       "lote21": {
         "prom": 382.0,
         "max": 415.0,
@@ -85,12 +59,6 @@
       }
     },
     "Novillos 1 a 2 años": {
-      "plaza_rural": {
-        "prom": 3.31,
-        "max": 3.79,
-        "min": 3.08,
-        "prom_bulto": 969.66
-      },
       "lote21": {
         "prom": 287.0,
         "max": 287.0,
@@ -104,12 +72,6 @@
       }
     },
     "Novillos 2 a 3 años": {
-      "plaza_rural": {
-        "prom": 2.98,
-        "max": 3.35,
-        "min": 2.5,
-        "prom_bulto": 1190.93
-      },
       "lote21": {
         "prom": 327.0,
         "max": 364.0,
@@ -122,21 +84,7 @@
         "prom_bulto": 1207.0
       }
     },
-    "Novillos mas de 3 años": {
-      "plaza_rural": {
-        "prom": 2.83,
-        "max": 2.9,
-        "min": 2.7,
-        "prom_bulto": 1278.18
-      }
-    },
     "Holando y Cruza Ho": {
-      "plaza_rural": {
-        "prom": 2.6,
-        "max": 2.7,
-        "min": 2.4,
-        "prom_bulto": 882.79
-      },
       "lote21": {
         "prom": 287.0,
         "max": 317.0,
@@ -144,12 +92,6 @@
       }
     },
     "Terneros / Terneras": {
-      "plaza_rural": {
-        "prom": 3.85,
-        "max": 4.27,
-        "min": 3.6,
-        "prom_bulto": 654.36
-      },
       "pantalla_uruguay": {
         "prom": 3.82,
         "max": 4.05,
@@ -233,14 +175,6 @@
         "max": 2.5,
         "min": 2.07,
         "prom_bulto": 964.0
-      }
-    },
-    "Mas De Un Año Enteros": {
-      "plaza_rural": {
-        "prom": 3.19,
-        "max": 3.22,
-        "min": 3.18,
-        "prom_bulto": 783.63
       }
     },
     "Ovejas De Crã­A": {
