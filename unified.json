@@ -1,13 +1,13 @@
 {
-  "last_updated_utc": "2026-06-24T12:24:23Z",
+  "last_updated_utc": "2026-06-25T12:28:40Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
       "fecha": null
     },
     "lote21": {
-      "url": null,
-      "error": "Lote21: no pude descargar la página"
+      "url": "https://www.lote21.uy/promedios.asp",
+      "fecha": null
     },
     "pantalla_uruguay": {
       "url": "https://www.pantallauruguay.com.uy/promedios/",
@@ -26,11 +26,10 @@
         "min": 4.41,
         "prom_bulto": 619.22
       },
-      "pantalla_uruguay": {
-        "prom": 4.76,
-        "max": 4.76,
-        "min": 4.76,
-        "prom_bulto": 652.0
+      "lote21": {
+        "prom": 466.0,
+        "max": 470.0,
+        "min": 462.0
       }
     },
     "Terneros entre 140 y 180kg": {
@@ -40,11 +39,10 @@
         "min": 3.86,
         "prom_bulto": 677.26
       },
-      "pantalla_uruguay": {
-        "prom": 4.32,
-        "max": 4.61,
-        "min": 3.95,
-        "prom_bulto": 702.0
+      "lote21": {
+        "prom": 414.0,
+        "max": 464.0,
+        "min": 375.0
       }
     },
     "Terneros mas de 180kg": {
@@ -62,11 +60,10 @@
         "min": 3.6,
         "prom_bulto": 734.63
       },
-      "pantalla_uruguay": {
-        "prom": 4.13,
-        "max": 4.76,
-        "min": 3.64,
-        "prom_bulto": 746.0
+      "lote21": {
+        "prom": 400.0,
+        "max": 438.0,
+        "min": 366.0
       }
     },
     "Novillos 1 a 2 años": {
@@ -76,11 +73,10 @@
         "min": 3.08,
         "prom_bulto": 969.66
       },
-      "pantalla_uruguay": {
-        "prom": 3.28,
-        "max": 3.72,
-        "min": 3.13,
-        "prom_bulto": 993.0
+      "lote21": {
+        "prom": 291.0,
+        "max": 302.0,
+        "min": 280.0
       }
     },
     "Novillos 2 a 3 años": {
@@ -90,11 +86,10 @@
         "min": 2.5,
         "prom_bulto": 1190.93
       },
-      "pantalla_uruguay": {
-        "prom": 3.28,
-        "max": 3.28,
-        "min": 3.28,
-        "prom_bulto": 1207.0
+      "lote21": {
+        "prom": 294.0,
+        "max": 300.0,
+        "min": 285.0
       }
     },
     "Novillos mas de 3 años": {
@@ -119,12 +114,6 @@
         "max": 4.27,
         "min": 3.6,
         "prom_bulto": 654.36
-      },
-      "pantalla_uruguay": {
-        "prom": 3.82,
-        "max": 4.05,
-        "min": 3.33,
-        "prom_bulto": 704.0
       }
     },
     "Terneras": {
@@ -134,19 +123,10 @@
         "min": 3.5,
         "prom_bulto": 647.85
       },
-      "pantalla_uruguay": {
-        "prom": 3.96,
-        "max": 4.22,
-        "min": 3.45,
-        "prom_bulto": 688.0
-      }
-    },
-    "Terneras hasta 140kg": {
-      "pantalla_uruguay": {
-        "prom": 3.95,
-        "max": 4.22,
-        "min": 3.45,
-        "prom_bulto": 694.0
+      "lote21": {
+        "prom": 394.0,
+        "max": 415.0,
+        "min": 360.0
       }
     },
     "Vaquillonas de 1 a 2 años": {
@@ -155,6 +135,11 @@
         "max": 3.6,
         "min": 2.83,
         "prom_bulto": 916.96
+      },
+      "lote21": {
+        "prom": 345.0,
+        "max": 445.0,
+        "min": 260.0
       }
     },
     "Vaquillonas mas de 2 años": {
@@ -165,34 +150,12 @@
         "prom_bulto": 840.48
       }
     },
-    "Vaquillonas sin servicio": {
-      "pantalla_uruguay": {
-        "prom": 3.33,
-        "max": 3.5,
-        "min": 2.85,
-        "prom_bulto": 883.0
-      }
-    },
-    "Vaquillonas preñadas": {
-      "pantalla_uruguay": {
-        "prom": 1257.0,
-        "max": 1275.0,
-        "min": 1200.0,
-        "prom_bulto": 1257.0
-      }
-    },
     "Vientres Preñados": {
       "plaza_rural": {
         "prom": 1238.76,
         "max": 1500.0,
         "min": 940.0,
         "prom_bulto": 1238.76
-      },
-      "pantalla_uruguay": {
-        "prom": 1200.0,
-        "max": 1370.0,
-        "min": 1100.0,
-        "prom_bulto": 1200.0
       }
     },
     "Piezas de cría": {
@@ -201,12 +164,6 @@
         "max": 765.0,
         "min": 695.0,
         "prom_bulto": 724.28
-      },
-      "pantalla_uruguay": {
-        "prom": 667.0,
-        "max": 685.0,
-        "min": 650.0,
-        "prom_bulto": 667.0
       }
     },
     "Vacas de Invernada": {
@@ -216,11 +173,17 @@
         "min": 2.19,
         "prom_bulto": 980.47
       },
-      "pantalla_uruguay": {
-        "prom": 2.35,
-        "max": 2.5,
-        "min": 2.07,
-        "prom_bulto": 964.0
+      "lote21": {
+        "prom": 233.0,
+        "max": 263.0,
+        "min": 218.0
+      }
+    },
+    "Enteros + De 1 Aã±O": {
+      "lote21": {
+        "prom": 315.0,
+        "max": 315.0,
+        "min": 315.0
       }
     },
     "Mas De Un Año Enteros": {
@@ -231,12 +194,38 @@
         "prom_bulto": 783.63
       }
     },
+    "Ovejas De Crã­A": {
+      "lote21": {
+        "prom": 10000.0,
+        "max": 10000.0,
+        "min": 10000.0
+      }
+    },
+    "Piezas De Crã­A": {
+      "lote21": {
+        "prom": 67950.0,
+        "max": 70200.0,
+        "min": 65700.0
+      }
+    },
     "Vientres Entorados": {
       "plaza_rural": {
         "prom": 1001.26,
         "max": 1190.0,
         "min": 900.0,
         "prom_bulto": 1001.26
+      },
+      "lote21": {
+        "prom": 98000.0,
+        "max": 98000.0,
+        "min": 98000.0
+      }
+    },
+    "Vientres Preã±Ados": {
+      "lote21": {
+        "prom": 1249.62,
+        "max": 1460.0,
+        "min": 90000.0
       }
     }
   }
