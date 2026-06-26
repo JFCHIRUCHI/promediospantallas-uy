@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-06-25T12:28:40Z",
+  "last_updated_utc": "2026-06-26T12:18:54Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -30,6 +30,12 @@
         "prom": 466.0,
         "max": 470.0,
         "min": 462.0
+      },
+      "pantalla_uruguay": {
+        "prom": 4.35,
+        "max": 4.47,
+        "min": 4.04,
+        "prom_bulto": 595.0
       }
     },
     "Terneros entre 140 y 180kg": {
@@ -43,6 +49,12 @@
         "prom": 414.0,
         "max": 464.0,
         "min": 375.0
+      },
+      "pantalla_uruguay": {
+        "prom": 4.25,
+        "max": 4.53,
+        "min": 4.1,
+        "prom_bulto": 696.0
       }
     },
     "Terneros mas de 180kg": {
@@ -64,6 +76,12 @@
         "prom": 400.0,
         "max": 438.0,
         "min": 366.0
+      },
+      "pantalla_uruguay": {
+        "prom": 4.08,
+        "max": 4.53,
+        "min": 3.8,
+        "prom_bulto": 747.0
       }
     },
     "Novillos 1 a 2 años": {
@@ -77,6 +95,12 @@
         "prom": 291.0,
         "max": 302.0,
         "min": 280.0
+      },
+      "pantalla_uruguay": {
+        "prom": 3.22,
+        "max": 3.61,
+        "min": 3.1,
+        "prom_bulto": 913.0
       }
     },
     "Novillos 2 a 3 años": {
@@ -90,6 +114,12 @@
         "prom": 294.0,
         "max": 300.0,
         "min": 285.0
+      },
+      "pantalla_uruguay": {
+        "prom": 2.93,
+        "max": 3.05,
+        "min": 2.8,
+        "prom_bulto": 1101.0
       }
     },
     "Novillos mas de 3 años": {
@@ -98,6 +128,12 @@
         "max": 2.9,
         "min": 2.7,
         "prom_bulto": 1278.18
+      },
+      "pantalla_uruguay": {
+        "prom": 2.79,
+        "max": 2.81,
+        "min": 2.7,
+        "prom_bulto": 1364.0
       }
     },
     "Holando y Cruza Ho": {
@@ -114,6 +150,12 @@
         "max": 4.27,
         "min": 3.6,
         "prom_bulto": 654.36
+      },
+      "pantalla_uruguay": {
+        "prom": 3.98,
+        "max": 4.35,
+        "min": 3.71,
+        "prom_bulto": 601.0
       }
     },
     "Terneras": {
@@ -127,6 +169,20 @@
         "prom": 394.0,
         "max": 415.0,
         "min": 360.0
+      },
+      "pantalla_uruguay": {
+        "prom": 3.85,
+        "max": 4.21,
+        "min": 3.3,
+        "prom_bulto": 705.0
+      }
+    },
+    "Terneras hasta 140kg": {
+      "pantalla_uruguay": {
+        "prom": 3.81,
+        "max": 4.17,
+        "min": 3.3,
+        "prom_bulto": 736.0
       }
     },
     "Vaquillonas de 1 a 2 años": {
@@ -150,12 +206,34 @@
         "prom_bulto": 840.48
       }
     },
+    "Vaquillonas sin servicio": {
+      "pantalla_uruguay": {
+        "prom": 2.72,
+        "max": 2.72,
+        "min": 2.72,
+        "prom_bulto": 982.0
+      }
+    },
+    "Vaquillonas preñadas": {
+      "pantalla_uruguay": {
+        "prom": 1150.0,
+        "max": 1150.0,
+        "min": 1150.0,
+        "prom_bulto": 1150.0
+      }
+    },
     "Vientres Preñados": {
       "plaza_rural": {
         "prom": 1238.76,
         "max": 1500.0,
         "min": 940.0,
         "prom_bulto": 1238.76
+      },
+      "pantalla_uruguay": {
+        "prom": 1276.0,
+        "max": 1475.0,
+        "min": 1050.0,
+        "prom_bulto": 1276.0
       }
     },
     "Piezas de cría": {
@@ -164,6 +242,12 @@
         "max": 765.0,
         "min": 695.0,
         "prom_bulto": 724.28
+      },
+      "pantalla_uruguay": {
+        "prom": 656.0,
+        "max": 725.0,
+        "min": 625.0,
+        "prom_bulto": 656.0
       }
     },
     "Vacas de Invernada": {
@@ -177,6 +261,12 @@
         "prom": 233.0,
         "max": 263.0,
         "min": 218.0
+      },
+      "pantalla_uruguay": {
+        "prom": 2.28,
+        "max": 2.41,
+        "min": 2.13,
+        "prom_bulto": 888.0
       }
     },
     "Enteros + De 1 Aã±O": {
@@ -206,6 +296,14 @@
         "prom": 67950.0,
         "max": 70200.0,
         "min": 65700.0
+      }
+    },
+    "Vacas Entoradas": {
+      "pantalla_uruguay": {
+        "prom": 750.0,
+        "max": 750.0,
+        "min": 750.0,
+        "prom_bulto": 750.0
       }
     },
     "Vientres Entorados": {
