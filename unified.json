@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-08-21T10:37:11Z",
+  "last_updated_utc": "2026-08-22T10:31:04Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -233,6 +233,12 @@
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 1377.4,
+        "max": 1670.0,
+        "min": 1100.0,
+        "prom_bulto": 1377.4
+      },
       "pantalla_uruguay": {
         "prom": 1275.0,
         "max": 1505.0,
@@ -241,6 +247,12 @@
       }
     },
     "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 854.81,
+        "max": 905.0,
+        "min": 776.0,
+        "prom_bulto": 854.81
+      },
       "pantalla_uruguay": {
         "prom": 723.0,
         "max": 750.0,
@@ -304,6 +316,12 @@
       }
     },
     "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 1096.41,
+        "max": 1265.0,
+        "min": 955.0,
+        "prom_bulto": 1096.41
+      },
       "lote21": {
         "prom": 1110.0,
         "max": 1220.0,
