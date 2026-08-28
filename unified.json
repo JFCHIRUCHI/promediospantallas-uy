@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-08-27T20:17:03Z",
+  "last_updated_utc": "2026-08-28T21:09:34Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -14,8 +14,8 @@
       "fecha": null
     },
     "acg": {
-      "url": "https://acg.com.uy/?post_type=precio_semanal",
-      "fecha": null
+      "url": null,
+      "error": "HTTPSConnectionPool(host='acg.com.uy', port=443): Max retries exceeded with url: /?post_type=precio_semanal (Caused by NewConnectionError(\"HTTPSConnection(host='acg.com.uy', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable\"))"
     }
   },
   "categorias": {
@@ -208,6 +208,28 @@
         "prom": 293.0,
         "max": 293.0,
         "min": 293.0
+      },
+      "pantalla_uruguay": {
+        "prom": 3.56,
+        "max": 4.0,
+        "min": 3.35,
+        "prom_bulto": 1221.0
+      }
+    },
+    "Vaquillonas entoradas": {
+      "pantalla_uruguay": {
+        "prom": 1005.0,
+        "max": 1005.0,
+        "min": 1005.0,
+        "prom_bulto": 1005.0
+      }
+    },
+    "Vaquillonas preñadas": {
+      "pantalla_uruguay": {
+        "prom": 1541.0,
+        "max": 1800.0,
+        "min": 1100.0,
+        "prom_bulto": 1541.0
       }
     },
     "Vientres Preñados": {
@@ -216,6 +238,12 @@
         "max": 1670.0,
         "min": 1100.0,
         "prom_bulto": 1377.4
+      },
+      "pantalla_uruguay": {
+        "prom": 1433.0,
+        "max": 1820.0,
+        "min": 1050.0,
+        "prom_bulto": 1433.0
       }
     },
     "Piezas de cría": {
@@ -224,6 +252,12 @@
         "max": 905.0,
         "min": 776.0,
         "prom_bulto": 854.81
+      },
+      "pantalla_uruguay": {
+        "prom": 811.0,
+        "max": 890.0,
+        "min": 710.0,
+        "prom_bulto": 811.0
       }
     },
     "Vacas de Invernada": {
@@ -237,6 +271,12 @@
         "prom": 259.0,
         "max": 275.0,
         "min": 246.0
+      },
+      "pantalla_uruguay": {
+        "prom": 2.75,
+        "max": 3.1,
+        "min": 2.49,
+        "prom_bulto": 1062.0
       }
     },
     "Corderas Dl": {
