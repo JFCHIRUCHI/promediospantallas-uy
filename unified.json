@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-03T14:21:19Z",
+  "last_updated_utc": "2026-09-04T14:10:58Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -144,6 +144,12 @@
       }
     },
     "Terneros / Terneras": {
+      "plaza_rural": {
+        "prom": 4.38,
+        "max": 5.51,
+        "min": 3.85,
+        "prom_bulto": 726.25
+      },
       "pantalla_uruguay": {
         "prom": 4.25,
         "max": 5.35,
@@ -179,10 +185,24 @@
       }
     },
     "Vaquillonas de 1 a 2 años": {
+      "plaza_rural": {
+        "prom": 3.83,
+        "max": 4.15,
+        "min": 3.24,
+        "prom_bulto": 1000.7
+      },
       "lote21": {
         "prom": 356.0,
         "max": 396.0,
         "min": 327.0
+      }
+    },
+    "Vaquillonas mas de 2 años": {
+      "plaza_rural": {
+        "prom": 3.62,
+        "max": 3.72,
+        "min": 3.56,
+        "prom_bulto": 1139.67
       }
     },
     "Vaquillonas sin servicio": {
@@ -215,6 +235,12 @@
       }
     },
     "Vientres Preñados": {
+      "plaza_rural": {
+        "prom": 1306.05,
+        "max": 1655.0,
+        "min": 1100.0,
+        "prom_bulto": 1306.05
+      },
       "pantalla_uruguay": {
         "prom": 1433.0,
         "max": 1820.0,
@@ -223,6 +249,12 @@
       }
     },
     "Piezas de cría": {
+      "plaza_rural": {
+        "prom": 782.67,
+        "max": 875.0,
+        "min": 713.0,
+        "prom_bulto": 782.67
+      },
       "pantalla_uruguay": {
         "prom": 811.0,
         "max": 890.0,
@@ -302,6 +334,12 @@
       }
     },
     "Vientres Entorados": {
+      "plaza_rural": {
+        "prom": 1098.66,
+        "max": 1255.0,
+        "min": 925.0,
+        "prom_bulto": 1098.66
+      },
       "lote21": {
         "prom": 1110.0,
         "max": 1220.0,
