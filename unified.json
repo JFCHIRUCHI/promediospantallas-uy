@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-09-30T16:21:35Z",
+  "last_updated_utc": "2026-10-01T16:58:47Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -199,7 +199,7 @@
         "prom": 4.09,
         "max": 5.02,
         "min": 3.6,
-        "prom_bulto": 783.0
+        "prom_bulto": 782.0
       }
     },
     "Terneras hasta 140kg": {
@@ -207,7 +207,7 @@
         "prom": 4.06,
         "max": 4.51,
         "min": 3.6,
-        "prom_bulto": 804.0
+        "prom_bulto": 801.0
       }
     },
     "Vaquillonas de 1 a 2 años": {
@@ -236,6 +236,28 @@
         "prom": 334.0,
         "max": 341.0,
         "min": 323.0
+      },
+      "pantalla_uruguay": {
+        "prom": 3.54,
+        "max": 3.68,
+        "min": 3.38,
+        "prom_bulto": 1116.0
+      }
+    },
+    "Vaquillonas entoradas": {
+      "pantalla_uruguay": {
+        "prom": 985.0,
+        "max": 985.0,
+        "min": 985.0,
+        "prom_bulto": 985.0
+      }
+    },
+    "Vaquillonas preñadas": {
+      "pantalla_uruguay": {
+        "prom": 1188.0,
+        "max": 1200.0,
+        "min": 1160.0,
+        "prom_bulto": 1188.0
       }
     },
     "Vientres Preñados": {
@@ -244,6 +266,12 @@
         "max": 1770.0,
         "min": 1010.0,
         "prom_bulto": 1276.32
+      },
+      "pantalla_uruguay": {
+        "prom": 1371.0,
+        "max": 1550.0,
+        "min": 1180.0,
+        "prom_bulto": 1371.0
       }
     },
     "Piezas de cría": {
@@ -252,6 +280,12 @@
         "max": 905.0,
         "min": 690.0,
         "prom_bulto": 798.52
+      },
+      "pantalla_uruguay": {
+        "prom": 742.0,
+        "max": 820.0,
+        "min": 610.0,
+        "prom_bulto": 742.0
       }
     },
     "Vacas de Invernada": {
@@ -331,6 +365,14 @@
         "prom": 97250.0,
         "max": 1010.0,
         "min": 93500.0
+      }
+    },
+    "Vacas Entoradas": {
+      "pantalla_uruguay": {
+        "prom": 865.0,
+        "max": 865.0,
+        "min": 865.0,
+        "prom_bulto": 865.0
       }
     },
     "Vientres Entorados": {
