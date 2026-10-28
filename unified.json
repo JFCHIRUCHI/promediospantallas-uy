@@ -1,5 +1,5 @@
 {
-  "last_updated_utc": "2026-10-27T15:49:07Z",
+  "last_updated_utc": "2026-10-28T16:32:40Z",
   "fuentes": {
     "plaza_rural": {
       "url": "https://plazarural.com.uy/promedios",
@@ -379,7 +379,7 @@
     },
     "Vientres Preã±Ados": {
       "lote21": {
-        "prom": 1293.0,
+        "prom": 1287.19,
         "max": 1460.0,
         "min": 1110.0
       }
